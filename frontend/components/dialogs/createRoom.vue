@@ -1,0 +1,90 @@
+<template>  
+    <el-dialog
+      v-model="dialogVisible"
+      width="600"
+      on-destroy-close
+      >
+      <VTitle class="flex-1 mb-[20px]" title="Xona haqidago ma'lumotlarni o'zgartirish" v-if="selected"/>
+      <VTitle class="flex-1 mb-[20px]" title="Xona yaratish" v-else/>
+      <el-form ref="medserversForm" :model="form" label-position="top" :rules="useRules('roomsForm')">
+        <el-form-item label="Xonaning nomi:" prop="name">
+            <el-input v-model="form.name"/>
+        </el-form-item>
+        <el-form-item label="Xonaning 1 kunlik xizmat narxi:" prop="pricePerDay">
+            <el-input v-model="form.pricePerDay" v-mask="'##################'"/>
+        </el-form-item>
+        <el-form-item>
+            <div class="w-full flex justify-end">
+                <el-button type="default" @click="dialogVisible = false">Bekor qilish</el-button>
+                <el-button type="success" @click="submitForm">Saqlash</el-button>
+            </div>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+  </template>
+  
+  <script lang="ts" setup>
+  import {ref} from 'vue'
+  import type {rooms} from '~/types/api/rooms.type.ts'
+  import type { FormInstance } from 'element-plus'
+  const emit = defineEmits(['getData'])
+  const props = defineProps<{
+    selected?:rooms,
+    newId?:number|null
+  }>()
+  const dialogVisible = defineModel<boolean>()
+  
+  const medserversForm = ref<FormInstance>()
+
+  const form = ref({
+    name:'',
+    pricePerDay:0
+  })
+  
+  onMounted(() => {
+    if (props.selected) {
+      form.value = {
+        name:props.selected.name,
+        pricePerDay:props.selected.pricePerDay,
+      }
+    }
+  })
+
+  function submitForm () {
+    if (!medserversForm.value) return
+    medserversForm.value.validate((valid) => {
+      if (valid) {
+        if (props.selected) {
+          PatchLabTest()
+        }
+        else CreateLabTest()
+      }
+    })
+  }
+  async function CreateLabTest () {
+    const payloadData = {
+      id:props.newId,
+      create_at:new Date().toISOString(),
+      update_at:new Date().toISOString(),
+      ...form.value
+    };
+    const {error} = await useFetchApi.post('/rooms',payloadData)
+    if (!error.value) {
+      emit('getData')
+      dialogVisible.value = false;
+    }
+  }
+  async function PatchLabTest () {
+    const payloadData = {
+      id:props.newId || 1,
+      create_at:props.selected?.create_at,
+      update_at:new Date().toISOString(),
+      ...form.value
+    };
+    const {error} = await useFetchApi.patch(`/rooms/${props.selected?.id}`,payloadData)
+    if (!error.value) {
+      emit('getData')
+      dialogVisible.value = false;
+    }
+  }
+  </script>

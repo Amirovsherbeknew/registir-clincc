@@ -1,0 +1,3 @@
+<template>
+    <ViewsChecks/>
+</template>

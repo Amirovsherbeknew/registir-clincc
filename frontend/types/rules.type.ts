@@ -1,0 +1,1 @@
+export type rulesKeyType = "login"|"createForm"|"medServersForm"|"labTestForm"|"roomsForm"

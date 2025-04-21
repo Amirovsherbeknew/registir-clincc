@@ -1,0 +1,31 @@
+{
+    "name": "my-electron-app",
+    "version": "1.0.0",
+    "description": "This is an Electron app for Registir Medic Clinic",
+    "author": "Your Name",
+    "main": "main.js",
+    "scripts": {
+      "dev": "electron .",
+      "frontend:dev": "npx nuxi dev --cwd frontend",
+      "frontend:build": "npx nuxi build --cwd frontend",
+      "build": "npm run frontend:build && electron-builder"
+    },
+    "build": {
+      "appId": "com.myapp.autolaunch",
+      "win": {
+        "target": "nsis"
+      },
+      "directories": {
+        "buildResources": "assets"
+      }
+    },
+    "dependencies": {
+      "json-server": "^0.17.3",
+      "wait-on": "^7.2.0"
+    },
+    "devDependencies": {
+      "electron": "^29.0.0",
+      "electron-builder": "^26.0.12"
+    }
+  }
+  

@@ -1,0 +1,150 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "operator",
+      "password": "qweasdzxc",
+      "role": "operator"
+    },
+    {
+      "id": "1",
+      "username": "kassir",
+      "password": "qweasdzxc",
+      "role": "kassir"
+    },
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "qweasdzxc",
+      "role": "super_admin"
+    }
+  ],
+  "medServices": [
+    {
+      "id": "1",
+      "create_at": "2025-04-20T11:20:03.183Z",
+      "update_at": "2025-04-20T11:20:03.183Z",
+      "name": "Jigar analizi",
+      "price": "200000"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "1",
+      "create_at": "2025-04-20T11:21:44.663Z",
+      "update_at": "2025-04-20T11:21:44.663Z",
+      "name": "4 kishilik xona",
+      "pricePerDay": "150000"
+    }
+  ],
+  "labTests": [
+    {
+      "id": "1",
+      "create_at": "2025-04-20T11:21:21.188Z",
+      "update_at": "2025-04-20T11:21:21.188Z",
+      "name": "iwueoiru",
+      "price": "120000"
+    }
+  ],
+  "clients": [
+    {
+      "id": "1",
+      "last_name": "Aliyev Aziz",
+      "first_name": "Aliyev Aziz",
+      "middle_name": "Aliyev Aziz",
+      "phone": "+998901234567",
+      "gender": "Erkak",
+      "visits": [
+        {
+          "type": "med",
+          "serviceIds": [
+            1,
+            3
+          ]
+        },
+        {
+          "type": "room",
+          "roomId": 1,
+          "days": 3
+        },
+        {
+          "type": "lab",
+          "testIds": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "create_at": "2025-04-20T13:38:14.344Z",
+      "update_at": "2025-04-20T13:38:14.344Z",
+      "last_name": "opweirp",
+      "first_name": "opsdf",
+      "middle_name": "sdlk;f",
+      "phone": "+998 90 843 09 34",
+      "gender": "m",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        "1"
+      ],
+      "rooms": [],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": []
+    },
+    {
+      "id": 3,
+      "create_at": "2025-04-20T20:01:56.922Z",
+      "update_at": "2025-04-20T20:01:56.922Z",
+      "last_name": "qeow",
+      "first_name": "qweqe",
+      "middle_name": "qew",
+      "phone": "+998 33 333 33 33",
+      "gender": "m",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        "1"
+      ],
+      "rooms": [],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": []
+    }
+  ],
+  "checks": [
+    {
+      "id": "1001",
+      "clientId": 1,
+      "totalPrice": 233322,
+      "isPaid": true,
+      "queueNumber": null,
+      "createdAt": "2025-04-19T10:00:00Z",
+      "is_paid": true
+    },
+    {
+      "id": "1002",
+      "clientId": 2,
+      "create_at": "2025-04-20T13:38:14.386Z",
+      "update_at": "2025-04-20T13:38:14.386Z",
+      "totalPrice": "0200000",
+      "isPaid": false
+    },
+    {
+      "id": 1003,
+      "clientId": 3,
+      "create_at": "2025-04-20T20:01:56.988Z",
+      "update_at": "2025-04-20T20:01:56.988Z",
+      "totalPrice": "0200000",
+      "isPaid": false
+    }
+  ]
+}

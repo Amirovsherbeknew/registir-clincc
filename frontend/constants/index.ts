@@ -1,0 +1,1 @@
+export const roleList = ['operator','kassir','super_admin']

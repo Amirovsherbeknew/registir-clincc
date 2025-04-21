@@ -1,0 +1,9 @@
+{
+    "global_error_notification": true,
+    "auth": {
+      "login_api": "/user/login/",
+      "login_oneId_api": "/user/oneId_login/",
+      "refresh_api": "/token/refresh/",
+      "expires_date": { "access": 480, "refresh": 480 }
+    }
+}
