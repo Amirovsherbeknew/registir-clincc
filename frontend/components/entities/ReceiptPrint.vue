@@ -1,23 +1,37 @@
 <template>
-    <div>
+    <div class="w-full">
       <!-- Chek Dizayni -->
       <div
         id="print-area"
         ref="printSection"
-        class="receipt p-4 bg-white border rounded-md w-full mx-auto text-sm font-mono"
+        class="receipt p-4 bg-white rounded-md w-full mx-auto text-sm font-mono"
       >
         <h2 class="text-center font-bold text-lg mb-2" v-if="data.isPaid">To‘lov Cheki</h2>
         <h2 class="text-center font-bold text-lg mb-2" v-else>To‘lov uchun chek</h2>
-        <h1 class="text-center font-bold text-xl mb-2">{{ data.id }}</h1>
+        <h1 class="text-center text-4xl font-semibold text-blue-600 mb-2">{{ data.id }}</h1>
         <p><strong>Ism:</strong> {{ data.first_name }}</p>
         <p><strong>Familiya:</strong> {{ data.last_name }}</p>
         <p><strong>Telefon:</strong> {{ data.phone }}</p>
         <p v-if="data.isPaid"><strong>To‘lov summasi:</strong> {{ data.amount }} so‘m</p>
-        <p><strong>Sana:</strong> {{ formattedDate }}</p>
+        <p><strong>Sana:</strong> {{ useDateFormat(data.create_at || props.data.date) }}</p>
       </div>
   
       <!-- Chop Button -->
-      <el-button class="no-print" @click="printSection">🖨️ Chop qilish</el-button>
+      <div class="w-full">
+        
+        <!-- Agar to‘langan bo‘lsa -->
+        <p v-if="data?.isPaid || data?.is_paid" class="mt-4 text-green-500 text-2xl font-medium text-center">
+          To‘langan
+        </p>
+        <button 
+          v-else
+          @click="handlePaid(item.id)"
+          class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+        >
+          To‘lash
+        </button>
+      </div>
+      <!-- <el-button class="no-print" @click="printSection">🖨️ Chop qilish</el-button> -->
     </div>
   </template>
   
@@ -40,11 +54,14 @@
     }
   })
   
-  const formattedDate = computed(() => {
-    const d = new Date(props.data.create_at || props.data.date)
-    return d.toLocaleDateString('uz-UZ') + ' ' + d.toLocaleTimeString('uz-UZ')
-  })
-  
+
+  async function handlePaid(id) {
+    const { error } = await useFetchApi.patch(`/checks/${id}`, { isPaid: true })
+    if (!error.value) {
+      getChecks() // Ma'lumotlarni yangilash
+    }
+  }
+
   const printSection = () => {
     printJS({
       printable: 'print-area',
@@ -90,9 +107,9 @@
   </script>
   
   <style scoped>
-  .receipt {
+  /* .receipt {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+  } */
   
   /* Chopda ko‘rinmasin */
   .no-print {

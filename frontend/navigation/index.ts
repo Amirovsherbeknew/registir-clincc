@@ -1,5 +1,11 @@
 export const navigationList = [
     {
+        title:"Ariza yaratish",
+        path:'/registir/create',
+        icon:'IconsListUserView',
+        permisionList:['operator']
+    },
+    {
         title:"Mijozlar ro'yxat",
         path:'/registir',
         icon:'IconsListUserView',
@@ -9,7 +15,7 @@ export const navigationList = [
         title:"Checklar ro'yxati",
         path:'/checks',
         icon:'IconsListUserView',
-        permisionList:['super_admin','operator','kassir']
+        permisionList:['super_admin','kassir']
     },
     {
         title:"Med ko'riklar ro'yxati",

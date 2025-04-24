@@ -1,0 +1,8 @@
+default layout ozgargan
+kassirda faqat qidiruv natijasida check chiqadi
+
+operatorga yangi page yaratish uchun faqatgina
+va yaratganlarni detail korish 
+
+directorda hisobotlar boladi 
+

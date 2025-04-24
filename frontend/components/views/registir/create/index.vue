@@ -26,10 +26,20 @@
           </el-form-item>
   
           <el-form-item label="Jinsi" prop="gender">
-            <el-select v-model="form.gender" placeholder="Tanlang">
-              <el-option label="Erkak" value="m" />
-              <el-option label="Ayol" value="f" />
-            </el-select>
+            <el-button-group>
+            <el-button
+              :type="form.gender === 'm' ? 'primary' : 'default'"
+              @click="form.gender = 'm'"
+            >
+              Erkak
+            </el-button>
+            <el-button
+              :type="form.gender === 'f' ? 'primary' : 'default'"
+              @click="form.gender = 'f'"
+            >
+              Ayol
+            </el-button>
+          </el-button-group>
           </el-form-item>
         </div>
   
@@ -76,7 +86,7 @@
         <!-- Yotoqxona -->
         <template v-if="form.visitTypes.includes('room')">
           <el-form-item label="Xona turi" prop="room.roomId">
-            <el-select v-model="form.room.roomId" multiple placeholder="Xona tanlang">
+            <el-select v-model="form.room.roomId" placeholder="Xona tanlang">
               <el-option
                 v-for="room in dictionary.rooms"
                 :key="room.id"

@@ -98,13 +98,35 @@
       "labTests": []
     },
     {
-      "id": 3,
+      "id": "3",
       "create_at": "2025-04-20T20:01:56.922Z",
       "update_at": "2025-04-20T20:01:56.922Z",
       "last_name": "qeow",
       "first_name": "qweqe",
       "middle_name": "qew",
       "phone": "+998 33 333 33 33",
+      "gender": "m",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        "1"
+      ],
+      "rooms": [],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": []
+    },
+    {
+      "id": 4,
+      "create_at": "2025-04-24T15:57:50.353Z",
+      "update_at": "2025-04-24T15:57:50.353Z",
+      "last_name": "3242",
+      "first_name": "fdssd",
+      "middle_name": "sdfs",
+      "phone": "+998 43 543 54 35",
       "gender": "m",
       "visitTypes": [
         "med"
@@ -139,10 +161,18 @@
       "isPaid": false
     },
     {
-      "id": 1003,
+      "id": "1003",
       "clientId": 3,
       "create_at": "2025-04-20T20:01:56.988Z",
       "update_at": "2025-04-20T20:01:56.988Z",
+      "totalPrice": "0200000",
+      "isPaid": false
+    },
+    {
+      "id": 1004,
+      "clientId": 4,
+      "create_at": "2025-04-24T15:57:50.377Z",
+      "update_at": "2025-04-24T15:57:50.377Z",
       "totalPrice": "0200000",
       "isPaid": false
     }

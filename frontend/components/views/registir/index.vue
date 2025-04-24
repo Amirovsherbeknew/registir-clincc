@@ -7,14 +7,8 @@
         v-model="searchQuery"
         placeholder="Qidiruv..."
         clearable
-        class="w-[300px] mr-[16px]"
+        class="w-[300px]"
       />
-      <el-button type="primary" @click="$router.push('/registir/create')" class="flex gap-[8px]">
-        <div class="flex !gap-[8px] items-center">
-          Mijoz ro'yxatga olish
-          <IconPlusRectangle/>
-        </div>
-      </el-button>
       </div>
     </div>
     <el-table :data="filteredData" border style="width: 100%">
