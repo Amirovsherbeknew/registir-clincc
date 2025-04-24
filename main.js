@@ -21,12 +21,15 @@ function createWindow() {
   });
 
   // Frontend ishga tushishini kutamiz
-  const distPath = path.join(__dirname, 'frontend', '.output', 'public', 'index.html');
-  if (fs.existsSync(distPath)) {
-    win.loadFile(distPath);
-  } else {
-    console.error('❌ Nuxt build topilmadi. Avval frontend:build buyrugʻini bajarishingiz kerak.');
-  }
+  const frontendUrl = 'http://localhost:3000';
+
+  waitOn({ resources: [frontendUrl], timeout: 30000 }) // 30 soniyagacha kutadi
+    .then(() => {
+      win.loadURL(frontendUrl);
+    })
+    .catch((err) => {
+      console.error('❌ Nuxt frontend yuklanmadi: ', err);
+    });
 
   // JSON-serverni ishga tushirish, agar `db.json` mavjud bo‘lsa
   const dbPath = path.join(__dirname, 'db.json');
