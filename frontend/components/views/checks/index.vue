@@ -19,19 +19,18 @@
           v-model="search"
           style="width: 100%;"
           placeholder="Check raqamini yozing..."
-          @input="handleSearch"
+          @keydown.enter="handleSearch"
           class="rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 shadow-sm hover:shadow-md"
         >
           <template #suffix>
-            <IconSearch class="text-gray-500 hover:text-blue-500 transition-colors duration-200" />
+            <IconSearch @click="handleSearch" class="text-gray-500 hover:text-blue-500 transition-colors duration-200" />
           </template>
         </el-input>
       </div>
     </div>
-
     <!-- Check ma'lumotlari -->
-    <div
-      v-if="tableData.length > 0"
+    <div v-loading="loading"
+      v-if="checkInfo && search"
       class="w-full mt-8 flex flex-col gap-[20px] justify-center"
     >
       <div class="text-2xl font-semibold text-gray-800 tracking-tight">
@@ -39,59 +38,90 @@
       </div>
       <div class="flex-1 flex-center flex-wrap gap-[20px]">
         <div
-          v-for="item in tableData"
-          :key="item.id"
           class="min-w-[640px] bg-white rounded-xl p-6 border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-blue-50/50"
         >
-          <ReceiptPrint :data="{ ...item, ...form }" />
+          <ReceiptPrint :data="{ ...checkInfo }" />
         </div>
       </div>
     </div>
 
     <!-- Natija topilmaganda -->
-    <div v-else-if="search && tableData.length === 0" class="mt-8">
+    <div v-else-if="search && errorMessage" class="mt-8">
       <p class="text-gray-600 text-center text-lg font-medium">
         Check topilmadi...
       </p>
     </div>
+    <!-- <pre>{{ dictionary }}</pre> -->
   </Card>
 </template>
 
 <script lang="ts" setup>
 import type { checkType } from '~/types/api/check.type.ts'
-
-const tableData = ref<checkType[]>([])
+const dictionary = ref({
+  medServices: [],
+  room: [],
+  labTests: []
+})
+const checkInfo = ref<any>(null)
 const originalData = ref<checkType[]>([])
 const search = ref<string>('')
+const errorMessage = ref('')
+const loading = ref(false)
 
 onMounted(() => {
-  getChecks()
+  getDictionary()
 })
 
-async function getChecks() {
-  const { data, error } = await useFetchApi.get<checkType[]>('/checks')
-  if (!error.value && data.value) {
-    tableData.value = data.value || []
-    originalData.value = data.value || []
+async function getDictionary() {
+    const apiList = [
+      { key: 'medServices', endpoint: '/medServices' },
+      { key: 'room', endpoint: '/rooms' },
+      { key: 'labTests', endpoint: '/labTests' }
+    ]
+  
+    const fetchPromises = apiList.map(resp => useFetchApi.get(resp.endpoint))
+    const results = await Promise.all(fetchPromises)
+  
+    results.forEach((result, index) => {
+      if (!result.error.value) {
+        (dictionary.value as any)[apiList[index].key] = result.data.value
+      }
+    })
   }
-}
 
 async function handleSearch() {
   const query = search.value.trim()
   if (!query) {
-    tableData.value = []
+    checkInfo.value = null
   } else {
-    tableData.value = originalData.value.filter((item: checkType) =>
-      item.id.toString().includes(query)
-    )
+    const {data,error} = await useFetchApi.get<checkType>(`/checks/${query}`)
+    if (!error.value && data.value) {
+      checkInfo.value = data.value;
+      getClientInfo(data.value?.clientId)
+    }
+    else {
+      errorMessage.value = 'Topilmad'
+      checkInfo.value = null;
+    }
+    
+  }
+}
+async function getClientInfo (id:number) {
+  const {data,error} = await useFetchApi.get(`/clients/${id}`)
+  if (!error.value) {
+    checkInfo.value = {...checkInfo.value,
+      clientInfo:data.value
+    }
+    Object.entries(dictionary.value)?.forEach(([key,value]) => {
+      console.log(key)
+      // if ((checkInfo.value?.clientInfo as any)?.[key]) {
+      //   (checkInfo.value?.clientInfo as any)[key] = value?.filter((resp:any) => (checkInfo.value?.clientInfo as any)[key].includes(resp?.id))
+      // }
+    })
   }
 }
 
 
-const formattedDate = (date: any) => {
-  const d = new Date(date)
-  return d.toLocaleDateString('uz-UZ') + ' ' + d.toLocaleTimeString('uz-UZ')
-}
 </script>
 
 <style scoped>

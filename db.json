@@ -48,34 +48,6 @@
   ],
   "clients": [
     {
-      "id": "1",
-      "last_name": "Aliyev Aziz",
-      "first_name": "Aliyev Aziz",
-      "middle_name": "Aliyev Aziz",
-      "phone": "+998901234567",
-      "gender": "Erkak",
-      "visits": [
-        {
-          "type": "med",
-          "serviceIds": [
-            1,
-            3
-          ]
-        },
-        {
-          "type": "room",
-          "roomId": 1,
-          "days": 3
-        },
-        {
-          "type": "lab",
-          "testIds": [
-            1
-          ]
-        }
-      ]
-    },
-    {
       "id": "2",
       "create_at": "2025-04-20T13:38:14.344Z",
       "update_at": "2025-04-20T13:38:14.344Z",
@@ -140,18 +112,32 @@
         "days": 1
       },
       "labTests": []
+    },
+    {
+      "id": 5,
+      "create_at": "2025-04-25T05:13:23.927Z",
+      "update_at": "2025-04-25T05:13:23.927Z",
+      "last_name": "alibek",
+      "first_name": "Aliye",
+      "middle_name": "",
+      "phone": "+998 99 999 99 99",
+      "gender": "m",
+      "visitTypes": [
+        "med",
+        "room"
+      ],
+      "medServices": [
+        "1"
+      ],
+      "rooms": [],
+      "room": {
+        "roomId": "1",
+        "days": 1
+      },
+      "labTests": []
     }
   ],
   "checks": [
-    {
-      "id": "1001",
-      "clientId": 1,
-      "totalPrice": 233322,
-      "isPaid": true,
-      "queueNumber": null,
-      "createdAt": "2025-04-19T10:00:00Z",
-      "is_paid": true
-    },
     {
       "id": "1002",
       "clientId": 2,
@@ -169,10 +155,18 @@
       "isPaid": false
     },
     {
-      "id": 1004,
+      "id": "1004",
       "clientId": 4,
       "create_at": "2025-04-24T15:57:50.377Z",
       "update_at": "2025-04-24T15:57:50.377Z",
+      "totalPrice": "0200000",
+      "isPaid": false
+    },
+    {
+      "id": 1005,
+      "clientId": 5,
+      "create_at": "2025-04-25T05:13:23.963Z",
+      "update_at": "2025-04-25T05:13:23.963Z",
       "totalPrice": "0200000",
       "isPaid": false
     }

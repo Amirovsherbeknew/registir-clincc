@@ -8,7 +8,7 @@ export const rules = {
         first_name:[{required:true,message:''},{validator: useTrim(),trigger: 'blur'}],
         middle_name:[{required:false,message:''}],
         phone:[{required:true,message:''},{validator: usePhoneNumberValidate(),trigger: 'blur'}],
-        gender:[{required:true,message:'Jinsni tanlang'}],
+        gender:[{required:true,message:'Jinsini tanlang'}],
         servers_type:[{required:true,message:''}],
         medServices:[{required:true,message:''}],
         visitTypes:[{required:true,message:'Murojat turini tanlang'}],
