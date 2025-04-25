@@ -26,6 +26,20 @@
       "update_at": "2025-04-20T11:20:03.183Z",
       "name": "Jigar analizi",
       "price": "200000"
+    },
+    {
+      "id": "2",
+      "create_at": "2025-04-20T11:20:03.183Z",
+      "update_at": "2025-04-20T11:20:03.183Z",
+      "name": "Siydik analizi",
+      "price": "220000"
+    },
+    {
+      "id": "3",
+      "create_at": "2025-04-20T11:20:03.183Z",
+      "update_at": "2025-04-20T11:20:03.183Z",
+      "name": "Qon analizi",
+      "price": "400000"
     }
   ],
   "rooms": [
@@ -33,8 +47,50 @@
       "id": "1",
       "create_at": "2025-04-20T11:21:44.663Z",
       "update_at": "2025-04-20T11:21:44.663Z",
-      "name": "4 kishilik xona",
+      "name": "4 kishilik xona standart",
       "pricePerDay": "150000"
+    },
+    {
+      "id": "2",
+      "create_at": "2025-04-20T11:21:44.663Z",
+      "update_at": "2025-04-20T11:21:44.663Z",
+      "name": "2 kishilik xona standart",
+      "pricePerDay": "100000"
+    },
+    {
+      "id": "3",
+      "create_at": "2025-04-20T11:21:44.663Z",
+      "update_at": "2025-04-20T11:21:44.663Z",
+      "name": "2 kishilik xona luxury",
+      "pricePerDay": "450000"
+    },
+    {
+      "id": "4",
+      "create_at": "2025-04-20T11:21:44.663Z",
+      "update_at": "2025-04-20T11:21:44.663Z",
+      "name": "4 kishilik xona luxury",
+      "pricePerDay": "650000"
+    },
+    {
+      "id": "5",
+      "create_at": "2025-04-20T11:21:44.663Z",
+      "update_at": "2025-04-20T11:21:44.663Z",
+      "name": "4 kishilik xona comfort",
+      "pricePerDay": "450000"
+    },
+    {
+      "id": "6",
+      "create_at": "2025-04-20T11:21:44.663Z",
+      "update_at": "2025-04-20T11:21:44.663Z",
+      "name": "2 kishilik xona V.I.P",
+      "pricePerDay": "950000"
+    },
+    {
+      "id": "7",
+      "create_at": "2025-04-20T11:21:44.663Z",
+      "update_at": "2025-04-20T11:21:44.663Z",
+      "name": "2 kishilik xona V.I.P",
+      "pricePerDay": "1250000"
     }
   ],
   "labTests": [
@@ -44,19 +100,41 @@
       "update_at": "2025-04-20T11:21:21.188Z",
       "name": "iwueoiru",
       "price": "120000"
+    },
+    {
+      "id": "2",
+      "create_at": "2025-04-20T11:21:21.188Z",
+      "update_at": "2025-04-20T11:21:21.188Z",
+      "name": "iwueoiru 1",
+      "price": "130000"
+    },
+    {
+      "id": "3",
+      "create_at": "2025-04-20T11:21:21.188Z",
+      "update_at": "2025-04-20T11:21:21.188Z",
+      "name": "iwueoiru 2",
+      "price": "110000"
+    },
+    {
+      "id": "4",
+      "create_at": "2025-04-20T11:21:21.188Z",
+      "update_at": "2025-04-20T11:21:21.188Z",
+      "name": "iwueoiru 3",
+      "price": "90000"
     }
   ],
   "clients": [
     {
-      "id": "2",
-      "create_at": "2025-04-20T13:38:14.344Z",
-      "update_at": "2025-04-20T13:38:14.344Z",
-      "last_name": "opweirp",
-      "first_name": "opsdf",
-      "middle_name": "sdlk;f",
-      "phone": "+998 90 843 09 34",
+      "id": "1",
+      "create_at": "2025-04-25T13:11:31.405Z",
+      "update_at": "2025-04-25T13:11:31.405Z",
+      "last_name": " 90345083409",
+      "first_name": "    dsdd",
+      "middle_name": "",
+      "phone": "+998 44 444 44 44",
       "gender": "m",
       "visitTypes": [
+        "room",
         "med"
       ],
       "medServices": [
@@ -64,110 +142,55 @@
       ],
       "rooms": [],
       "room": {
-        "roomId": null,
+        "roomId": "7",
         "days": 1
       },
       "labTests": []
     },
     {
-      "id": "3",
-      "create_at": "2025-04-20T20:01:56.922Z",
-      "update_at": "2025-04-20T20:01:56.922Z",
-      "last_name": "qeow",
-      "first_name": "qweqe",
-      "middle_name": "qew",
+      "id": "2",
+      "create_at": "2025-04-25T13:14:26.638Z",
+      "update_at": "2025-04-25T13:14:26.638Z",
+      "last_name": "sss",
+      "first_name": "ss",
+      "middle_name": "",
       "phone": "+998 33 333 33 33",
       "gender": "m",
       "visitTypes": [
+        "lab",
+        "room",
         "med"
       ],
       "medServices": [
-        "1"
-      ],
-      "rooms": [],
-      "room": {
-        "roomId": null,
-        "days": 1
-      },
-      "labTests": []
-    },
-    {
-      "id": 4,
-      "create_at": "2025-04-24T15:57:50.353Z",
-      "update_at": "2025-04-24T15:57:50.353Z",
-      "last_name": "3242",
-      "first_name": "fdssd",
-      "middle_name": "sdfs",
-      "phone": "+998 43 543 54 35",
-      "gender": "m",
-      "visitTypes": [
-        "med"
-      ],
-      "medServices": [
-        "1"
-      ],
-      "rooms": [],
-      "room": {
-        "roomId": null,
-        "days": 1
-      },
-      "labTests": []
-    },
-    {
-      "id": 5,
-      "create_at": "2025-04-25T05:13:23.927Z",
-      "update_at": "2025-04-25T05:13:23.927Z",
-      "last_name": "alibek",
-      "first_name": "Aliye",
-      "middle_name": "",
-      "phone": "+998 99 999 99 99",
-      "gender": "m",
-      "visitTypes": [
-        "med",
-        "room"
-      ],
-      "medServices": [
-        "1"
+        "1",
+        "3"
       ],
       "rooms": [],
       "room": {
         "roomId": "1",
-        "days": 1
+        "days": 4
       },
-      "labTests": []
+      "labTests": [
+        "4",
+        "3"
+      ]
     }
   ],
   "checks": [
     {
-      "id": "1002",
+      "id": "1",
+      "clientId": 1,
+      "create_at": "2025-04-25T13:11:31.430Z",
+      "update_at": "2025-04-25T13:11:31.430Z",
+      "totalPrice": "02000001250000",
+      "isPaid": true
+    },
+    {
+      "id": "2",
       "clientId": 2,
-      "create_at": "2025-04-20T13:38:14.386Z",
-      "update_at": "2025-04-20T13:38:14.386Z",
-      "totalPrice": "0200000",
-      "isPaid": false
-    },
-    {
-      "id": "1003",
-      "clientId": 3,
-      "create_at": "2025-04-20T20:01:56.988Z",
-      "update_at": "2025-04-20T20:01:56.988Z",
-      "totalPrice": "0200000",
-      "isPaid": false
-    },
-    {
-      "id": "1004",
-      "clientId": 4,
-      "create_at": "2025-04-24T15:57:50.377Z",
-      "update_at": "2025-04-24T15:57:50.377Z",
-      "totalPrice": "0200000",
-      "isPaid": false
-    },
-    {
-      "id": 1005,
-      "clientId": 5,
-      "create_at": "2025-04-25T05:13:23.963Z",
-      "update_at": "2025-04-25T05:13:23.963Z",
-      "totalPrice": "0200000",
+      "create_at": "2025-04-25T13:14:26.657Z",
+      "update_at": "2025-04-25T13:14:26.657Z",
+      "totalPrice": 1400000,
       "isPaid": false
     }
   ]

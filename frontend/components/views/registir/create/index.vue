@@ -77,7 +77,7 @@
             <el-option
               v-for="item in dictionary.medServices"
               :key="item.id"
-              :label="`${item.name} - ${item.price} so'm`"
+              :label="`${item.name} - ${useCurrencyFormat(item.price)}`"
               :value="item.id"
             />
           </el-select>
@@ -90,7 +90,7 @@
               <el-option
                 v-for="room in dictionary.rooms"
                 :key="room.id"
-                :label="`${room.name} - ${room.pricePerDay} so'm/kun`"
+                :label="`${room.name} - ${useCurrencyFormat(room.pricePerDay)}/kun`"
                 :value="room.id"
               />
             </el-select>
@@ -106,7 +106,7 @@
             <el-option
               v-for="test in dictionary.labTests"
               :key="test.id"
-              :label="`${test.name} - ${test.price} so'm`"
+              :label="`${test.name} - ${useCurrencyFormat(test.price)}`"
               :value="test.id"
             />
           </el-select>
@@ -168,21 +168,21 @@
     if (form.value.visitTypes.includes('med')) {
       for (let id of form.value.medServices) {
         const item = dictionary.value.medServices.find(m => m.id === id)
-        if (item) total += item.price
+        if (item) total += Number(item.price)
       }
     }
   
     if (form.value.visitTypes.includes('room')) {
-      for (let roomId of form.value.rooms) {
-        const room = dictionary.value.rooms.find(r => r.id === roomId)
-        if (room) total += room.pricePerDay * form.value.room.days
-      }
+      console.log(form.value.room)
+      const room = dictionary.value.rooms.find(r => r.id === form.value.room.roomId)
+      if (room) total += Number(room.pricePerDay) * form.value.room.days
+      console.log(total)
     }
   
     if (form.value.visitTypes.includes('lab')) {
       for (let id of form.value.labTests) {
         const test = dictionary.value.labTests.find(t => t.id === id)
-        if (test) total += test.price
+        if (test) total += Number(test.price)
       }
     }
   
@@ -202,8 +202,10 @@
     if (!createform.value) return
     createform.value.validate(valid => {
       if (valid) {
+        alert('l')
         createClientForm()
       }
+      else alert('2')
     })
   }
   

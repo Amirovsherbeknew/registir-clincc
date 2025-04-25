@@ -17,7 +17,11 @@
           {{ scope.row.last_name }} {{ scope.row.first_name }} {{ scope.row.middle_name }}
         </template>
       </el-table-column>
-      <el-table-column prop="gender" label="Jinsi"/>
+      <el-table-column prop="gender" label="Jinsi">
+        <template #default="scope">
+          {{ useConstant().gender(scope.row.gender).label }}
+        </template>
+      </el-table-column>
       <el-table-column prop="phone" label="Telefon raqami" />
       <el-table-column label="Ro'yxatga olingan vaqti">
         <template #default="scope">
@@ -31,28 +35,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 
-const tableData = ref([
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-])
+const tableData = ref([])
 
 const searchQuery = ref('')
 

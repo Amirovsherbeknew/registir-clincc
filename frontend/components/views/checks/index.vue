@@ -51,7 +51,6 @@
         Check topilmadi...
       </p>
     </div>
-    <!-- <pre>{{ dictionary }}</pre> -->
   </Card>
 </template>
 
@@ -71,7 +70,9 @@ const loading = ref(false)
 onMounted(() => {
   getDictionary()
 })
-
+function findRoom (id:number) {
+  return dictionary.value.room.find((resp) => resp?.id === id)
+}
 async function getDictionary() {
     const apiList = [
       { key: 'medServices', endpoint: '/medServices' },
@@ -113,10 +114,16 @@ async function getClientInfo (id:number) {
       clientInfo:data.value
     }
     Object.entries(dictionary.value)?.forEach(([key,value]) => {
-      console.log(key)
-      // if ((checkInfo.value?.clientInfo as any)?.[key]) {
-      //   (checkInfo.value?.clientInfo as any)[key] = value?.filter((resp:any) => (checkInfo.value?.clientInfo as any)[key].includes(resp?.id))
-      // }
+      if ((checkInfo.value?.clientInfo as any)?.[key] && key !== 'room') {
+        (checkInfo.value?.clientInfo as any)[key] = value?.filter((resp:any) => (checkInfo.value?.clientInfo as any)[key].includes(resp?.id))
+      }
+      else if ((checkInfo.value?.clientInfo as any)?.[key] && key === 'room') {
+        console.log(findRoom(checkInfo.value.clientInfo.room.roomId))
+        checkInfo.value.clientInfo.room = {...checkInfo.value.clientInfo.room,
+          price:checkInfo.value.clientInfo.room.days * findRoom(checkInfo.value.clientInfo.room.roomId)?.pricePerDay,
+          priceDay:findRoom(checkInfo.value.clientInfo.room.roomId)?.pricePerDay
+        }
+      }
     })
   }
 }
