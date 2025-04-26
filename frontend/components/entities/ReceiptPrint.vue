@@ -1,104 +1,144 @@
 <template>
-    <div class="w-full">
-      <div
-        id="print-area"
-        ref="printSection"
-        class="receipt p-4 bg-white rounded-md w-full mx-auto text-sm font-mono"
-      >
-        <h2 class="text-center font-bold text-lg mb-2" v-if="data.isPaid">To‘lov Cheki</h2>
-        <h2 class="text-center font-bold text-lg mb-2" v-else>To‘lov uchun chek</h2>
-        <h1 class="text-center text-4xl font-semibold text-blue-600 mb-2">{{ data.id }}</h1>
-        <p class="flex justify-between"><strong>Ism:</strong> {{ data?.clientInfo?.first_name }}</p>
-        <p class="flex justify-between"><strong>Familiya:</strong> {{ data?.clientInfo?.last_name }}</p>
-        <p class="flex justify-between"><strong>Jinsi:</strong> {{ useConstant().gender(data?.clientInfo?.gender)?.label }}</p>
-        <p class="flex justify-between"><strong>Telefon:</strong> {{ data?.clientInfo?.phone }}</p>
-        <p class="flex justify-between" v-if="data.isPaid"><strong>To‘lov summasi:</strong> {{ data.amount }} so‘m</p>
-        <p class="flex justify-between mb-[10px]"><strong>Sana:</strong> {{ useDateFormat(data.create_at || props.data.date) }}</p>
-        <hr>
-        <p class="flex justify-between my-[10px] font-[700]"><strong>Xizmatlar:</strong></p>
-        <hr>
-        <!-- <p class="flex justify-between my-[10px] border-b border-dashed" v-if="data?.clientInfo?.visitTypes.includes('med')"><strong>Med ko'rik:</strong> {{ usePriceCalculate(data?.clientInfo.medServices) }}</p> -->
-          <template v-if="data?.clientInfo?.visitTypes.includes('med')">
-            <p class="flex justify-between my-[5px]" v-for="item in data?.clientInfo.medServices"><strong>{{item.name}}:</strong>{{ useCurrencyFormat(item.price) }}</p>
-          </template>
-        <!-- <hr> -->
-        <p class="flex justify-between my-[5px] " v-if="data?.clientInfo?.visitTypes.includes('room')"><strong>Yotoqxona:</strong> {{ useCurrencyFormat(Number(data?.clientInfo?.room?.priceDay)) }} x {{ data?.clientInfo?.room?.days }} = {{ useCurrencyFormat(Number(data?.clientInfo?.room?.price)) }}</p>
-        <!-- <hr> -->
-        <!-- <p class="flex justify-between my-[10px] border-b border-dashed" v-if="data?.clientInfo?.visitTypes.includes('lab')"><strong>Laboratoriya test:</strong> {{ usePriceCalculate(data?.clientInfo.labTests) }}</p> -->
-          <template v-if="data?.clientInfo?.visitTypes.includes('lab')">
-            <p class="flex justify-between my-[5px]" v-for="item in data?.clientInfo.labTests"><strong>{{item.name}}:</strong> {{ item.price }}</p>
-          </template>
-        <hr>
-        <p class="flex justify-between mt-[30px] text-[20px]"><strong>Jami:</strong> {{ useCurrencyFormat(data?.totalPrice)}}</p>
-      </div>
-  
-      <!-- Chop Button -->
-      <div class="w-full">
-        
-        <!-- Agar to‘langan bo‘lsa -->
-        <p v-if="data?.isPaid || data?.is_paid" @click="handlePaid(data.id)" class="mt-4 text-green-500 text-2xl font-medium text-center">
-          To‘langan
-        </p>
-        <button 
-          v-else
-          @click="handlePaid(data.id)"
-          class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
-        >
-          To‘lash
-        </button>
-      </div>
-      <!-- <el-button class="no-print" @click="printSection">🖨️ Chop qilish</el-button> -->
+  <div class="w-full">
+    <div
+      id="print-area"
+      ref="printSection"
+      class="receipt p-4 bg-white rounded-md w-full mx-auto text-sm font-mono"
+    >
+      <h2 class="text-center font-bold text-lg mb-2" v-if="data.isPaid">To'lov Cheki</h2>
+      <h2 class="text-center font-bold text-lg mb-2" v-else>To'lov uchun chek</h2>
+      <h1 class="text-center text-4xl font-semibold text-blue-600 mb-2">{{ data.id }}</h1>
+      
+      <!-- Используем таблицу для гарантированного разделения -->
+      <table class="w-full mb-2">
+        <tr>
+          <td class="font-bold w-1/3">Ism:</td>
+          <td class="text-right">{{ data?.clientInfo?.first_name }}</td>
+        </tr>
+        <tr>
+          <td class="font-bold">Familiya:</td>
+          <td class="text-right">{{ data?.clientInfo?.last_name }}</td>
+        </tr>
+        <tr>
+          <td class="font-bold">Jinsi:</td>
+          <td class="text-right">{{ useConstant().gender(data?.clientInfo?.gender)?.label }}</td>
+        </tr>
+        <tr>
+          <td class="font-bold">Telefon:</td>
+          <td class="text-right">{{ data?.clientInfo?.phone }}</td>
+        </tr>
+        <tr v-if="data.isPaid">
+          <td class="font-bold">To'lov summasi:</td>
+          <td class="text-right">{{ data.amount }} so'm</td>
+        </tr>
+        <tr>
+          <td class="font-bold">Sana:</td>
+          <td class="text-right">{{ useDateFormat(data.create_at || props.data.date) }}</td>
+        </tr>
+      </table>
+      
+      <hr>
+      <p class="font-bold my-2">Xizmatlar:</p>
+      <hr>
+      
+      <!-- Медицинские услуги -->
+      <table class="w-full" v-if="data?.clientInfo?.visitTypes.includes('med')">
+        <tr v-for="item in data?.clientInfo.medServices" class="my-1">
+          <td class="font-bold w-2/3">{{item.name}}:</td>
+          <td class="text-right">{{ useCurrencyFormat(item.price) }}</td>
+        </tr>
+      </table>
+      
+      <!-- Услуги проживания -->
+      <table class="w-full" v-if="data?.clientInfo?.visitTypes.includes('room')">
+        <tr class="my-1">
+          <td class="font-bold w-1/2">Yotoqxona:</td>
+          <td class="text-right bg-[red]">
+            {{ Number(data?.clientInfo?.room?.priceDay) }} x 
+            {{ data?.clientInfo?.room?.days }} = 
+            {{ useCurrencyFormat(Number(data?.clientInfo?.room?.price)) }}
+          </td>
+        </tr>
+      </table>
+      
+      <!-- Лабораторные тесты -->
+      <table class="w-full" v-if="data?.clientInfo?.visitTypes.includes('lab')">
+        <tr v-for="item in data?.clientInfo.labTests" class="my-1">
+          <td class="font-bold w-2/3">{{item.name}}:</td>
+          <td class="text-right">{{ useCurrencyFormat(item.price) }}</td>
+        </tr>
+      </table>
+      
+      <hr>
+      <table class="w-full mt-4">
+        <tr>
+          <td class="font-bold text-xl w-1/3">Jami:</td>
+          <td class="text-right text-xl">{{ useCurrencyFormat(data?.totalPrice)}}</td>
+        </tr>
+      </table>
     </div>
-  </template>
-  
-  <script setup>
-  import printJS from 'print-js'
-  
-  // Props orqali ma’lumot olish
-  const props = defineProps({
-    data: {
-      type: Object,
-      required: true,
-      default: () => ({
-        first_name: '',
-        last_name: '',
-        phone: '',
-        amount: 0,
-        date: new Date()
-      })
-    }
-  })
 
-  async function handlePaid(id) {
-    const { error } = await useFetchApi.patch(`/checks/${id}`, { isPaid: !props.data.isPaid })
-    if (!error.value) {
-      printSection()
-    }
-  }
+    <!-- Кнопка оплаты -->
+    <div class="w-full">
+      <p v-if="data?.isPaid || data?.is_paid" @click="handlePaid(data.id)" class="mt-4 text-green-500 text-2xl font-medium text-center">
+        To'langan
+      </p>
+      <button 
+        v-else
+        @click="handlePaid(data.id)"
+        class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+      >
+        To'lash
+      </button>
+    </div>
+  </div>
+</template>
 
-  const printSection = () => {
-    printJS({
-      printable: 'print-area',
-      type: 'html',
-      targetStyles: ['*']
+<script setup>
+import printJS from 'print-js'
+
+// Props orqali ma'lumot olish
+const props = defineProps({
+  data: {
+    type: Object,
+    required: true,
+    default: () => ({
+      first_name: '',
+      last_name: '',
+      phone: '',
+      amount: 0,
+      date: new Date()
     })
   }
-  </script>
-  
-  <!-- <style scoped>
-  /* .receipt {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  } */
-  
-  /* Chopda ko‘rinmasin */
-  .no-print {
-    display: inline-block;
+})
+
+async function handlePaid(id) {
+  const { error } = await useFetchApi.patch(`/checks/${id}`, { isPaid: !props.data.isPaid })
+  if (!error.value) {
+    printSection()
+  }
+}
+
+const printSection = () => {
+  printJS({
+    printable: 'print-area',
+    type: 'html',
+    targetStyles: ['*']
+  })
+}
+</script>
+
+<style scoped>
+/* Дополнительные стили для корректного отображения в печати */
+@media print {
+  table {
+    width: 100%;
+    table-layout: fixed;
   }
   
-  @media print {
-    .no-print {
-      display: none !important;
-    }
+  td {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
-  </style> -->
-  
+}
+</style>
