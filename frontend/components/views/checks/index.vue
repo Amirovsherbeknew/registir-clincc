@@ -102,22 +102,33 @@ async function getChecks () {
 }
 
 async function handleSearch() {
-  const query = search.value.trim()
+  const query = search.value.trim();
   if (!query) {
-    checkInfo.value = null
+    checkInfo.value = null;
+    return;
+  }
+
+  let { data, error } = await useFetchApi.get<checkType>(`/checks/${query}`);
+  
+  if (error.value) {
+    // Agar birinchi so‘rovda error bo‘lsa, query ni Number qilib qayta urinadi
+    const numericQuery = Number(query);
+    if (!isNaN(numericQuery)) {
+      const retry = await useFetchApi.get<checkType>(`/checks/${numericQuery}`);
+      data = retry.data;
+      error = retry.error;
+    }
+  }
+
+  if (!error.value && data.value) {
+    checkInfo.value = data.value;
+    getClientInfo(data.value?.clientId);
   } else {
-    const {data,error} = await useFetchApi.get<checkType>(`/checks/${query}`)
-    if (!error.value && data.value) {
-      checkInfo.value = data.value;
-      getClientInfo(data.value?.clientId)
-    }
-    else {
-      errorMessage.value = 'Topilmad'
-      checkInfo.value = null;
-    }
-    
+    errorMessage.value = 'Topilmad';
+    checkInfo.value = null;
   }
 }
+
 async function getClientInfo (id:number) {
   const {data,error} = await useFetchApi.get(`/clients/${id}`)
   if (!error.value) {
