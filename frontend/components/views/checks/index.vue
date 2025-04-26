@@ -130,7 +130,7 @@ async function handleSearch() {
 }
 
 async function getClientInfo (id:number) {
-  const {data,error} = await useFetchApi.get(`/clients/${id}`)
+  const {data,error} = await useFetchApi.get(`/clients/${String(id)}`)
   if (!error.value) {
     checkInfo.value = {...checkInfo.value,
       clientInfo:data.value
