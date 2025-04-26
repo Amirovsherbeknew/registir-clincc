@@ -88,8 +88,8 @@
     {
       "id": "7",
       "create_at": "2025-04-20T11:21:44.663Z",
-      "update_at": "2025-04-20T11:21:44.663Z",
-      "name": "2 kishilik xona V.I.P",
+      "update_at": "2025-04-26T12:50:36.623Z",
+      "name": "4 kishilik xona V.I.P",
       "pricePerDay": "1250000"
     }
   ],
@@ -126,40 +126,17 @@
   "clients": [
     {
       "id": "1",
-      "create_at": "2025-04-25T13:11:31.405Z",
-      "update_at": "2025-04-25T13:11:31.405Z",
-      "last_name": " 90345083409",
-      "first_name": "    dsdd",
-      "middle_name": "",
-      "phone": "+998 44 444 44 44",
-      "gender": "m",
+      "create_at": "2025-04-26T12:38:24.490Z",
+      "update_at": "2025-04-26T12:38:24.490Z",
+      "last_name": "22sajdlk",
+      "first_name": "jklajslkj",
+      "middle_name": "k",
+      "phone": "+998 09 382 40 93",
+      "gender": "f",
       "visitTypes": [
+        "med",
         "room",
-        "med"
-      ],
-      "medServices": [
-        "1"
-      ],
-      "rooms": [],
-      "room": {
-        "roomId": "7",
-        "days": 1
-      },
-      "labTests": []
-    },
-    {
-      "id": "2",
-      "create_at": "2025-04-25T13:14:26.638Z",
-      "update_at": "2025-04-25T13:14:26.638Z",
-      "last_name": "sss",
-      "first_name": "ss",
-      "middle_name": "",
-      "phone": "+998 33 333 33 33",
-      "gender": "m",
-      "visitTypes": [
-        "lab",
-        "room",
-        "med"
+        "lab"
       ],
       "medServices": [
         "1",
@@ -167,12 +144,88 @@
       ],
       "rooms": [],
       "room": {
-        "roomId": "1",
-        "days": 4
+        "roomId": "7",
+        "days": 10
       },
       "labTests": [
         "4",
         "3"
+      ]
+    },
+    {
+      "id": "2",
+      "create_at": "2025-04-26T12:43:45.145Z",
+      "update_at": "2025-04-26T12:43:45.145Z",
+      "last_name": "sdas",
+      "first_name": "asda",
+      "middle_name": "asdsa",
+      "phone": "+998 33 333 33 33",
+      "gender": "m",
+      "visitTypes": [
+        "med",
+        "room",
+        "lab"
+      ],
+      "medServices": [
+        "1",
+        "3",
+        "2"
+      ],
+      "rooms": [],
+      "room": {
+        "roomId": "7",
+        "days": 5
+      },
+      "labTests": [
+        "4",
+        "3",
+        "2",
+        "1"
+      ]
+    },
+    {
+      "id": "3",
+      "create_at": "2025-04-26T12:50:57.663Z",
+      "update_at": "2025-04-26T12:50:57.663Z",
+      "last_name": "dasdasdsa",
+      "first_name": "3asd",
+      "middle_name": "",
+      "phone": "+998 33 333 33 33",
+      "gender": "m",
+      "visitTypes": [
+        "room"
+      ],
+      "medServices": [],
+      "rooms": [],
+      "room": {
+        "roomId": "7",
+        "days": 10
+      },
+      "labTests": []
+    },
+    {
+      "id": 4,
+      "create_at": "2025-04-26T12:53:00.211Z",
+      "update_at": "2025-04-26T12:53:00.211Z",
+      "last_name": "asdas",
+      "first_name": "adasdasd",
+      "middle_name": "asdasdasd",
+      "phone": "+998 33 333 33 33",
+      "gender": "m",
+      "visitTypes": [
+        "room",
+        "lab"
+      ],
+      "medServices": [],
+      "rooms": [],
+      "room": {
+        "roomId": "7",
+        "days": 10
+      },
+      "labTests": [
+        "3",
+        "2",
+        "1"
       ]
     }
   ],
@@ -180,18 +233,34 @@
     {
       "id": "1",
       "clientId": 1,
-      "create_at": "2025-04-25T13:11:31.430Z",
-      "update_at": "2025-04-25T13:11:31.430Z",
-      "totalPrice": "02000001250000",
-      "isPaid": false
+      "create_at": "2025-04-26T12:38:24.504Z",
+      "update_at": "2025-04-26T12:38:24.504Z",
+      "totalPrice": 13300000,
+      "isPaid": true
     },
     {
       "id": "2",
       "clientId": 2,
-      "create_at": "2025-04-25T13:14:26.657Z",
-      "update_at": "2025-04-25T13:14:26.657Z",
-      "totalPrice": 1400000,
-      "isPaid": false
+      "create_at": "2025-04-26T12:43:45.157Z",
+      "update_at": "2025-04-26T12:43:45.157Z",
+      "totalPrice": 7520000,
+      "isPaid": true
+    },
+    {
+      "id": "3",
+      "clientId": 3,
+      "create_at": "2025-04-26T12:50:57.676Z",
+      "update_at": "2025-04-26T12:50:57.676Z",
+      "totalPrice": 12500000,
+      "isPaid": true
+    },
+    {
+      "id": "4",
+      "clientId": 4,
+      "create_at": "2025-04-26T12:53:00.224Z",
+      "update_at": "2025-04-26T12:53:00.224Z",
+      "totalPrice": 12860000,
+      "isPaid": true
     }
   ]
 }
