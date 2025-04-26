@@ -53,7 +53,7 @@
       <table class="w-full" v-if="data?.clientInfo?.visitTypes.includes('room')">
         <tr class="my-1">
           <td class="font-bold w-1/2">Yotoqxona:</td>
-          <td class="text-right bg-[red]">
+          <td class="text-right">
             {{ Number(data?.clientInfo?.room?.priceDay) }} x 
             {{ data?.clientInfo?.room?.days }} = 
             {{ useCurrencyFormat(Number(data?.clientInfo?.room?.price)) }}
@@ -77,18 +77,26 @@
         </tr>
       </table>
     </div>
-
     <!-- Кнопка оплаты -->
     <div class="w-full">
-      <p v-if="data?.isPaid || data?.is_paid" @click="handlePaid(data.id)" class="mt-4 text-green-500 text-2xl font-medium text-center">
-        To'langan
-      </p>
-      <button 
-        v-else
-        @click="handlePaid(data.id)"
+      <template v-if="role === 'kassir'">
+        <p v-if="data?.isPaid || data?.is_paid" class="mt-4 text-green-500 text-2xl font-medium text-center">
+          To'langan
+        </p>
+        <button  type="button"
+          v-else
+          @click="handlePaid(data.id)"
+          class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+        >
+          To'lash
+        </button>
+      </template>
+      <button type="button"
+        v-if="role === 'operator'"
+        @click="printSection"
         class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
       >
-        To'lash
+        Checkni chop etish
       </button>
     </div>
   </div>
@@ -96,7 +104,9 @@
 
 <script setup>
 import printJS from 'print-js'
-
+const emit = defineEmits(['handleSearch'])
+const { getRole } = useToken();
+const role = getRole()
 // Props orqali ma'lumot olish
 const props = defineProps({
   data: {
@@ -113,8 +123,9 @@ const props = defineProps({
 })
 
 async function handlePaid(id) {
-  const { error } = await useFetchApi.patch(`/checks/${id}`, { isPaid: !props.data.isPaid })
+  const { error } = await useFetchApi.patch(`/checks/${id}`, { isPaid:true })
   if (!error.value) {
+    emit('handleSearch')
     printSection()
   }
 }

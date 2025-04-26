@@ -19,6 +19,7 @@
           v-model="search"
           style="width: 100%;"
           placeholder="Check raqamini yozing..."
+          @input="handleChange"
           @keydown.enter="handleSearch"
           class="rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 shadow-sm hover:shadow-md"
         >
@@ -40,7 +41,7 @@
         <div
           class="min-w-[640px] bg-white rounded-xl p-6 border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-blue-50/50"
         >
-          <ReceiptPrint :data="{ ...checkInfo }" />
+          <ReceiptPrint :data="{ ...checkInfo }" @handleSearch="handleSearch"/>
         </div>
       </div>
     </div>
@@ -61,6 +62,11 @@ const dictionary = ref({
   room: [],
   labTests: []
 })
+function handleChange (val:string) {
+  if (!val) {
+    checkInfo.value = null;
+  }
+}
 const checkInfo = ref<any>(null)
 const originalData = ref<checkType[]>([])
 const search = ref<string>('')
@@ -69,6 +75,7 @@ const loading = ref(false)
 
 onMounted(() => {
   getDictionary()
+  getChecks()
 })
 function findRoom (id:number) {
   return dictionary.value.room.find((resp) => resp?.id === id)
@@ -88,7 +95,11 @@ async function getDictionary() {
         (dictionary.value as any)[apiList[index].key] = result.data.value
       }
     })
-  }
+}
+
+async function getChecks () {
+  
+}
 
 async function handleSearch() {
   const query = search.value.trim()

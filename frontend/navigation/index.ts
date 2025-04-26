@@ -12,7 +12,13 @@ export const navigationList = [
         permisionList:['super_admin','operator']
     },
     {
-        title:"Checklar ro'yxati",
+        title:"Hisobot",
+        path:'/report',
+        icon:'IconsListUserView',
+        permisionList:['super_admin']
+    },
+    {
+        title:"Checklar",
         path:'/checks',
         icon:'IconsListUserView',
         permisionList:['super_admin','kassir']

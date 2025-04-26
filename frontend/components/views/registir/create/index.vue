@@ -116,8 +116,8 @@
           <el-button type="primary" @click="submitForm">Check chiqarish</el-button>
         </el-form-item>
   
-        <div class="w-[350px] mx-auto">
-          <ReceiptPrint v-if="viewCheck" :data="{...checkData,...form}"/>
+        <div class="max-w-[750px] mx-auto">
+          <ReceiptPrint v-if="viewCheck" :data="{...checkData,clientInfo:clientInfo}"/>
         </div>
       </el-form>
     </Card>
@@ -149,7 +149,17 @@
     },
     labTests: []
   })
-  
+  const clientInfo = computed(() => {
+    return {
+      ...form.value,
+      medServices:dictionary.value.medServices?.filter(resp => form.value.medServices.includes(resp.id)),
+      labTests:dictionary.value.labTests?.filter(resp => form.value.labTests.includes(resp.id)),
+      room:{...form.value.room,
+        priceDay:dictionary.value.rooms.find(resp => Number(resp.id) === Number(form.value.room.roomId))?.pricePerDay,
+        price:dictionary.value.rooms.find(resp => Number(resp.id) === Number(form.value.room.roomId))?.pricePerDay * form.value.room.days,
+      }
+    }
+  })
   // Visit type toggle
   function toggleVisitType(type) {
     const index = form.value.visitTypes.indexOf(type)
@@ -202,10 +212,8 @@
     if (!createform.value) return
     createform.value.validate(valid => {
       if (valid) {
-        alert('l')
         createClientForm()
       }
-      else alert('2')
     })
   }
   
@@ -234,7 +242,7 @@
       console.log(clientsIdList)
       newClientId = clientsIdList.length > 0 ? Math.max(...clientsIdList) + 1:1
     }
-    return newClientId;
+    return Number(newClientId);
   }
   async function generateNewCheckId () {
     let newClientId = 0;
@@ -244,7 +252,7 @@
       console.log(clientsIdList)
       newClientId = clientsIdList.length > 0 ? Math.max(...clientsIdList) + 1:1
     }
-    return newClientId;
+    return Number(newClientId);
   }
   async function createClientForm () {
     

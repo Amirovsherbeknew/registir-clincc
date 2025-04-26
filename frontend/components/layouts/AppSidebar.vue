@@ -47,7 +47,7 @@
 
 /* Hover state for menu item */
 .el-menu-item:hover {
-  background: linear-gradient(to right, #e0f7fa, #b3e5fc);
+  background:rgb(202, 223, 255);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -63,8 +63,8 @@
 
 /* Nuxt-link active state */
 .el-menu-item .router-link-exact-active  {
-  background: linear-gradient(to right, #e0f7fa, #b3e5fc);
-  color: #0288d1;
+  background: rgb(59, 130, 246);
+  color: #fff;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
