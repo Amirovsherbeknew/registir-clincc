@@ -242,7 +242,7 @@
       console.log(clientsIdList)
       newClientId = clientsIdList.length > 0 ? Math.max(...clientsIdList) + 1:1
     }
-    return Number(newClientId);
+    return String(newClientId);
   }
   async function generateNewCheckId () {
     let newClientId = 0;
@@ -252,7 +252,7 @@
       console.log(clientsIdList)
       newClientId = clientsIdList.length > 0 ? Math.max(...clientsIdList) + 1:1
     }
-    return Number(newClientId);
+    return String(newClientId);
   }
   async function createClientForm () {
     
