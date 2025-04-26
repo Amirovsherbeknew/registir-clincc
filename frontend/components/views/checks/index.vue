@@ -108,7 +108,7 @@ async function handleSearch() {
     return;
   }
 
-  let { data, error } = await useFetchApi.get<checkType>(`/checks/${query}`);
+  let { data, error } = await useFetchApi.get<checkType>(`/checks/${String(query)}`);
   
   if (error.value) {
     // Agar birinchi so‘rovda error bo‘lsa, query ni Number qilib qayta urinadi
