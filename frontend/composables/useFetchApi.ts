@@ -31,6 +31,7 @@ const request = async <T>(
   } else {
     delete defaultHeaders.Authorization;
   }
+  defaultHeaders['ngrok-skip-browser-warning'] = '69420';
 
   try {
     const response = await useFetch<T>(url, {
