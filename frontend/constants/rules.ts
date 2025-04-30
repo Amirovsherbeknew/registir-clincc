@@ -29,5 +29,29 @@ export const rules = {
     roomsForm: {
         name:[{required:true,message:""}],
         pricePerDay:[{required:true,message:""}]
-    }
+    },
+    doctorsForm:{
+        last_name: [
+          { required: true, message: '', trigger: 'blur' },
+          {validator: useTrim(),trigger: 'blur'}
+        ],
+        first_name: [
+          { required: true, message: '', trigger: 'blur' },
+          {validator: useTrim(),trigger: 'blur'}
+        ],
+        middle_name: [
+          { required: false, message: '', trigger: 'blur' },
+          {validator: useTrim(),trigger: 'blur'}
+        ],
+        position: [
+            { required: true, message: '', trigger: 'blur' },
+            {validator: useTrim(),trigger: 'blur'}
+        ],
+        clients: [
+            { required: true, message: '', trigger: 'blur' }
+        ],
+        category: [
+            { required: true, message: '', trigger: 'blur' }
+        ],
+      }
 }

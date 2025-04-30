@@ -40,5 +40,11 @@ export const navigationList = [
         path:'/laboratory-test',
         icon:'IconsListUserView',
         permisionList:['super_admin']
+    },
+    {
+        title:"Shifokorlar",
+        path:'/doctors',
+        icon:'IconsListUserView',
+        permisionList:['super_admin']
     }
 ]

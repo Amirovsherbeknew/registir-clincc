@@ -1,8 +1,4 @@
-export const usePriceCalculate = (list:any) => {
-    let price = 0;
-
-    list?.forEach((resp:any) => {
-        price = price + Number(resp.price)
-    })
-    return useCurrencyFormat(price)
+export const usePriceCalculate = (keyName:string,dictnary:any) => {
+    // dictnary[keyName].
+    return 2;
 }

@@ -1,1 +1,1 @@
-export type rulesKeyType = "login"|"createForm"|"medServersForm"|"labTestForm"|"roomsForm"
+export type rulesKeyType = "login"|"createForm"|"medServersForm"|"labTestForm"|"roomsForm"|"doctorsForm"
