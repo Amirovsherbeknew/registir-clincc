@@ -9,11 +9,21 @@
                 </div>
             </el-button>
         </div>
-        <el-table :data="tableData" border style="width: 100%">
-            <el-table-column prop="name" label="Nomi"/>
+        <el-table :data="tableData?.data" border style="width: 100%">
             <el-table-column  label="Xizmat narxi">
                 <template #default="scope">
-                    {{scope.row.price}}
+                    {{scope.row.last_name}} {{scope.row.first_name}} {{scope.row.middle_name}}
+                </template>
+            </el-table-column>
+            <el-table-column prop="position" label="Lavozimi"/>
+            <el-table-column  label="Xizmat ko'rsatish ">
+                <template #default="scope">
+                    <div v-for="(item,idx) in scope.row.category" :key="idx">{{ visitType(item).label }}</div>
+                </template>
+            </el-table-column>
+            <el-table-column  label="Xizmat ko'rsatish ">
+                <template #default="scope">
+                    <div v-for="(item,idx) in scope.row.category" :key="idx">{{ visitType(item).label }}</div>
                 </template>
             </el-table-column>
             <el-table-column label="Harakat" width="180">
@@ -29,11 +39,18 @@
     </Card>
 </template>
 <script lang="ts" setup>
-import type {doctors} from '~/types/api/doctor.type'
+import type {TDoctorsListApi,doctors} from '~/types/api/doctor.type'
+
+const {visitType} = useConstant()
+
 const dialogVisible = ref(false)
-const tableData = ref<doctors[]>([])
+const tableData = ref<TDoctorsListApi>()
 const newId = ref<number|null>();
 const selected = ref<doctors>()
+const filters = ref({
+    _page:1,
+    _per_page:10
+})
 onMounted(() => {
     getDoctorsList()
 })
@@ -45,11 +62,15 @@ function handleEditOpenDialog (val:doctors) {
     selected.value = val;
 }
 async function getDoctorsList () {
-  const {data,error} = await useFetchApi.get<doctors[]>('/doctors');
+  const {data,error} = await useFetchApi.get<TDoctorsListApi>('/doctors',{
+    params:{...filters.value}
+  });
   if (!error.value && data.value) {
-    const idList = data.value?.map((resp:doctors) => Number(resp.id)) 
-    newId.value = idList.length > 0 ? Math.max(...idList) + 1:1;
-    tableData.value = data.value || []
+    const idList = data.value.data?.map((resp:doctors) => Number(resp.id)) 
+    if (idList) {
+        newId.value = idList.length > 0 ? Math.max(...idList) + 1:1;
+    }
+    tableData.value = data.value
   }
 }
 async function handleDelete (id:number) {

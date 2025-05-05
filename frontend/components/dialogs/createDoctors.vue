@@ -54,7 +54,7 @@
           class="w-full"
         >
           <el-option
-            v-for="category in categoryOptions"
+            v-for="(category,idx) in categoryOptions"
             :key="category.value"
             :label="category.label"
             :value="category.value"
@@ -86,10 +86,12 @@ import { ref } from 'vue';
 import { ElForm } from 'element-plus';
 import type { FormInstance } from 'element-plus';
 import type {doctors} from '~/types/api/doctor.type'
+const emit = defineEmits(['getData'])
 const props = defineProps<{
     selected?:doctors,
     newId?:number|null
 }>()
+const {visitType} = useConstant()
 // Form data
 const dialogVisible = defineModel<boolean>()
 const form = ref<doctors>({
@@ -103,11 +105,10 @@ const form = ref<doctors>({
 // Form reference
 const doctorForm = ref<FormInstance>();
 
-const categoryOptions = ref([
-  { value: 'cat1', label: 'Category 1' },
-  { value: 'cat2', label: 'Category 2' },
-  { value: 'cat3', label: 'Category 3' },
-]);
+const categoryOptions = computed(() => {
+  const ignoreList = ['lab']
+  return Array.isArray(visitType()) ? visitType()?.filter(resp=> !ignoreList.includes(resp.value)) || []:[]
+});
 
 // Submit form
 const submitForm = () => {
@@ -128,9 +129,10 @@ const resetForm = () => {
 };
 
 async function createDoctors () {
-    const {error} = await useFetchApi.post('/doctors',{id:String(props.newId),...form.value})
+    const {error} = await useFetchApi.post('/doctors',{id:String(props.newId),...form.value,patients:[]})
     if (!error.value) {
         resetForm()
+        emit('getData')
         dialogVisible.value = false;
     }
 } 

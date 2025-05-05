@@ -6,9 +6,9 @@ export const useConstant = () => {
         }
         return genderList
     }
-    function visitType (value:string) {
+    function visitType (value?:string) {
         if (value) {
-            return visitTypeList.find(resp => resp.value === value)
+            return visitTypeList.find(resp => resp.value === value) || []
         }
         return visitTypeList
     }

@@ -76,7 +76,6 @@
   }
   async function PatchLabTest () {
     const payloadData = {
-      id:props.newId || 1,
       create_at:props.selected?.create_at,
       update_at:new Date().toISOString(),
       ...form.value

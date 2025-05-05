@@ -7,3 +7,7 @@ export interface doctors {
     clients?: string[];
     category: string[];
 }
+export interface TDoctorsListApi {
+    items?:number,
+    data?:doctors[]
+}

@@ -98,7 +98,8 @@
         setRole(findUser.role)
         router.push('/')
       }
-    } 
+      else useNotifacation.error('Noto\'g\'ri foydalanuvchi malumotlari' )
+    }
   }
   </script>
   

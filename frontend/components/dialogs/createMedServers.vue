@@ -63,7 +63,6 @@
   }
   async function CreateMedServers () {
     const payloadData = {
-      id:props.newId || 1,
       create_at:new Date().toISOString(),
       update_at:new Date().toISOString(),
       ...form.value

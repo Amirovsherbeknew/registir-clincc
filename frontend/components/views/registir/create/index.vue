@@ -197,7 +197,6 @@
     }
   
     checkData.value = {
-      id: await generateNewCheckId(),
       clientId:id,
       create_at: new Date().toISOString(),
       update_at: new Date().toISOString(),
@@ -234,30 +233,9 @@
       }
     })
   }
-  async function generateNewId () {
-    let newClientId = 0;
-    const {data,error} = await useFetchApi.get('/clients');
-    if (!error.value && data.value) {
-      const clientsIdList = data.value?.map(resp => Number(resp.id))
-      console.log(clientsIdList)
-      newClientId = clientsIdList.length > 0 ? Math.max(...clientsIdList) + 1:1
-    }
-    return String(newClientId);
-  }
-  async function generateNewCheckId () {
-    let newClientId = 0;
-    const {data,error} = await useFetchApi.get('/checks');
-    if (!error.value && data.value) {
-      const clientsIdList = data.value?.map(resp => Number(resp.id))
-      console.log(clientsIdList)
-      newClientId = clientsIdList.length > 0 ? Math.max(...clientsIdList) + 1:1
-    }
-    return String(newClientId);
-  }
   async function createClientForm () {
     
     const payloadData = {
-      id:await generateNewId(),
       create_at: new Date().toISOString(),
       update_at: new Date().toISOString(),
       ...form.value
