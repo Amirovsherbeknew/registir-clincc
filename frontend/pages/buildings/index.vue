@@ -1,0 +1,3 @@
+<template>
+    <ViewsBuildings/>
+</template>

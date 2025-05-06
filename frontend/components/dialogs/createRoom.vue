@@ -13,6 +13,14 @@
         <el-form-item label="Xonaning 1 kunlik xizmat narxi:" prop="pricePerDay">
             <el-input v-model="form.pricePerDay" v-mask="'##################'"/>
         </el-form-item>
+        <el-form-item label="Qaysi binoga tegishli" prop="pricePerDay">
+            <el-select>
+              <el-option></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="Xonani sig'imi" prop="people_per_room">
+          <el-input-number v-model="form.people_per_room" :min="1" />
+        </el-form-item>
         <el-form-item>
             <div class="w-full flex justify-end">
                 <el-button type="default" @click="dialogVisible = false">Bekor qilish</el-button>
@@ -36,15 +44,20 @@
   
   const medserversForm = ref<FormInstance>()
 
-  const form = ref({
+  const form = ref<rooms>({
     name:'',
-    pricePerDay:0
+    people_per_room:1,
+    pricePerDay:0,
+    catergory:undefined
   })
   
   onMounted(() => {
+    getCategory()
     if (props.selected) {
       form.value = {
         name:props.selected.name,
+        people_per_room:props.selected?.people_per_room,
+        catergory:props.selected?.catergory,
         pricePerDay:props.selected.pricePerDay,
       }
     }
@@ -85,5 +98,11 @@
       emit('getData')
       dialogVisible.value = false;
     }
+  }
+  async function getCategory () {
+      const {data,error} = await useFetchApi.get('/buildings?_fields=name,id')
+      if (!error.value) {
+        console.log(data.value)
+      }
   }
   </script>

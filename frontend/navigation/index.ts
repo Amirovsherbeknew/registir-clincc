@@ -36,6 +36,12 @@ export const navigationList = [
         permisionList:['super_admin']
     },
     {
+        title:"Binolar",
+        path:'/buildings',
+        icon:'IconsListUserView',
+        permisionList:['super_admin']
+    },
+    {
         title:"Labaratoriya ro'yxati",
         path:'/laboratory-test',
         icon:'IconsListUserView',

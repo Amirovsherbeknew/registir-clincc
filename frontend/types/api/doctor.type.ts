@@ -6,6 +6,8 @@ export interface doctors {
     position: string;
     clients?: string[];
     category: string[];
+    create_at?:string,
+    update_at?:string,
 }
 export interface TDoctorsListApi {
     items?:number,

@@ -111,6 +111,17 @@
             />
           </el-select>
         </el-form-item>
+
+        <el-form-item label="Shifokorlar" v-if="form.visitTypes.includes('med') || form.visitTypes.includes('room')" prop="doctorId">
+          <el-select v-model="form.doctorId" placeholder="Shifokorni tanlang">
+            <el-option
+              v-for="doctor in dictionary.doctor"
+              :key="doctor.id"
+              :label="`${doctor.first_name} - ${doctor.last_name} - ${doctor.middle_name}`"
+              :value="doctor.id"
+            />
+          </el-select>
+        </el-form-item>
   
         <el-form-item>
           <el-button type="primary" @click="submitForm">Check chiqarish</el-button>
@@ -131,7 +142,8 @@
   const dictionary = ref({
     medServices: [],
     rooms: [],
-    labTests: []
+    labTests: [],
+    doctor:[]
   })
   
   const form = ref({
@@ -147,7 +159,8 @@
       roomId: null,
       days: 1
     },
-    labTests: []
+    labTests: [],
+    doctorId:undefined
   })
   const clientInfo = computed(() => {
     return {
@@ -157,7 +170,8 @@
       room:{...form.value.room,
         priceDay:dictionary.value.rooms.find(resp => Number(resp.id) === Number(form.value.room.roomId))?.pricePerDay,
         price:dictionary.value.rooms.find(resp => Number(resp.id) === Number(form.value.room.roomId))?.pricePerDay * form.value.room.days,
-      }
+      },
+      doctorInfo:dictionary.value.doctor.find((resp) => resp.id === form.value.doctorId)
     }
   })
   // Visit type toggle
@@ -221,7 +235,8 @@
     const apiList = [
       { key: 'medServices', endpoint: '/medServices' },
       { key: 'rooms', endpoint: '/rooms' },
-      { key: 'labTests', endpoint: '/labTests' }
+      { key: 'labTests', endpoint: '/labTests' },
+      { key: 'doctor', endpoint: '/doctors' }
     ]
   
     const fetchPromises = apiList.map(resp => useFetchApi.get(resp.endpoint))

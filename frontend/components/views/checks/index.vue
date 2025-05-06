@@ -52,11 +52,12 @@
         Check topilmadi...
       </p>
     </div>
+    <pre>{{tableData  }}</pre>
   </Card>
 </template>
 
 <script lang="ts" setup>
-import type { checkType } from '~/types/api/check.type.ts'
+import type { checkType,TCheck } from '~/types/api/check.type.ts'
 const dictionary = ref({
   medServices: [],
   room: [],
@@ -69,6 +70,12 @@ function handleChange (val:string) {
 }
 const checkInfo = ref<any>(null)
 const originalData = ref<checkType[]>([])
+const tableData = ref<TCheck>()
+const filter = ref({
+  _page:1,
+  _per_page:10
+})
+
 const search = ref<string>('')
 const errorMessage = ref('')
 const loading = ref(false)
@@ -98,7 +105,12 @@ async function getDictionary() {
 }
 
 async function getChecks () {
-  
+    const {data,error} = await useFetchApi.get<TCheck>('/checks',{
+      params:{...filter.value,_expand:'client'}
+    })
+    if (!error.value && data.value) {
+      tableData.value = data.value
+    }
 }
 
 async function handleSearch() {

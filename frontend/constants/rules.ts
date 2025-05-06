@@ -16,7 +16,8 @@ export const rules = {
             roomId: [{ required: true, message: '' }],
             days: [{ required: true, message: '' }],
         },
-        labTests:[{required:true,message:''}]
+        labTests:[{required:true,message:''}],
+        doctorId:[{required:true,message:''}]
     },
     medServersForm: {
         name:[{required:true,message:""}],
@@ -28,7 +29,13 @@ export const rules = {
     },
     roomsForm: {
         name:[{required:true,message:""}],
+        people_per_room:[{required:true,message:""}],
+        catergory:[{required:true,message:""}],
         pricePerDay:[{required:true,message:""}]
+    },
+    buildingForm: {
+        name:[{required:true,message:""}],
+        per_room:[{required:true,message:""}]
     },
     doctorsForm:{
         last_name: [

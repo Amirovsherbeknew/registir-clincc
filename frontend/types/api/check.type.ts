@@ -6,3 +6,7 @@ export interface checkType {
     totalPrice: string,
     isPaid: boolean
 }
+export interface TCheck {
+    items?:number,
+    data?:checkType[]
+}

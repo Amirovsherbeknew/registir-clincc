@@ -69,6 +69,13 @@
         </tr>
       </table>
       
+      <table class="w-full" v-if="data?.clientInfo?.doctorInfo">
+        <tr class="my-1">
+          <td class="font-bold w-2/3">Shifokor:</td>
+          <td class="text-right">{{ data?.clientInfo?.doctorInfo?.first_name }} {{ data?.clientInfo?.doctorInfo?.last_name }} {{ data?.clientInfo?.doctorInfo?.middle_name }}</td>
+        </tr>
+      </table>
+
       <hr>
       <table class="w-full mt-4">
         <tr>

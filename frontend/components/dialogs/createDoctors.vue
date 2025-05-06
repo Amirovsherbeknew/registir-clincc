@@ -105,6 +105,18 @@ const form = ref<doctors>({
 // Form reference
 const doctorForm = ref<FormInstance>();
 
+onMounted(() => {
+  if (props.selected) {
+    form.value = {
+      category:props.selected.category,
+      first_name:props.selected.first_name,
+      last_name:props.selected.last_name,
+      middle_name:props.selected.middle_name,
+      position:props.selected.position
+    }
+  }
+})
+
 const categoryOptions = computed(() => {
   const ignoreList = ['lab']
   return Array.isArray(visitType()) ? visitType()?.filter(resp=> !ignoreList.includes(resp.value)) || []:[]
@@ -114,7 +126,10 @@ const categoryOptions = computed(() => {
 const submitForm = () => {
   doctorForm.value?.validate((valid) => {
     if (valid) {
-        createDoctors()
+        if (props.selected) {
+          PatchLabTest()
+        }
+        else createDoctors()
         console.log('Form submitted:', form.value);
       // alert('Form submitted successfully!');
     } else {
@@ -135,7 +150,19 @@ async function createDoctors () {
         emit('getData')
         dialogVisible.value = false;
     }
-} 
+}
+async function PatchLabTest () {
+    const payloadData = {
+      create_at:props.selected?.create_at,
+      update_at:new Date().toISOString(),
+      ...form.value
+    };
+    const {error} = await useFetchApi.patch(`/doctors/${props.selected?.id}`,payloadData)
+    if (!error.value) {
+      emit('getData')
+      dialogVisible.value = false;
+    }
+  } 
 </script>
 
 <style scoped>

@@ -1,0 +1,7 @@
+export interface TBuildings {
+    id?:number,
+    create_at?:string,
+    update_at?:string,
+    name:string,
+    per_room:1
+}
