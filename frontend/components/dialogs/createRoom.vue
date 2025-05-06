@@ -13,9 +13,9 @@
         <el-form-item label="Xonaning 1 kunlik xizmat narxi:" prop="pricePerDay">
             <el-input v-model="form.pricePerDay" v-mask="'##################'"/>
         </el-form-item>
-        <el-form-item label="Qaysi binoga tegishli" prop="pricePerDay">
-            <el-select>
-              <el-option></el-option>
+        <el-form-item label="Qaysi binoga tegishli" prop="catergory">
+            <el-select v-model="form.catergory" placeholder="Qaysi binoga tegishli">
+              <el-option v-for="catergory in catergory" :key="catergory.id" :value="catergory.id" :label="catergory.name"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item label="Xonani sig'imi" prop="people_per_room">
@@ -33,6 +33,7 @@
   
   <script lang="ts" setup>
   import {ref} from 'vue'
+  import type {TBuildings} from '~/types/api/buildings.type.ts'
   import type {rooms} from '~/types/api/rooms.type.ts'
   import type { FormInstance } from 'element-plus'
   const emit = defineEmits(['getData'])
@@ -41,7 +42,7 @@
     newId?:number|null
   }>()
   const dialogVisible = defineModel<boolean>()
-  
+  const catergory = ref<TBuildings[]>([])
   const medserversForm = ref<FormInstance>()
 
   const form = ref<rooms>({
@@ -100,9 +101,9 @@
     }
   }
   async function getCategory () {
-      const {data,error} = await useFetchApi.get('/buildings?_fields=name,id')
-      if (!error.value) {
-        console.log(data.value)
+      const {data,error} = await useFetchApi.get<TBuildings[]>('/buildings')
+      if (!error.value && data.value) {
+        catergory.value = data.value
       }
   }
   </script>

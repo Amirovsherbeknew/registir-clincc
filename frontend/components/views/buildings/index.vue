@@ -4,7 +4,7 @@
             <VTitle title="Binolar"/>
             <el-button type="primary" @click="dialogVisibly = true">Yangi bino qo'shish</el-button>
         </div>
-        <el-table>
+        <el-table :data="tableData?.data || []">
             <el-table-column prop="name" label="Bino nomi"/>
             <el-table-column prop="per_room" label="Binoda nechta xona mavjudligi"/>
             <el-table-column label="Yaratilgan vaqti">
@@ -21,29 +21,31 @@
                 <template #default="scope">
                     <div class="flex gap-[10px]">
                         <ActionButton type="edit" @click="handleEditOpenDialog(scope.row)"/>
-                        <ActionButton type="delete" @click="handleDelete(scope.row.id)"/>
+                        <!-- <ActionButton type="delete" @click="handleDelete(scope.row.id)"/> -->
                     </div>
                 </template>
             </el-table-column>
         </el-table>
-        <DialogsCreateBuilding v-model="dialogVisibly" @getData="getBuildings"/>
+        <DialogsCreateBuilding v-if="dialogVisibly" v-model="dialogVisibly" @getData="getBuildings" :selected="selected"/>
     </Card>
 </template>
 <script setup lang='ts'>
-
+import type {TBuildings,TBuildingsApi} from '~/types/api/buildings.type.ts'
+const selected = ref<TBuildings>();
 const dialogVisibly = ref(false);
 const tableData = ref();
 const filter = ref({
     _page:1,
-    _per_page:10
+    _limit:10
 })
 
 onMounted(() => {
     getBuildings()
 })
 
-function handleEditOpenDialog () {
-
+function handleEditOpenDialog (val:TBuildings) {
+    selected.value = val;
+    dialogVisibly.value = true;
 }
 
 async function handleDelete (id:number) {
@@ -51,9 +53,13 @@ async function handleDelete (id:number) {
 }
 
 async function getBuildings () {
-    const {data,error} = await useFetchApi.get('/buildings')
-    if (!error.value) {
-
+    const {data,error} = await useFetchApi.get<TBuildingsApi>('/buildings',
+        {
+            params:{...filter.value}
+        }
+    )
+    if (!error.value && data.value) {
+        tableData.value = data.value
     }
 }
 </script>

@@ -5,3 +5,7 @@ export interface TBuildings {
     name:string,
     per_room:1
 }
+export interface TBuildingsApi {
+    item?:number,
+    data?:TBuildings[]
+}
