@@ -144,7 +144,7 @@ const resetForm = () => {
 };
 
 async function createDoctors () {
-    const {error} = await useFetchApi.post('/doctors',{id:String(props.newId),...form.value,patients:[]})
+    const {error} = await useFetchApi.post('/doctors',{id:String(props.newId),...form.value})
     if (!error.value) {
         resetForm()
         emit('getData')

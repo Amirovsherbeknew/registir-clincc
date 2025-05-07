@@ -30,7 +30,7 @@ export const rules = {
     roomsForm: {
         name:[{required:true,message:""}],
         people_per_room:[{required:true,message:""}],
-        catergory:[{required:true,message:""}],
+        buildingId:[{required:true,message:""}],
         pricePerDay:[{required:true,message:""}]
     },
     buildingForm: {

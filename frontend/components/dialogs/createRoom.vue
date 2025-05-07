@@ -13,9 +13,9 @@
         <el-form-item label="Xonaning 1 kunlik xizmat narxi:" prop="pricePerDay">
             <el-input v-model="form.pricePerDay" v-mask="'##################'"/>
         </el-form-item>
-        <el-form-item label="Qaysi binoga tegishli" prop="catergory">
-            <el-select v-model="form.catergory" placeholder="Qaysi binoga tegishli">
-              <el-option v-for="catergory in catergory" :key="catergory.id" :value="catergory.id" :label="catergory.name"></el-option>
+        <el-form-item label="Qaysi binoga tegishli" prop="buildingId">
+            <el-select v-model="form.buildingId" placeholder="Qaysi binoga tegishli">
+              <el-option v-for="catergory in catergory" :key="catergory.id" :value="catergory?.id || ''" :label="catergory.name"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item label="Xonani sig'imi" prop="people_per_room">
@@ -49,7 +49,7 @@
     name:'',
     people_per_room:1,
     pricePerDay:0,
-    catergory:undefined
+    buildingId:undefined
   })
   
   onMounted(() => {
@@ -58,7 +58,7 @@
       form.value = {
         name:props.selected.name,
         people_per_room:props.selected?.people_per_room,
-        catergory:props.selected?.catergory,
+        buildingId:props.selected?.buildingId,
         pricePerDay:props.selected.pricePerDay,
       }
     }

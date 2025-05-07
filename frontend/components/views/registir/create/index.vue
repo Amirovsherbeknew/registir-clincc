@@ -85,6 +85,16 @@
   
         <!-- Yotoqxona -->
         <template v-if="form.visitTypes.includes('room')">
+          <el-form-item label="Binoni tanlang">
+            <el-select v-model="form.room.roomId" placeholder="Xona tanlang">
+              <el-option
+                v-for="room in dictionary.rooms"
+                :key="room.id"
+                :label="`${room.name} - ${useCurrencyFormat(room.pricePerDay)}/kun`"
+                :value="room.id"
+              />
+            </el-select>
+          </el-form-item>
           <el-form-item label="Xona turi" prop="room.roomId">
             <el-select v-model="form.room.roomId" placeholder="Xona tanlang">
               <el-option
@@ -154,7 +164,6 @@
     gender: '',
     visitTypes: [],
     medServices: [],
-    rooms: [],
     room: {
       roomId: null,
       days: 1
@@ -250,10 +259,13 @@
   }
   async function createClientForm () {
     
-    const payloadData = {
+    let payloadData = {
       create_at: new Date().toISOString(),
       update_at: new Date().toISOString(),
       ...form.value
+    }
+    if (form.value.room.roomId) {
+      payloadData = {...payloadData,roomId:form.value.room.roomId}
     }
     const {data,error} = await useFetchApi.post('/clients',payloadData)
     if (!error.value && data.value) {

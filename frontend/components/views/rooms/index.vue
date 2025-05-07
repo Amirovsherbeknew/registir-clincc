@@ -11,9 +11,15 @@
         </div>
         <el-table :data="tableData" border style="width: 100%">
             <el-table-column prop="name" label="Nomi"/>
+            <el-table-column prop="people_per_room" label="Sig'imi"/>
+            <el-table-column label="binosi joylashuvi">
+                <template #default="scope">
+                    {{scope.row?.building?.name}}
+                </template>
+            </el-table-column>
             <el-table-column  label="Xizmat narxi">
                 <template #default="scope">
-                    {{scope.row.pricePerDay}}
+                    {{useCurrencyFormat(Number(scope.row.pricePerDay))}}
                 </template>
             </el-table-column>
             <el-table-column label="Harakat" width="180">
@@ -45,7 +51,7 @@ function handleEditOpenDialog (val:rooms) {
     selected.value = val;
 }
 async function getMedservers () {
-  const {data,error} = await useFetchApi.get<rooms[]>('/rooms');
+  const {data,error} = await useFetchApi.get<rooms[]>('/rooms?_expand=building');
   if (!error.value && data.value) {
     const idList = data.value.map((resp:rooms) => Number(resp.id))
     newId.value = idList.length > 0 ? Math.max(...idList) + 1:1;

@@ -18,12 +18,17 @@
             <el-table-column prop="position" label="Lavozimi"/>
             <el-table-column  label="Xizmat ko'rsatish ">
                 <template #default="scope">
-                    <div v-for="(item,idx) in scope.row.category" :key="idx">{{ visitType(item).label }}</div>
+                    <div v-for="(item,idx) in scope.row.category" :key="idx">{{ (visitType(item) as any)?.label }}</div>
                 </template>
             </el-table-column>
-            <el-table-column  label="Xizmat ko'rsatish ">
+            <el-table-column  label="Xizmat ko'rsatgan mijozlar soni">
                 <template #default="scope">
-                    <div v-for="(item,idx) in scope.row.category" :key="idx">{{ visitType(item).label }}</div>
+                    <template v-if="scope.row?.clients?.length > 0">
+                        {{scope.row?.clients?.length}}
+                    </template>
+                    <template v-else>
+                        Mavjud emas
+                    </template>
                 </template>
             </el-table-column>
             <el-table-column label="Harakat" width="180">
@@ -63,7 +68,7 @@ function handleEditOpenDialog (val:doctors) {
 }
 async function getDoctorsList () {
   const {data,error} = await useFetchApi.get<TDoctorsListApi>('/doctors',{
-    params:{...filters.value}
+    params:{...filters.value,_embed:'clients'}
   });
   if (!error.value && data.value) {
     const idList = data.value.data?.map((resp:doctors) => Number(resp.id)) 
