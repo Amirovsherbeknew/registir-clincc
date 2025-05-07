@@ -116,9 +116,96 @@
       "id": 74371
     }
   ],
-  "rooms": [],
-  "labTests": [],
-  "doctors": [],
-  "clients": [],
-  "checks": []
+  "rooms": [
+    {
+      "id": 1,
+      "create_at": "2025-05-07T03:41:34.746Z",
+      "update_at": "2025-05-07T03:41:34.746Z",
+      "name": "standart",
+      "people_per_room": 10,
+      "pricePerDay": "20000",
+      "buildingId": 84900
+    }
+  ],
+  "labTests": [
+    {
+      "create_at": "2025-05-07T04:17:29.909Z",
+      "update_at": "2025-05-07T04:17:29.909Z",
+      "name": "asda",
+      "price": "20000",
+      "id": 53003
+    }
+  ],
+  "doctors": [
+    {
+      "id": 1,
+      "last_name": "Navbatov",
+      "first_name": "Navbatbek",
+      "middle_name": "Navbat o'g'li",
+      "position": "siydik ustasi",
+      "category": [
+        "med",
+        "room"
+      ]
+    },
+    {
+      "id": 2,
+      "last_name": "asd",
+      "first_name": "adas",
+      "middle_name": "dadasd",
+      "position": "asdsa",
+      "category": [
+        "med",
+        "room"
+      ]
+    },
+    {
+      "id": 3,
+      "last_name": "Urologov",
+      "first_name": "Urolog",
+      "middle_name": "Urolog o'g'li",
+      "position": "Super Urolog",
+      "category": [
+        "med",
+        "room"
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "create_at": "2025-05-07T04:18:04.894Z",
+      "update_at": "2025-05-07T04:18:04.894Z",
+      "last_name": "sad",
+      "first_name": "asdas",
+      "middle_name": "dsada",
+      "phone": "+998 33 333 33 33",
+      "gender": "m",
+      "visitTypes": [
+        "med",
+        "room"
+      ],
+      "medServices": [
+        45734,
+        16389
+      ],
+      "roomId": 1,
+      "room": {
+        "roomId": 1,
+        "days": 4
+      },
+      "labTests": [],
+      "doctorId": 3,
+      "id": 22441
+    }
+  ],
+  "checks": [
+    {
+      "clientId": 22441,
+      "create_at": "2025-05-07T04:18:04.926Z",
+      "update_at": "2025-05-07T04:18:04.926Z",
+      "totalPrice": 135000,
+      "isPaid": false,
+      "id": 95443
+    }
+  ]
 }

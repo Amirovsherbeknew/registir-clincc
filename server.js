@@ -8,10 +8,11 @@ server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
   if (['POST', 'PUT'].includes(req.method)) {
     if (!req.body.id) {
+      console.log('l;ksal;ksdl;asdsa')
       req.body.id = Math.floor(10000 + Math.random() * 90000);
     }
 
-    const keysToConvert = ['clientId', 'doctorId', 'roomId'];
+    const keysToConvert = ['clientId', 'doctorId', 'roomId','id'];
     keysToConvert.forEach(key => {
       if (req.body[key] && typeof req.body[key] === 'string') {
         const parsed = parseInt(req.body[key]);
