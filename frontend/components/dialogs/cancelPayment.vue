@@ -4,8 +4,7 @@
       width="600"
       on-destroy-close
       >
-      <VTitle class="flex-1 mb-[20px]" title="Med ko'rikni o'zgartirish" v-if="selected"/>
-      <VTitle class="flex-1 mb-[20px]" title="Med ko'rik yaratish" v-else/>
+      <VTitle class="flex-1 mb-[20px]" title="Pulni qaytarish"/>
       <el-form ref="medserversForm" :model="form" label-position="top" :rules="useRules('medServersForm')">
         <el-form-item label="Med ko'rikning nomi:" prop="name">
             <el-input v-model="form.name"/>

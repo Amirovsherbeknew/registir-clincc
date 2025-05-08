@@ -27,7 +27,7 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">Sana</label>
             <el-date-picker
               v-model="selectedDate"
-              type="date"
+              type="daterange"
               placeholder="Sanani tanlang"
               format="DD-MM-YYYY"
               value-format="DD-MM-YYYY"
@@ -87,9 +87,13 @@
   const staticsData = ref()
   // Filter uchun reaktiv o‘zgaruvchilar
   const selectedService = ref('')
-  const selectedDate = ref(dayjs().format('DD-MM-YYYY'))
+  const selectedDate = ref([
+    dayjs().subtract(1, 'day').format('DD-MM-YYYY'),
+    dayjs().format('DD-MM-YYYY')
+  ])
   const originalStatics = ref() 
   onMounted(async () => {
+    getList()
     const data = await statics()
     staticsData.value = data
     originalStatics.value = JSON.parse(JSON.stringify(data));
@@ -98,9 +102,7 @@
 
   // Filtrlash funksiyasi
   const fetchReport = () => {
-    console.log('s')
-    console.log(selectedService.value)
-    console.log(originalStatics.value.statistic)
+    getList()
     const filtered = originalStatics.value.statistic.filter((resp) => {
       console.log(resp.visitTypes.some((v) => v.value === selectedService.value))
       const itemDate = dayjs(resp.create_at).format('DD-MM-YYYY')
@@ -122,6 +124,18 @@
         totalPrice.value = totalPrice.value + resp.totalPrice
       }
     })
+  }
+
+  async function getList () {
+    const {data,error} = await useFetchApi.get(`/clients`,{
+      params:{
+        create_at_gte:selectedDate.value[0]?.split('-')?.reverse()?.join('-'),
+        create_at_lte:selectedDate.value[1]?.split('-')?.reverse()?.join('-')
+      }
+    })
+    if (!error.value) {
+      console.log(data.value)
+    }
   }
   </script>
   

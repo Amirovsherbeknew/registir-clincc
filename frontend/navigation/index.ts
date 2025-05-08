@@ -52,5 +52,11 @@ export const navigationList = [
         path:'/doctors',
         icon:'IconsListUserView',
         permisionList:['super_admin']
+    },
+    {
+        title:"Pulni qaytarish",
+        path:'/replace-payment',
+        icon:'IconsListUserView',
+        permisionList:['super_admin','kassir']
     }
 ]

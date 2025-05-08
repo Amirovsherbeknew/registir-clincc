@@ -60,5 +60,5 @@ export const rules = {
         category: [
             { required: true, message: '', trigger: 'blur' }
         ],
-      }
+    }
 }
