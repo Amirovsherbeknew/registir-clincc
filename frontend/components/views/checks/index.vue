@@ -1,48 +1,49 @@
 <template>
   <Card>
-      <div>
-          <VTitle title="Checklar ro'yxati"/>
-          <el-input :value="filter.search" @input=""/>
-      </div>
-      <el-table :data="tableData?.data">
-          <el-table-column prop="id" label="Check raqami"></el-table-column>
-          <el-table-column label="Check egasi">
-              <template #default="scope">
-                  {{ scope.row?.client?.last_name }} {{ scope.row?.client?.first_name }} {{ scope.row?.client?.middle_name }}
-              </template>
-          </el-table-column>
-          <el-table-column label="To'lov summasi">
-              <template #default="scope">
-                  {{ useCurrencyFormat(Number(scope.row?.totalPrice)) }}
-              </template>
-          </el-table-column>
-          <el-table-column label="Yaratilgan vaqti">
-              <template #default="scope">
-                  {{ useDateFormat(scope.row?.create_at) }}
-              </template>
-          </el-table-column>
-          <el-table-column label="Holati">
-              <template #default="scope">
-                  <TableStatus :type="scope.row?.is_paid ? 'approved':'pending'"/>
-              </template>
-          </el-table-column>
-          <el-table-column label="Telefon raqam">
-              <template #default="scope">
-                  {{scope?.row?.client?.phone}}
-              </template>
-          </el-table-column>
-          <el-table-column label="Check egasini raqami">
-              <template #default="scope">
-                  <pre>{{ scope.row.id }}</pre>
-              </template>
-          </el-table-column>
-          <el-table-column label="Harakat">
-              <template #default="scope">
-                  <ActionButton type="edit" @click="handleEditOpenDialog(scope.row)"/>
-              </template>
-          </el-table-column>
-      </el-table>
-      <DialogsCancelPayment v-model="dialogVisibly"/>
+        <div class="flex gap-[10px] justify-between">
+            <VTitle title="Checklar ro'yxati"/>
+            <el-input class="max-w-[250px]" :value="filter.search" @input="handleSearch" placeholder="check raqami bo'yicha qidiruv"/>
+        </div>
+        <el-table :data="tableData?.data">
+            <el-table-column prop="id" label="Check raqami"></el-table-column>
+            <el-table-column label="Check egasi">
+                <template #default="scope">
+                    {{ scope.row?.client?.last_name }} {{ scope.row?.client?.first_name }} {{ scope.row?.client?.middle_name }}
+                </template>
+            </el-table-column>
+            <el-table-column label="To'lov summasi">
+                <template #default="scope">
+                    {{ useCurrencyFormat(Number(scope.row?.totalPrice)) }}
+                </template>
+            </el-table-column>
+            <el-table-column label="Yaratilgan vaqti">
+                <template #default="scope">
+                    {{ useDateFormat(scope.row?.create_at) }}
+                </template>
+            </el-table-column>
+            <el-table-column label="Holati">
+                <template #default="scope">
+                    <TableStatus :type="scope.row?.is_paid ? 'approved':'pending'"/>
+                </template>
+            </el-table-column>
+            <el-table-column label="Telefon raqam">
+                <template #default="scope">
+                    {{scope?.row?.client?.phone}}
+                </template>
+            </el-table-column>
+            <el-table-column label="Check egasini raqami">
+                <template #default="scope">
+                    <pre>{{ scope.row.client?.id }}</pre>
+                </template>
+            </el-table-column>
+            <el-table-column label="Harakat">
+                <template #default="scope">
+                    <ActionButton type="show" tooltip_title="Xona haqida malumot" @click="handleOpenRoomInfoDialog(scope.row?.client?.roomId)"/>
+                </template>
+            </el-table-column>
+        </el-table>
+      
+      <DialogsViewRoomInfo v-if="dialogVisibly" v-model="dialogVisibly" :roomId="roomId"/>
   </Card>
 </template>
 <script setup lang='ts'>
@@ -54,14 +55,26 @@ const filter = ref({
 
 const tableData = ref()
 const dialogVisibly = ref(false)
+const roomId = ref<number|null>(null)
 
 onMounted(() => {
   GetCheckList()
 })
 
-function handleEditOpenDialog (val:any) {
-  console.log(val)
-  dialogVisibly.value = true
+function handleOpenRoomInfoDialog (val:number) {
+    roomId.value = val
+    dialogVisibly.value = true
+}
+
+async function handleSearch () {
+    const {data,error} = await useFetchApi.get('',{
+        params:{
+            ...filter.value
+        }
+    })
+    if (!error.value) {
+        console.log(data.value)
+    }
 }
 
 async function GetCheckList () {

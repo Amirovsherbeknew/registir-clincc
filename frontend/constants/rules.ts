@@ -60,5 +60,9 @@ export const rules = {
         category: [
             { required: true, message: '', trigger: 'blur' }
         ],
+    },
+    replacePayment:{
+        reason:[{required:true,message:''}],
+        price:[{required:true,message:''}]
     }
 }

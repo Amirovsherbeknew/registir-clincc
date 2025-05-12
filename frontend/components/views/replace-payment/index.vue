@@ -1,48 +1,60 @@
 <template>
     <Card>
-        <div>
+        <div class="flex gap-[10px] mb-[20px] justify-between">
             <VTitle title="Checklar ro'yxati"/>
-            <el-input :value="filter.search" @input=""/>
+            <el-input class="max-w-[250px]" :value="filter.search" @input="handleSearch" placeholder="check raqami bo'yicha qidiruv"/>
         </div>
-        <el-table :data="tableData?.data">
-            <el-table-column prop="id" label="Check raqami"></el-table-column>
-            <el-table-column label="Check egasi">
+        <div class="w-full">
+            <el-table :data="tableData?.data" style="width: 100%">
+            <el-table-column prop="id" label="Check raqami" width="150"></el-table-column>
+            <el-table-column label="Check egasi" min-width="150">
                 <template #default="scope">
                     {{ scope.row?.client?.last_name }} {{ scope.row?.client?.first_name }} {{ scope.row?.client?.middle_name }}
                 </template>
             </el-table-column>
-            <el-table-column label="To'lov summasi">
+            <el-table-column label="To'lov summasi" width="150">
                 <template #default="scope">
                     {{ useCurrencyFormat(Number(scope.row?.totalPrice)) }}
                 </template>
             </el-table-column>
-            <el-table-column label="Yaratilgan vaqti">
+            <el-table-column label="Yaratilgan vaqti" width="200">
                 <template #default="scope">
                     {{ useDateFormat(scope.row?.create_at) }}
                 </template>
             </el-table-column>
-            <el-table-column label="Holati">
+            <el-table-column label="Holati" width="250">
                 <template #default="scope">
                     <TableStatus :type="scope.row?.is_paid ? 'approved':'pending'"/>
                 </template>
             </el-table-column>
-            <el-table-column label="Telefon raqam">
+            <el-table-column label="Telefon raqam" width="200">
                 <template #default="scope">
                     {{scope?.row?.client?.phone}}
                 </template>
             </el-table-column>
-            <el-table-column label="Check egasini raqami">
+            <el-table-column label="Check egasini raqami" width="200">
                 <template #default="scope">
-                    <pre>{{ scope.row.id }}</pre>
+                    <div>{{ scope.row.id }}</div>
                 </template>
             </el-table-column>
-            <el-table-column label="Harakat">
+            <el-table-column label="Qaytarilgan miqdor" width="220">
+                <template #default="scope">
+                    <div>{{ useCurrencyFormat(Number(scope?.row?.replace_payment?.price)) }}</div>
+                </template>
+            </el-table-column>
+            <el-table-column label="Qaytarish sababi" width="250">
+                <template #default="scope">
+                    <div>{{ scope?.row?.replace_payment?.reason }}</div>
+                </template>
+            </el-table-column>
+            <el-table-column fixed="right" label="Harakat">
                 <template #default="scope">
                     <ActionButton type="edit" @click="handleEditOpenDialog(scope.row)"/>
                 </template>
             </el-table-column>
         </el-table>
-        <DialogsCancelPayment v-model="dialogVisibly"/>
+        </div>
+        <DialogsCancelPayment v-model="dialogVisibly" :check="check"/>
     </Card>
 </template>
 <script setup lang='ts'>
@@ -54,6 +66,7 @@ const filter = ref({
 
 const tableData = ref()
 const dialogVisibly = ref(false)
+const check = ref()
 
 onMounted(() => {
     GetCheckList()
@@ -61,7 +74,19 @@ onMounted(() => {
 
 function handleEditOpenDialog (val:any) {
     console.log(val)
+    check.value = val
     dialogVisibly.value = true
+}
+
+async function handleSearch () {
+    const {data,error} = await useFetchApi.get('',{
+        params:{
+            ...filter.value
+        }
+    })
+    if (!error.value) {
+        console.log(data.value)
+    }
 }
 
 async function GetCheckList () {

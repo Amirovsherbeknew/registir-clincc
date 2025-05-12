@@ -1,60 +1,77 @@
 export const navigationList = [
     {
         title:"Ariza yaratish",
+        show:true,
         path:'/registir/create',
         icon:'IconsListUserView',
         permisionList:['operator']
     },
     {
         title:"Mijozlar ro'yxat",
+        show:true,
         path:'/registir',
         icon:'IconsListUserView',
         permisionList:['super_admin','operator']
     },
     {
         title:"Hisobot",
+        show:true,
         path:'/report',
         icon:'IconsListUserView',
         permisionList:['super_admin']
     },
     {
         title:"Checklar",
+        show:true,
         path:'/checks',
         icon:'IconsListUserView',
         permisionList:['super_admin','kassir']
     },
     {
         title:"Med ko'riklar ro'yxati",
+        show:true,
         path:'/medservices',
         icon:'IconsListUserView',
         permisionList:['super_admin']
     },
     {
         title:"Yotoqxonalar ro'yxati",
+        show:true,
         path:'/rooms',
         icon:'IconsListUserView',
         permisionList:['super_admin']
     },
     {
         title:"Binolar",
+        show:true,
         path:'/buildings',
         icon:'IconsListUserView',
         permisionList:['super_admin']
     },
     {
         title:"Labaratoriya ro'yxati",
+        show:true,
         path:'/laboratory-test',
         icon:'IconsListUserView',
         permisionList:['super_admin']
     },
     {
         title:"Shifokorlar",
+        show:true,
         path:'/doctors',
         icon:'IconsListUserView',
         permisionList:['super_admin']
     },
     {
         title:"Pulni qaytarish",
+        show:true,
+        path:'/replace-payment',
+        icon:'IconsListUserView',
+        permisionList:['super_admin','kassir']
+    },
+    {
+        title:"",
+        show:false,
         path:'/replace-payment',
         icon:'IconsListUserView',
         permisionList:['super_admin','kassir']

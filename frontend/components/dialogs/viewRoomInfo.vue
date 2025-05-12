@@ -1,0 +1,66 @@
+<template>
+    <el-dialog v-model="dialogVisible"
+      width="600"
+      on-destroy-close>
+      <h1 class="mb-[10px]">
+        <VTitle title="Xona haqida malumotlar"/>
+      </h1>
+        <div class="grid grid-cols-2 gap-y-[6px]">
+            <div>Nomi:</div>
+            <div>{{roomInfo?.name}}</div>
+            <div>Sig'imi:</div>
+            <div>{{roomInfo?.people_per_room}}</div>
+            <div>Kunlik narxi:</div>
+            <div>{{useCurrencyFormat(Number(roomInfo?.pricePerDay))}}</div>
+            <div>Binosi:</div>
+            <div>{{roomInfo?.building?.name}}</div>
+            <div>Mavjud insonlar soni:</div>
+            <div class="font-bold">{{clientsInfo?.length}}</div>
+        </div>
+        
+        <div class="my-[10px] pt-[5px] font-semibold text-[18px] text-stone-500 border-t-[1px] border-strone-500">
+            Xonadagi mavjud insonlar ro'yxati:
+        </div>
+       <el-table :data="clientsInfo || []">
+        <el-table-column label="FIO">
+            <template #default="scope">
+                {{scope.row?.last_name}} {{scope.row?.first_name}} {{scope.row?.middle_name}}
+            </template>
+        </el-table-column>
+        <el-table-column prop="phone" label="Telefon "/>
+       </el-table>
+    </el-dialog>
+</template>
+<script lang="ts" setup>
+import type {rooms} from '~/types/api/rooms.type.ts'
+const props = defineProps<{
+    roomId:number|null
+}>()
+const dialogVisible = defineModel<boolean>()
+const clientsInfo = ref([])
+const roomInfo = ref<rooms>()
+
+onMounted(() => {
+    getRoomInfo();
+})
+
+async function getRoomInfo () {
+    const {data,error} = await useFetchApi.get<rooms>(`/rooms/${props.roomId}/`,{
+        params:{
+            _expand:'building'
+        }
+    })
+    if (!error.value && data.value) {
+        roomInfo.value = data.value;
+        getClientCountByRoomId()
+    }
+}
+
+async function getClientCountByRoomId () {
+    const { data,error } = await useFetchApi.get<any>(`/clients?roomId=${props.roomId}`)
+    if (!error.value && data.value) {
+        clientsInfo.value = data.value
+    }
+}
+
+</script>

@@ -6,7 +6,7 @@
       </div>
       <el-menu class="flex flex-col gap-[5px] !px-4">
           <el-menu-item 
-            v-for="(item, index) in useNavigation()" 
+            v-for="(item, index) in useNavigation()?.filter(resp => resp.show)" 
             :key="index" 
             class="rounded-[12px] transition-all duration-200 hover:bg-gradient-to-r hover:from-sky-50 hover:to-blue-100 hover:shadow-md"
           >
