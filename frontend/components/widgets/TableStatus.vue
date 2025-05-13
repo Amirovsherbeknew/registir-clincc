@@ -87,7 +87,7 @@ const statusTypes = {
   },
   cancel_payment: {
     icon: "remove-circle",
-    label: "Rad etilgan",
+    label: "To'lov qaytarilgan",
     class: "bg-rose-50 text-rose-500"
   },
   approved: {

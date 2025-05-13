@@ -11,7 +11,7 @@
       />
       </div>
     </div>
-    <el-table :data="filteredData" border style="width: 100%">
+    <el-table :data="tableData?.data || []" border style="width: 100%">
       <el-table-column label="FIO">
         <template #default="scope">
           {{ scope.row.last_name }} {{ scope.row.first_name }} {{ scope.row.middle_name }}
@@ -28,32 +28,54 @@
           {{ formattedDate(scope.row.create_at) }}
         </template>
       </el-table-column>
+      <el-table-column label="Harakat" width="150" align="center">
+          <template #default="scope">
+              <div class="flex-center">
+                <ActionButton :disabled="!scope.row?.visitTypes?.includes('room')" type="show" tooltip_title="Xona haqida malumot" @click="handleOpenRoomInfoDialog(scope.row?.roomId)"/>
+              </div>
+          </template>
+      </el-table-column>
     </el-table>
+    <DialogsViewRoomInfo v-if="dialogVisibly" v-model="dialogVisibly" :roomId="roomId"/>
   </Card>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const tableData = ref([])
-
 const searchQuery = ref('')
-
-const filteredData = computed(() => {
-  if (!searchQuery.value) return tableData.value
-  return tableData.value.filter((item) =>
-    Object.values(item).some(val =>
-      String(val).toLowerCase().includes(searchQuery.value.toLowerCase())
-    )
-  )
+const dialogVisibly = ref(false)
+const roomId = ref(null)
+const filter = ref({
+  _page:1,
+  _per_page:10,
+  phone:'',
+  id:null,
+  _expand:'room'
 })
 
 onMounted(() => {
   getRegistirClients()
 })
 
+function handleOpenRoomInfoDialog (val) {
+    roomId.value = val
+    dialogVisibly.value = true
+}
+
 async function getRegistirClients() {
-  const { data, error } = await useFetchApi.get('/clients')
+  let queryFilter = {}
+  
+  Object.entries(filter.value).forEach(([key,value]) => {
+    if (value) {
+      queryFilter = {...queryFilter,[key]:value}
+    }
+  })
+
+  const { data, error } = await useFetchApi.get('/clients',{
+    params:queryFilter
+  })
   if (!error.value) {
     tableData.value = data.value
   }

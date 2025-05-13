@@ -1,3 +1,4 @@
+import type { TPagination } from "../others/index.type";
 export interface TBuildings {
     id?:number,
     create_at?:string,
@@ -7,5 +8,6 @@ export interface TBuildings {
 }
 export interface TBuildingsApi {
     item?:number,
-    data?:TBuildings[]
+    data?:TBuildings[],
+    pagination?:TPagination
 }

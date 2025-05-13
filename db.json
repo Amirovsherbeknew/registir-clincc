@@ -114,6 +114,13 @@
       "name": "adsadsa",
       "per_room": 7,
       "id": 74371
+    },
+    {
+      "create_at": "2025-05-13T11:46:49.502Z",
+      "update_at": "2025-05-13T11:46:49.502Z",
+      "name": "12asd",
+      "per_room": 1,
+      "id": 60393
     }
   ],
   "rooms": [
@@ -125,6 +132,60 @@
       "people_per_room": 10,
       "pricePerDay": "20000",
       "buildingId": 84900
+    },
+    {
+      "id": 2,
+      "create_at": "2025-05-13T04:29:22.567Z",
+      "update_at": "2025-05-13T04:29:22.567Z",
+      "name": "sss",
+      "people_per_room": 5,
+      "pricePerDay": "120000",
+      "buildingId": 84900
+    },
+    {
+      "id": 3,
+      "create_at": "2025-05-13T04:30:36.901Z",
+      "update_at": "2025-05-13T04:30:36.901Z",
+      "name": "asd",
+      "people_per_room": 5,
+      "pricePerDay": "1222",
+      "buildingId": 84900
+    },
+    {
+      "id": 4,
+      "create_at": "2025-05-13T04:31:02.790Z",
+      "update_at": "2025-05-13T04:31:02.790Z",
+      "name": "asdas",
+      "people_per_room": 5,
+      "pricePerDay": "1232",
+      "buildingId": 84900
+    },
+    {
+      "id": 5,
+      "create_at": "2025-05-13T04:31:36.723Z",
+      "update_at": "2025-05-13T04:31:36.723Z",
+      "name": "asda",
+      "people_per_room": 5,
+      "pricePerDay": "123",
+      "buildingId": 84900
+    },
+    {
+      "id": 6,
+      "create_at": "2025-05-13T04:35:20.711Z",
+      "update_at": "2025-05-13T04:35:20.711Z",
+      "name": "asd",
+      "people_per_room": 4,
+      "pricePerDay": "212",
+      "buildingId": 28807
+    },
+    {
+      "create_at": "2025-05-13T11:47:04.932Z",
+      "update_at": "2025-05-13T11:47:04.932Z",
+      "name": "asdasd",
+      "people_per_room": 3,
+      "pricePerDay": "1222",
+      "buildingId": 60393,
+      "id": 26952
     }
   ],
   "labTests": [
@@ -173,12 +234,12 @@
   ],
   "clients": [
     {
-      "create_at": "2025-05-07T04:18:04.894Z",
-      "update_at": "2025-05-07T04:18:04.894Z",
-      "last_name": "sad",
-      "first_name": "asdas",
-      "middle_name": "dsada",
-      "phone": "+998 33 333 33 33",
+      "create_at": "2025-05-13T12:59:07.480Z",
+      "update_at": "2025-05-13T12:59:07.480Z",
+      "last_name": "qowpeiqwopip",
+      "first_name": "kjqwe",
+      "middle_name": "iopipoipo",
+      "phone": "+998 32 423 42 34",
       "gender": "m",
       "visitTypes": [
         "med",
@@ -188,30 +249,31 @@
         45734,
         16389
       ],
-      "roomId": 1,
       "room": {
-        "roomId": 1,
-        "days": 4
+        "roomId": 2,
+        "days": 5
       },
       "labTests": [],
-      "doctorId": 3,
-      "id": 22441
+      "doctorId": 1,
+      "roomId": 2,
+      "end_date": "2025-05-18T12:59:07.480Z",
+      "id": 66459
     }
   ],
   "checks": [
     {
-      "clientId": 22441,
-      "create_at": "2025-05-07T04:18:04.926Z",
-      "update_at": "2025-05-07T04:18:04.926Z",
-      "totalPrice": 135000,
+      "clientId": 66459,
+      "create_at": "2025-05-13T12:59:07.644Z",
+      "update_at": "2025-05-13T12:59:07.644Z",
+      "totalPrice": 655000,
       "isPaid": false,
-      "id": 95443,
-      "replace_payment": {
-        "create_at": "2025-05-12T07:52:20.257Z",
-        "update_at": "2025-05-12T07:52:20.257Z",
-        "reason": "dasdas",
-        "price": "22"
-      }
+      "doctorId": 1,
+      "roomId": 2,
+      "visitTypes": [
+        "med",
+        "room"
+      ],
+      "id": 92539
     }
   ]
 }

@@ -9,7 +9,7 @@
                 </div>
             </el-button>
         </div>
-        <el-table :data="tableData?.data" border style="width: 100%">
+        <el-table :data="tableData?.data || []" border style="width: 100%">
             <el-table-column  label="Xizmat narxi">
                 <template #default="scope">
                     {{scope.row.last_name}} {{scope.row.first_name}} {{scope.row.middle_name}}
@@ -40,6 +40,12 @@
                 </template>
             </el-table-column>
         </el-table>
+        <VPagenation
+            v-model="filters._page"
+            :pageSize="filters._limit"
+            :total="tableData?.pagination?.total || 0"
+            @change="getDoctorsList"
+        />
         <DialogsCreateDoctors  v-if="dialogVisible" v-model="dialogVisible" :newId="newId" :selected="selected" @getData="getDoctorsList"/>
     </Card>
 </template>
@@ -54,7 +60,7 @@ const newId = ref<number|null>();
 const selected = ref<doctors>()
 const filters = ref({
     _page:1,
-    _per_page:10
+    _limit:10
 })
 onMounted(() => {
     getDoctorsList()

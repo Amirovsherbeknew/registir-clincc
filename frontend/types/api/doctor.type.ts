@@ -1,3 +1,4 @@
+import type { TPagination } from "../others/index.type";
 export interface doctors {
     id?: number;
     last_name: string;
@@ -11,5 +12,6 @@ export interface doctors {
 }
 export interface TDoctorsListApi {
     items?:number,
-    data?:doctors[]
+    data?:doctors[],
+    pagination?:TPagination
 }

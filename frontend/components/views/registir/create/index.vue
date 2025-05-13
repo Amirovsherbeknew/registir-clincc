@@ -190,21 +190,20 @@
   
     if (form.value.visitTypes.includes('med')) {
       for (let id of form.value.medServices) {
-        const item = dictionary.value.medServices.find(m => m.id === id)
+        const item = dictionary.value.medServices.find(m => m?.id === id)
         if (item) total += Number(item.price)
       }
     }
   
     if (form.value.visitTypes.includes('room')) {
-      console.log(form.value.room)
-      const room = dictionary.value.rooms.find(r => r.id === form.value.room.roomId)
+      const room = dictionary.value.rooms.find(r => r?.id === form.value.room.roomId)
       if (room) total += Number(room.pricePerDay) * form.value.room.days
       console.log(total)
     }
   
     if (form.value.visitTypes.includes('lab')) {
       for (let id of form.value.labTests) {
-        const test = dictionary.value.labTests.find(t => t.id === id)
+        const test = dictionary.value.labTests.find(t => t?.id === id)
         if (test) total += Number(test.price)
       }
     }
@@ -214,7 +213,10 @@
       create_at: new Date().toISOString(),
       update_at: new Date().toISOString(),
       totalPrice: total,
-      isPaid: false
+      isPaid: false,
+      doctorId:form.value.doctorId || null,
+      roomId:form.value?.room?.roomId || null,
+      visitTypes:form.value.visitTypes
     }
     createCheck()
   }
@@ -248,6 +250,7 @@
     })
   }
   async function createClientForm () {
+    const datePlus4Days = new Date();
     
     let payloadData = {
       create_at: new Date().toISOString(),
@@ -257,17 +260,26 @@
     if (form.value.room.roomId) {
       payloadData = {...payloadData,roomId:form.value.room.roomId}
     }
+    if (form.value.visitTypes?.includes('room')) {
+      datePlus4Days.setDate(datePlus4Days.getDate() + Number(form.value.room.days));
+      payloadData = {...payloadData,end_date:datePlus4Days.toISOString()}
+    }
     const {data,error} = await useFetchApi.post('/clients',payloadData)
     if (!error.value && data.value) {
       generateCheck(data.value.id)
     }
   }
-  async function createCheck (payloadData) {
+  async function createCheck () {
     const {data,error} = await useFetchApi.post('/checks',checkData.value)
     if (!error.value) {
       viewCheck.value = true;
     }
   }
+
+  // async function PatchRoom () {
+  //   const {} = await useFetchApi.patch(`/rooms/${}`,{limit:})
+  // }
+
   onMounted(() => {
     getDictionary()
   })

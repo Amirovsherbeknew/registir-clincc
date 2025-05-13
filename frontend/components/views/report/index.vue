@@ -42,7 +42,7 @@
       </el-card>
       <!-- Report Table -->
       <el-card shadow="hover">
-        <el-table
+        <el-table border
           :data="staticsData?.statistic || []"
           style="width: 100%"
           empty-text="Ma'lumot topilmadi"

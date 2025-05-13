@@ -1,10 +1,10 @@
 <template>
     <Card>
-        <div class="flex justify-between">
+        <div class="flex justify-between mb-4">
             <VTitle title="Binolar"/>
             <el-button type="primary" @click="dialogVisibly = true">Yangi bino qo'shish</el-button>
         </div>
-        <el-table :data="tableData?.data || []">
+        <el-table :data="tableData?.data || []" border>
             <el-table-column prop="name" label="Bino nomi"/>
             <el-table-column prop="per_room" label="Binoda nechta xona mavjudligi"/>
             <el-table-column label="Yaratilgan vaqti">
@@ -26,6 +26,13 @@
                 </template>
             </el-table-column>
         </el-table>
+        <VPagenation
+            v-model="filter._page"
+            :pageSize="filter._limit"
+            :total="tableData?.pagination?.total || 0"
+            @change="getBuildings"
+        />
+        
         <DialogsCreateBuilding v-if="dialogVisibly" v-model="dialogVisibly" @getData="getBuildings" :selected="selected"/>
     </Card>
 </template>
@@ -48,9 +55,9 @@ function handleEditOpenDialog (val:TBuildings) {
     dialogVisibly.value = true;
 }
 
-async function handleDelete (id:number) {
-    const {data,error} = await useFetchApi.delete(`/buildings/${id}`)
-}
+// async function handleDelete (id:number) {
+//     const {data,error} = await useFetchApi.delete(`/buildings/${id}`)
+// }
 
 async function getBuildings () {
     const {data,error} = await useFetchApi.get<TBuildingsApi>('/buildings',

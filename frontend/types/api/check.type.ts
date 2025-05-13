@@ -1,3 +1,4 @@
+import type { TPagination } from "../others/index.type";
 export interface checkType {
     id: number,
     clientId: number,
@@ -9,4 +10,5 @@ export interface checkType {
 export interface TCheck {
     items?:number,
     data?:checkType[]
+    pagination?:TPagination
 }

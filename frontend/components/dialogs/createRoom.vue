@@ -69,15 +69,14 @@
     medserversForm.value.validate((valid) => {
       if (valid) {
         if (props.selected) {
-          PatchLabTest()
+          PatchRoom()
         }
-        else CreateLabTest()
+        else Validate()
       }
     })
   }
-  async function CreateLabTest () {
+  async function CreateRoom () {
     const payloadData = {
-      id:props.newId,
       create_at:new Date().toISOString(),
       update_at:new Date().toISOString(),
       ...form.value
@@ -88,7 +87,7 @@
       dialogVisible.value = false;
     }
   }
-  async function PatchLabTest () {
+  async function PatchRoom () {
     const payloadData = {
       create_at:props.selected?.create_at,
       update_at:new Date().toISOString(),
@@ -100,6 +99,22 @@
       dialogVisible.value = false;
     }
   }
+  async function Validate () {
+    const {data,error} = await useFetchApi.get<rooms[]>(`/rooms?buildingId=${form.value.buildingId}`)
+    if (!error.value) {
+      const findBuilding = catergory.value.find(resp => resp.id === form.value.buildingId)
+      if (!data.value) {
+        CreateRoom()
+        return
+      }
+      if (data.value?.length < findBuilding?.per_room) {
+        CreateRoom()
+        return
+      }
+      else useNotifacation.warning('Xatolik','bu binoni barcha xonalar to\'lgan')
+    }
+  }
+   
   async function getCategory () {
       const {data,error} = await useFetchApi.get<TBuildings[]>('/buildings')
       if (!error.value && data.value) {

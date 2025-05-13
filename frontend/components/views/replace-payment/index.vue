@@ -5,7 +5,7 @@
             <el-input class="max-w-[250px]" :value="filter.search" @input="handleSearch" placeholder="check raqami bo'yicha qidiruv"/>
         </div>
         <div class="w-full">
-            <el-table :data="tableData?.data" style="width: 100%">
+            <el-table :data="tableData?.data" style="width: 100%" border>
             <el-table-column prop="id" label="Check raqami" width="150"></el-table-column>
             <el-table-column label="Check egasi" min-width="150">
                 <template #default="scope">
@@ -22,9 +22,9 @@
                     {{ useDateFormat(scope.row?.create_at) }}
                 </template>
             </el-table-column>
-            <el-table-column label="Holati" width="250">
+            <el-table-column label="Holati" width="250" center>
                 <template #default="scope">
-                    <TableStatus :type="scope.row?.is_paid ? 'approved':'pending'"/>
+                    <TableStatus :type="TableStatusType(scope.row)"/>
                 </template>
             </el-table-column>
             <el-table-column label="Telefon raqam" width="200">
@@ -58,6 +58,7 @@
     </Card>
 </template>
 <script setup lang='ts'>
+import type {rooms} from '~/types/api/rooms.type.ts'
 const filter = ref({
     search:'',
     _per_page:1,
@@ -76,6 +77,13 @@ function handleEditOpenDialog (val:any) {
     console.log(val)
     check.value = val
     dialogVisibly.value = true
+}
+
+function TableStatusType (check:rooms) {
+    if (check?.replace_payment) {
+        return 'cancel_payment'
+    }
+    else return check?.isPaid ? 'approved':'pending'
 }
 
 async function handleSearch () {
