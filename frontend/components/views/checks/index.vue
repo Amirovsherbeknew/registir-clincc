@@ -23,7 +23,7 @@
             </el-table-column>
             <el-table-column label="Holati">
                 <template #default="scope">
-                    <TableStatus :type="scope.row?.is_paid ? 'approved':'pending'"/>
+                    <TableStatus :type="'pending'"/>
                 </template>
             </el-table-column>
             <el-table-column label="Telefon raqam">
@@ -33,7 +33,7 @@
             </el-table-column>
             <el-table-column label="Check egasini raqami">
                 <template #default="scope">
-                    <pre>{{ scope.row.client?.id }}</pre>
+                    <div>{{ scope.row.client?.id }}</div>
                 </template>
             </el-table-column>
             <el-table-column label="Harakat">
@@ -47,6 +47,7 @@
   </Card>
 </template>
 <script setup lang='ts'>
+import type {rooms} from '~/types/api/rooms.type.ts'
 const filter = ref({
   search:'',
   _per_page:1,
@@ -75,6 +76,13 @@ async function handleSearch () {
     if (!error.value) {
         console.log(data.value)
     }
+}
+
+function TableStatus (check:rooms) {
+    if (check?.replace_payment) {
+        return 'cancel_payment'
+    }
+    else return check?.isPaid ? 'approved':'pending'
 }
 
 async function GetCheckList () {
