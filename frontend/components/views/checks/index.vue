@@ -23,7 +23,7 @@
             </el-table-column>
             <el-table-column label="Holati">
                 <template #default="scope">
-                    <TableStatus :type="'pending'"/>
+                    <TableStatus :type="scope 'approved':'pending'"/>
                 </template>
             </el-table-column>
             <el-table-column label="Telefon raqam">
