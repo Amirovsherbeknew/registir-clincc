@@ -1,6 +1,6 @@
 import { genderList,visitTypeList } from "~/constants"
 export const useConstant = () => {
-    function gender (value:string) {
+    function gender (value?:string) {
         if (value) {
             return genderList.find(resp => resp.value === value)
         }

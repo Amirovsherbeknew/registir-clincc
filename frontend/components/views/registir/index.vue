@@ -2,14 +2,9 @@
   <Card class="flex flex-col gap-[20px]">
     <div class="flex items-center">
       <VTitle class="flex-1" title="Ro'yxatga olingan mijozlar ro'yxati"/>
-      <div class="max-w-1/2 flex gap-[10px]">
-        <el-input
-        v-model="searchQuery"
-        placeholder="Qidiruv..."
-        clearable
-        class="w-[300px]"
-      />
-      </div>
+    </div>
+    <div class="flex gap-[10px]">
+      <FiltersRegister v-model="filter" @search="getRegistirClients"/>
     </div>
     <el-table :data="tableData?.data || []" border style="width: 100%">
       <el-table-column label="FIO">
@@ -28,6 +23,11 @@
           {{ formattedDate(scope.row.create_at) }}
         </template>
       </el-table-column>
+      <el-table-column label="Ko'rsatilgan xizmatlar">
+        <template #default="scope">
+          <div v-for="(item,idx) in scope.row?.visitTypes" :key="`visit_types_${idx}`">{{ useConstant().visitType(item)?.label }}</div>
+        </template>
+      </el-table-column>
       <el-table-column label="Harakat" width="150" align="center">
           <template #default="scope">
               <div class="flex-center">
@@ -36,6 +36,12 @@
           </template>
       </el-table-column>
     </el-table>
+    <VPagenation
+        v-model="filter._page"
+        :pageSize="filter._limit"
+        :total="tableData?.pagination?.total || 0"
+        @change="getRegistirClients"
+    />
     <DialogsViewRoomInfo v-if="dialogVisibly" v-model="dialogVisibly" :roomId="roomId"/>
   </Card>
 </template>
@@ -44,15 +50,16 @@
 import { ref, onMounted } from 'vue'
 
 const tableData = ref([])
-const searchQuery = ref('')
 const dialogVisibly = ref(false)
 const roomId = ref(null)
 const filter = ref({
-  _page:1,
-  _per_page:10,
-  phone:'',
-  id:null,
-  _expand:'room'
+    _page:1,
+    _limit:10,
+    dateRange:[],
+    gender:'',
+    last_name:"",
+    phone:'',
+    visitTypes_like:''
 })
 
 onMounted(() => {
@@ -64,17 +71,10 @@ function handleOpenRoomInfoDialog (val) {
     dialogVisibly.value = true
 }
 
-async function getRegistirClients() {
-  let queryFilter = {}
-  
-  Object.entries(filter.value).forEach(([key,value]) => {
-    if (value) {
-      queryFilter = {...queryFilter,[key]:value}
-    }
-  })
-
+async function getRegistirClients(query) {
+  console.log(query)
   const { data, error } = await useFetchApi.get('/clients',{
-    params:queryFilter
+    params:useClean(query || filter.value)
   })
   if (!error.value) {
     tableData.value = data.value

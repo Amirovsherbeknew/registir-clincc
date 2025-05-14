@@ -90,7 +90,7 @@
               <el-option
                 v-for="room in dictionary.rooms"
                 :key="room.id"
-                :label="`${room.name} - ${useCurrencyFormat(room.pricePerDay)}/kun`"
+                :label="`${room.name} - ${useCurrencyFormat(room.pricePerDay)}/kun  ${room?.people_per_room - (room?.limit || 0)} ta joy mavjud`"
                 :value="room.id"
               />
             </el-select>
@@ -126,11 +126,9 @@
         <el-form-item>
           <el-button type="primary" @click="submitForm">Check chiqarish</el-button>
         </el-form-item>
-  
-        <div class="max-w-[750px] mx-auto">
-          <ReceiptPrint v-if="viewCheck" :data="{...checkData,clientInfo:clientInfo}"/>
-        </div>
+        
       </el-form>
+      <DialogsViewCheck v-model="viewCheck" :info="{...checkData,clientInfo:clientInfo}"/>
     </Card>
   </template>
   
@@ -226,7 +224,10 @@
     if (!createform.value) return
     createform.value.validate(valid => {
       if (valid) {
-        createClientForm()
+        if (form.value.visitTypes.includes('room')) {
+          PatchRoom()
+        }
+        else createClientForm()
       }
     })
   }
@@ -235,7 +236,7 @@
   async function getDictionary() {
     const apiList = [
       { key: 'medServices', endpoint: '/medServices' },
-      { key: 'rooms', endpoint: '/rooms' },
+      { key: 'rooms', endpoint: '/rooms?is_full=false' },
       { key: 'labTests', endpoint: '/labTests' },
       { key: 'doctor', endpoint: '/doctors' }
     ]
@@ -273,12 +274,25 @@
     const {data,error} = await useFetchApi.post('/checks',checkData.value)
     if (!error.value) {
       viewCheck.value = true;
+      useNotifacation.success('Muvaffaqiyatli yaratildi')
     }
   }
 
-  // async function PatchRoom () {
-  //   const {} = await useFetchApi.patch(`/rooms/${}`,{limit:})
-  // }
+  async function PatchRoom () {
+    let limit = 1;
+    let is_full = false;
+    const findRoomId = dictionary.value.rooms?.find((resp) => resp.id === form.value.room.roomId)
+    if (findRoomId?.limit) {
+      limit = Number(findRoomId?.limit) + 1
+    }
+    if (limit === Number(findRoomId.people_per_room)) {
+      is_full = true
+    }
+    const {data,error} = await useFetchApi.patch(`/rooms/${form.value.room.roomId}`,{limit,is_full})
+    if (!error.value) {
+      createClientForm()
+    }
+  }
 
   onMounted(() => {
     getDictionary()

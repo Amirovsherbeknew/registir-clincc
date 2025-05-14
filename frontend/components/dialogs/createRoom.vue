@@ -79,6 +79,7 @@
     const payloadData = {
       create_at:new Date().toISOString(),
       update_at:new Date().toISOString(),
+      is_full:false,
       ...form.value
     };
     const {error} = await useFetchApi.post('/rooms',payloadData)
