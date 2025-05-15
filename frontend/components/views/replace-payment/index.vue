@@ -6,40 +6,41 @@
         </div>
         <div class="w-full">
             <el-table :data="tableData?.data" style="width: 100%" border>
-            <el-table-column prop="id" label="Check raqami" width="150"></el-table-column>
-            <el-table-column label="Check egasi" min-width="150">
+            <el-table-column prop="id" label="Check raqami" width="150"  align="center"/>
+            <el-table-column label="Check egasi" min-width="350">
                 <template #default="scope">
                     {{ scope.row?.client?.last_name }} {{ scope.row?.client?.first_name }} {{ scope.row?.client?.middle_name }}
                 </template>
             </el-table-column>
-            <el-table-column label="To'lov summasi" width="150">
+            <el-table-column label="To'lov summasi" width="150" align="center">
                 <template #default="scope">
                     {{ useCurrencyFormat(Number(scope.row?.totalPrice)) }}
                 </template>
             </el-table-column>
-            <el-table-column label="Yaratilgan vaqti" width="200">
+            <el-table-column label="Yaratilgan vaqti" width="200" align="center">
                 <template #default="scope">
                     {{ useDateFormat(scope.row?.create_at) }}
                 </template>
             </el-table-column>
-            <el-table-column label="Holati" width="250" center>
+            <el-table-column label="Holati" width="250"  align="center">
                 <template #default="scope">
                     <TableStatus :type="TableStatusType(scope.row)"/>
                 </template>
             </el-table-column>
-            <el-table-column label="Telefon raqam" width="200">
+            <el-table-column label="Telefon raqam" width="200" align="center">
                 <template #default="scope">
                     {{scope?.row?.client?.phone}}
                 </template>
             </el-table-column>
-            <el-table-column label="Check egasini raqami" width="200">
+            <el-table-column label="Check egasini raqami" width="200" align="center">
                 <template #default="scope">
                     <div>{{ scope.row.id }}</div>
                 </template>
             </el-table-column>
-            <el-table-column label="Qaytarilgan miqdor" width="220">
+            <el-table-column label="Qaytarilgan miqdor" width="220" align="center">
                 <template #default="scope">
-                    <div>{{ useCurrencyFormat(Number(scope?.row?.replace_payment?.price)) }}</div>
+                    <div v-if="scope?.row?.replace_payment?.price">{{ useCurrencyFormat(Number(scope?.row?.replace_payment?.price)) }}</div>
+                    <div v-else>---</div>
                 </template>
             </el-table-column>
             <el-table-column label="Qaytarish sababi" width="250">
@@ -53,16 +54,27 @@
                 </template>
             </el-table-column>
         </el-table>
+        <VPagenation
+            v-model="filter._page"
+            :pageSize="filter._limit"
+            :total="tableData?.pagination?.total || 0"
+            @change="GetCheckList"
+        />
         </div>
         <DialogsCancelPayment v-model="dialogVisibly" :check="check"/>
     </Card>
 </template>
 <script setup lang='ts'>
 import type {rooms} from '~/types/api/rooms.type.ts'
-const filter = ref({
-    search:'',
-    _per_page:1,
-    _page:1
+import type {TFilterReplacePayment} from '~/types/filter/index.type'
+const filter = ref<TFilterReplacePayment>({
+    _page:1,
+    _limit:10,
+    name:'',
+    phone:'',
+    dateRange:[],
+    id:undefined,
+    _expand:"client"
 })
 
 const tableData = ref()
@@ -97,9 +109,9 @@ async function handleSearch () {
     }
 }
 
-async function GetCheckList () {
+async function GetCheckList (query?:TFilterReplacePayment|number) {
     const {data,error} = await useFetchApi.get('/checks',{
-        params:{_expand:'client',...filter.value}
+        params:useClean(query || filter.value)
     })
     if (!error.value) {
         console.log(data.value);

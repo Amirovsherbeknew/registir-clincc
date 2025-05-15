@@ -28,3 +28,13 @@ export interface TFilterCheck {
     _limit:number,
     visitTypes_like?:string
 }
+
+export interface TFilterReplacePayment {
+    name:string,
+    _limit:number,
+    _page:number
+    id?:number,
+    phone:string,
+    dateRange:string[]
+    _expand:string
+}

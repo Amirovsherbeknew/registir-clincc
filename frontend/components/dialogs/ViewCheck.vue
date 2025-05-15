@@ -2,10 +2,11 @@
     <el-dialog v-model="dialogVisible"
       width="700"
       on-destroy-close>
-        <ReceiptPrint :data="info"/>
+        <ReceiptPrint :data="info" @handleSearch="emit('handleSearch')"/>
     </el-dialog>
 </template>
 <script lang="ts" setup>
+const emit = defineEmits(['handleSearch'])
 defineProps<{
   info:any
 }>()

@@ -8,48 +8,81 @@
         <div class="flex gap-[10px]">
           <div class="flex gap-4">
             <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Xizmat turi</label>
-            <el-select
-              v-model="selectedService"
-              placeholder="Xizmat turini tanlang"
-              clearable
-              class="min-w-[250px]"
-            >
-              <el-option
-                v-for="(service,idx) in useConstant().visitType()"
-                :key="idx"
-                :label="service.label"
-                :value="service.value"
-              />
-            </el-select>
-          </div>
+              <el-select
+                v-model="filter.visitTypes_like"
+                placeholder="Xizmat turini tanlang"
+                clearable
+                class="min-w-[250px]"
+              >
+                <el-option
+                  v-for="(service,idx) in useConstant().visitType()"
+                  :key="idx"
+                  :label="service.label"
+                  :value="service.value"
+                />
+              </el-select>
+            </div>
+            <div>
+              <el-select
+                v-model="filter.roomId"
+                placeholder="Xonani tanlang"
+                clearable
+                class="min-w-[250px]"
+              >
+                <el-option
+                  v-for="(service,idx) in dictionary?.rooms"
+                  :key="idx"
+                  :label="service.name"
+                  :value="service.id"
+                />
+              </el-select>
+            </div>
+            <div>
+              <el-select
+                v-model="filter.doctorId"
+                placeholder="Shifokorni tanlang"
+                clearable
+                class="min-w-[250px]"
+              >
+                <el-option
+                  v-for="(doctor,idx) in dictionary?.doctor"
+                  :key="idx"
+                  :label="`${doctor?.first_name} ${doctor?.last_name} ${doctor?.middle_name}`"
+                  :value="doctor.id"
+                />
+              </el-select>
+            </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Sana</label>
             <el-date-picker
               v-model="selectedDate"
               type="daterange"
               placeholder="Sanani tanlang"
               format="DD-MM-YYYY"
-              value-format="DD-MM-YYYY"
+              value-format="YYYY-MM-DD"
               class="w-full"
             />
           </div>
           </div>
           <div class="flex items-end">
-            <ActionButton type="search" @click="fetchReport"/>
+            <ActionButton type="search" @click="handleSearch"/>
+            <ActionButton type="clear" @click="handleClear"/>
           </div>
         </div>
       </el-card>
       <!-- Report Table -->
       <el-card shadow="hover">
         <el-table border
-          :data="staticsData?.statistic || []"
+          :data="tableData?.data || []"
           style="width: 100%"
           empty-text="Ma'lumot topilmadi"
           class="rounded-lg"
         >
-          <el-table-column prop="fullName" label="F.I.O" />
-          <el-table-column label="Sana" >
+          <el-table-column label="F.I.O" >
+            <template #default="scope">
+              {{ scope?.row?.client?.first_name }} {{ scope?.row?.client?.last_name }} {{ scope?.row?.client?.middle_name }}
+            </template>
+          </el-table-column>
+          <el-table-column label="Ro'yxatga olingan sana" >
             <template #default="scope">
               {{ useDateFormat(scope.row.create_at) }}
             </template>
@@ -61,80 +94,142 @@
           </el-table-column>
           <el-table-column label="Ko'rsatilgan xizmatlar">
             <template #default="scope">
-              <div v-for="item in scope.row.visitTypes" :key="item.value">{{ item.label }}</div>
+              <div v-for="(item,idx) in scope.row.visitTypes" :key="`visit_type_${idx}`">{{ useConstant().visitType(item)?.label }}</div>
             </template>
           </el-table-column>
+          <el-table-column fixed="right" label="Harakat" width="150" align="center">
+              <template #default="scope">
+                  <div class="flex-center">
+                      <ActionButton type="show" tooltip_title="Xona haqida malumot" @click="handleOpenRoomInfoDialog(scope.row?.client?.roomId)"/>
+                  </div>
+              </template>
+          </el-table-column>
         </el-table>
+        <VPagenation
+            v-model="filter._page"
+            :pageSize="filter._limit"
+            :total="tableData?.pagination?.total || 0"
+            @change="getRegistirClients"
+        />
       </el-card>
   
       <!-- Summary -->
       <el-card shadow="hover" class="mt-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Jami</h2>
-        <p class="text-gray-600">Umumiy mijozlar: {{ staticsData?.statistic?.length || 0 }}</p>
-        <p class="text-gray-600">Umumiy to‘lov: {{ useCurrencyFormat(totalPrice)}}</p>
+        <p class="text-gray-600">Umumiy mijozlar: {{ tableData?.pagination?.total || 0 }}</p>
+        <p class="text-gray-600">Umumiy to‘lov: {{ useCurrencyFormat(staticsData?.totalPrice)}}</p>
       </el-card>
     </div>
-    {{ selectedDate }}
-    </Card>
+    <DialogsViewRoomInfo v-if="dialogVisibly" v-model="dialogVisibly" :roomId="roomId"/>  
+  </Card>
   </template>
   
   <script setup>
   import { ref } from 'vue'
-  import { statics } from '~/server/statistic'
   import dayjs from 'dayjs'
   // Xizmat turlari
-  const totalPrice = ref(0)
   const staticsData = ref()
-  // Filter uchun reaktiv o‘zgaruvchilar
-  const selectedService = ref('')
-  const selectedDate = ref([
-    dayjs().subtract(1, 'day').format('DD-MM-YYYY'),
-    dayjs().format('DD-MM-YYYY')
-  ])
-  const originalStatics = ref() 
-  onMounted(async () => {
-    getList()
-    const data = await statics()
-    staticsData.value = data
-    originalStatics.value = JSON.parse(JSON.stringify(data));
-    totalPrice.value = data.total
+  const dialogVisibly = ref(false)
+  const tableData = ref()
+  const roomId = ref(null)
+  const dictionary = ref({
+    medServices: [],
+    rooms: [],
+    labTests: [],
+    doctor:[]
   })
 
-  // Filtrlash funksiyasi
-  const fetchReport = () => {
+  const filter = ref({
+    _expand:'client',
+    _page:1,
+    _limit:10,
+    visitTypes_like:'',
+    roomId:undefined,
+    doctorId:undefined,
+    medServices:undefined
+  })
+  const selectedDate = ref([
+    dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
+    dayjs().format('YYYY-MM-DD')
+  ])
+  
+  onMounted(async () => {
     getList()
-    const filtered = originalStatics.value.statistic.filter((resp) => {
-      console.log(resp.visitTypes.some((v) => v.value === selectedService.value))
-      const itemDate = dayjs(resp.create_at).format('DD-MM-YYYY')
-      const isSameDate = selectedDate.value
-        ? itemDate === selectedDate.value // Sana tanlangan bo'lsa solishtir
-        : true  
+    getDictionary()
+    getStatics()
+  })
 
-      const isSameService = selectedService.value
-        ? resp.visitTypes.some((v) => v.value === selectedService.value)
-        : true
-        return isSameDate && isSameService
+  function handleSearch () {
+    filter.value._page = 1
+    filter.value._limit = 10
+    getList()
+    getStatics()
+  }
+
+  function handleClear () {
+    filter.value = {
+      _expand:'client',
+      _page:1,
+      _limit:10,
+      visitTypes_like:'',
+      roomId:undefined,
+      doctorId:undefined,
+      medServices:undefined
+    }
+    selectedDate.value = undefined
+    getList()
+    getStatics()
+  }
+
+  function handleOpenRoomInfoDialog (val) {
+    roomId.value = val
+    dialogVisibly.value = true
+  }
+
+  async function getList () {
+    const {data,error} = await useFetchApi.get(`/checks`,{
+      params:useClean({
+        create_at_gte:selectedDate.value?.[0],
+        create_at_lte:selectedDate.value?.[1],
+        ...filter.value
       })
-      
-      console.log(filtered)
-    staticsData.value.statistic = filtered
-    totalPrice.value = 0
-    filtered.forEach((resp) => {
-      if (resp.totalPrice) {
-        totalPrice.value = totalPrice.value + resp.totalPrice
+    })
+    if (!error.value) {
+      tableData.value = data.value
+    }
+  }
+
+  async function getDictionary() {
+    const apiList = [
+      { key: 'medServices', endpoint: '/medServices' },
+      { key: 'rooms', endpoint: '/rooms?is_full=false' },
+      { key: 'labTests', endpoint: '/labTests' },
+      { key: 'doctor', endpoint: '/doctors' }
+    ]
+  
+    const fetchPromises = apiList.map(resp => useFetchApi.get(resp.endpoint))
+    const results = await Promise.all(fetchPromises)
+  
+    results.forEach((result, index) => {
+      if (!result.error.value) {
+        dictionary.value[apiList[index].key] = result.data.value
       }
     })
   }
 
-  async function getList () {
-    const {data,error} = await useFetchApi.get(`/clients`,{
-      params:{
-        create_at_gte:selectedDate.value[0]?.split('-')?.reverse()?.join('-'),
-        create_at_lte:selectedDate.value[1]?.split('-')?.reverse()?.join('-')
-      }
+  async function getStatics () {
+    const {data,error} = await useFetchApi.get('/checks/total',{
+      params:useClean({
+        create_at_gte:selectedDate.value?.[0],
+        create_at_lte:selectedDate.value?.[1],
+        ...filter.value
+      })
     })
     if (!error.value) {
-      console.log(data.value)
+      console.log(data)
+      staticsData.value = {
+        totalPrice:data.value?.total
+      }
     }
   }
   </script>

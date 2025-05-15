@@ -92,7 +92,7 @@ const statusTypes = {
   },
   approved: {
     icon: "check-circle",
-    label: "Tasdiqlangan",
+    label: "To'langan",
     class: "bg-teal-50 text-teal-600"
   },
   empty: {

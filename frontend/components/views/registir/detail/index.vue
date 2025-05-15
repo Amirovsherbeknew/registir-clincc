@@ -1,6 +1,6 @@
 <template>
     <Card class="flex flex-col gap-[20px]">
-      <VTitle title="Mijozni ro'yxatga olish" />
+      <VTitle title="Mijoz haqidagi ma'lumotlar" />
       <el-form
         :model="form"
         label-position="top"
@@ -134,7 +134,8 @@
   
   <script setup>
   import { ref, onMounted } from 'vue'
-  
+  const route = useRoute();
+  const checkByClientInfo = ref()
   const createform = ref(null)
   const viewCheck = ref(false)
   const dictionary = ref({
@@ -172,15 +173,10 @@
     }
   })
 
-  watch(
-    () => viewCheck.value,
-    (val) => {
-      if (!val) {
-        window.location.reload()
-      }
-    }
-  )
-  
+  const clientInfoId = computed(() => {
+    return route.query.clientInfoId;
+  })
+
   // Visit type toggle
   function toggleVisitType(type) {
     const index = form.value.visitTypes.indexOf(type)
@@ -217,18 +213,16 @@
     }
   
     checkData.value = {
-      clientId:id,
-      create_at: new Date().toISOString(),
-      update_at: new Date().toISOString(),
-      totalPrice: total,
-      isPaid: false,
-      medServices:form.value.medServices || [],
-      labTests:form.value.labTests || [],
-      doctorId:form.value.doctorId || null,
-      roomId:form.value?.room?.roomId || null,
-      visitTypes:form.value.visitTypes
+        id:checkData.value?.id,
+        create_at:checkData.value?.create_at,
+        update_at: new Date().toISOString(),
+        totalPrice: total,
+        isPaid: false,
+        doctorId:form.value.doctorId || null,
+        roomId:form.value?.room?.roomId || null,
+        visitTypes:form.value.visitTypes
     }
-    createCheck()
+    patchCheck()
   }
   
   // Submit
@@ -239,7 +233,7 @@
         if (form.value.visitTypes.includes('room')) {
           PatchRoom()
         }
-        else createClientForm()
+        else patchClientInfo()
       }
     })
   }
@@ -262,12 +256,10 @@
       }
     })
   }
-
-  async function createClientForm () {
+  async function patchClientInfo () {
     const datePlus4Days = new Date();
     
     let payloadData = {
-      create_at: new Date().toISOString(),
       update_at: new Date().toISOString(),
       ...form.value
     }
@@ -278,13 +270,13 @@
       datePlus4Days.setDate(datePlus4Days.getDate() + Number(form.value.room.days));
       payloadData = {...payloadData,end_date:datePlus4Days.toISOString()}
     }
-    const {data,error} = await useFetchApi.post('/clients',payloadData)
+    const {data,error} = await useFetchApi.patch(`/clients/${clientInfoId.value}`,payloadData)
     if (!error.value && data.value) {
       generateCheck(data.value.id)
     }
   }
-  async function createCheck () {
-    const {data,error} = await useFetchApi.post('/checks',checkData.value)
+  async function patchCheck () {
+    const {data,error} = await useFetchApi.patch(`/checks/${checkData.value.id}`,checkData.value)
     if (!error.value) {
       viewCheck.value = true;
       useNotifacation.success('Muvaffaqiyatli yaratildi')
@@ -303,12 +295,38 @@
     }
     const {data,error} = await useFetchApi.patch(`/rooms/${form.value.room.roomId}`,{limit,is_full})
     if (!error.value) {
-      createClientForm()
+      patchClientInfo()
+    }
+  }
+
+  async function getCheckByIdClient () {
+    const {data,error} = await useFetchApi.get(`/checks`,{
+        params:{
+            clientId:clientInfoId.value,
+            _expand:'client'
+        }
+    })
+    if (!error.value && data.value && data.value[0]) {
+        console.log(data.value)
+        const resData  = JSON.parse(JSON.stringify(data.value[0]))
+        form.value.first_name = resData?.client?.first_name
+        form.value.last_name = resData?.client?.last_name
+        form.value.middle_name = resData?.client?.middle_name
+        form.value.gender = resData?.client?.gender
+        form.value.visitTypes = resData?.client?.visitTypes
+        form.value.doctorId = resData?.client?.doctorId
+        form.value.medServices = resData?.client?.medServices
+        form.value.labTests = resData?.client?.labTests
+        form.value.phone = resData?.client?.phone
+        form.value.room = resData?.client?.room
+
+        checkData.value = resData
     }
   }
 
   onMounted(() => {
     getDictionary()
+    getCheckByIdClient()
   })
   </script>
   

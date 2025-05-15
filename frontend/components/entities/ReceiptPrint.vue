@@ -87,7 +87,7 @@
     <!-- Кнопка оплаты -->
     <div class="w-full">
       <template v-if="role === 'kassir'">
-        <p v-if="data?.isPaid || data?.is_paid" class="mt-4 text-green-500 text-2xl font-medium text-center">
+        <p v-if="responsePaid || data?.isPaid || data?.is_paid" class="mt-4 text-green-500 text-2xl font-medium text-center">
           To'langan
         </p>
         <button  type="button"
@@ -114,6 +114,7 @@ import printJS from 'print-js'
 const emit = defineEmits(['handleSearch'])
 const { getRole } = useToken();
 const role = getRole()
+const responsePaid = ref(false)
 // Props orqali ma'lumot olish
 const props = defineProps({
   data: {
@@ -130,9 +131,10 @@ const props = defineProps({
 })
 
 async function handlePaid(id) {
-  const { error } = await useFetchApi.patch(`/checks/${id}`, { isPaid:true })
+  const { data,error } = await useFetchApi.patch(`/checks/${id}`, { isPaid:true })
   if (!error.value) {
     emit('handleSearch')
+    responsePaid.value = data.value.isPaid
     printSection()
   }
 }

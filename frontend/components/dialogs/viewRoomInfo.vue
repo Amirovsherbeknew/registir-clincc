@@ -14,7 +14,7 @@
             <div>{{useCurrencyFormat(Number(roomInfo?.pricePerDay))}}</div>
             <div>Binosi:</div>
             <div>{{roomInfo?.building?.name}}</div>
-            <div>Mavjud insonlar soni:</div>
+            <div>Mavjud odamlar soni:</div>
             <div class="font-bold">{{clientsInfo?.length}}</div>
             <div>Qachon to'liq bo'shaydi:</div>
             <div>{{ useLatestEndDate(clientsInfo) }}</div>
@@ -23,7 +23,7 @@
         </div>
         
         <div class="my-[10px] pt-[5px] font-semibold text-[18px] text-stone-500 border-t-[1px] border-strone-500">
-            Xonadagi mavjud insonlar ro'yxati:
+            Xonadagi mavjud odamlar ro'yxati:
         </div>
        <el-table :data="clientsInfo || []" border>
         <el-table-column label="FIO">
@@ -36,7 +36,11 @@
                 <b>{{scope.row?.room?.days}}</b> 
             </template>
         </el-table-column>
-        <el-table-column prop="phone" label="Telefon "/>
+        <el-table-column label="Qachon chiqadi">
+            <template #default="scope">
+                <div>{{useDateFormat(scope.row?.end_date)}}</div> 
+            </template>
+        </el-table-column>
        </el-table>
     </el-dialog>
 </template>

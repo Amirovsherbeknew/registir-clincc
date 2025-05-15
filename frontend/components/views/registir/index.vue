@@ -30,8 +30,9 @@
       </el-table-column>
       <el-table-column label="Harakat" width="150" align="center">
           <template #default="scope">
-              <div class="flex-center">
+              <div class="flex-center gap-[10px]">
                 <ActionButton :disabled="!scope.row?.visitTypes?.includes('room')" type="show" tooltip_title="Xona haqida malumot" @click="handleOpenRoomInfoDialog(scope.row?.roomId)"/>
+                <ActionButton type="edit" @click="handleOpenClientInfo(scope.row?.id)"/>
               </div>
           </template>
       </el-table-column>
@@ -48,6 +49,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+
+const router = useRouter()
 
 const tableData = ref([])
 const dialogVisibly = ref(false)
@@ -71,8 +74,16 @@ function handleOpenRoomInfoDialog (val) {
     dialogVisibly.value = true
 }
 
+function handleOpenClientInfo (val) {
+  router.push({
+    path:'/client-info-change',
+    query:{
+      clientInfoId:val
+    }
+  })
+}
+
 async function getRegistirClients(query) {
-  console.log(query)
   const { data, error } = await useFetchApi.get('/clients',{
     params:useClean(query || filter.value)
   })

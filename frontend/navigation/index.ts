@@ -72,8 +72,8 @@ export const navigationList = [
     {
         title:"",
         show:false,
-        path:'/replace-payment',
+        path:'/client-info-change',
         icon:'IconsListUserView',
-        permisionList:['super_admin','kassir']
+        permisionList:['super_admin','operator']
     }
 ]
