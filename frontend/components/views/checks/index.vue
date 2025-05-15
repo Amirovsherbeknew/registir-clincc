@@ -67,6 +67,8 @@ const filter = ref<TFilterCheck>({
     _page:1,
     _limit:10,
     dateRange:[],
+    _order:'desc',
+    _sort:'create_at',
     visitTypes_like:undefined
 })
 

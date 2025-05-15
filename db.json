@@ -132,8 +132,8 @@
       "people_per_room": 10,
       "pricePerDay": "20000",
       "buildingId": 84900,
-      "limit": 10,
-      "is_full": true
+      "limit": 13,
+      "is_full": false
     },
     {
       "id": 2,
@@ -144,7 +144,7 @@
       "pricePerDay": "120000",
       "buildingId": 84900,
       "is_full": false,
-      "limit": 1
+      "limit": 4
     },
     {
       "id": 3,
@@ -194,7 +194,8 @@
       "pricePerDay": "1222",
       "buildingId": 60393,
       "id": 26952,
-      "is_full": false
+      "is_full": false,
+      "limit": 2
     }
   ],
   "labTests": [
@@ -244,7 +245,7 @@
   "clients": [
     {
       "create_at": "2025-05-15T11:05:19.008Z",
-      "update_at": "2025-05-15T11:08:06.952Z",
+      "update_at": "2025-05-15T16:57:11.379Z",
       "last_name": "test 1",
       "first_name": "test 1",
       "middle_name": "test 1",
@@ -260,12 +261,12 @@
       ],
       "room": {
         "roomId": 1,
-        "days": 4
+        "days": 8
       },
       "labTests": [],
       "doctorId": 1,
       "roomId": 1,
-      "end_date": "2025-05-19T11:08:06.952Z",
+      "end_date": "2025-05-23T16:57:11.379Z",
       "id": 36285
     },
     {
@@ -339,15 +340,173 @@
       "roomId": 2,
       "end_date": "2025-05-20T11:56:25.267Z",
       "id": 59885
+    },
+    {
+      "create_at": "2025-05-15T16:43:10.196Z",
+      "update_at": "2025-05-15T16:45:07.404Z",
+      "last_name": "sadadasd",
+      "first_name": "asd",
+      "middle_name": "",
+      "phone": "+998 33 333 33 33",
+      "gender": "m",
+      "visitTypes": [
+        "room"
+      ],
+      "medServices": [],
+      "room": {
+        "roomId": 26952,
+        "days": 3
+      },
+      "labTests": [],
+      "doctorId": 3,
+      "roomId": 26952,
+      "end_date": "2025-05-18T16:45:07.404Z",
+      "id": 82621
+    },
+    {
+      "create_at": "2025-05-15T16:58:59.638Z",
+      "update_at": "2025-05-15T16:58:59.638Z",
+      "last_name": "123qwe",
+      "first_name": "123qwe",
+      "middle_name": "",
+      "phone": "+998 33 333 33 33",
+      "gender": "m",
+      "visitTypes": [
+        "lab"
+      ],
+      "medServices": [],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [
+        53003
+      ],
+      "id": 39734
+    },
+    {
+      "create_at": "2025-05-15T17:04:31.479Z",
+      "update_at": "2025-05-15T17:04:31.479Z",
+      "last_name": "sadsadasd123",
+      "first_name": "sadsadasd123",
+      "middle_name": "",
+      "phone": "+998 33 333 33 33",
+      "gender": "m",
+      "visitTypes": [
+        "lab",
+        "room"
+      ],
+      "medServices": [],
+      "room": {
+        "roomId": 2,
+        "days": 1
+      },
+      "labTests": [
+        53003
+      ],
+      "doctorId": 1,
+      "roomId": 2,
+      "end_date": "2025-05-16T17:04:31.479Z",
+      "id": 98905
+    },
+    {
+      "create_at": "2025-05-15T17:10:30.442Z",
+      "update_at": "2025-05-15T17:10:30.442Z",
+      "last_name": "asdsadada",
+      "first_name": "asd",
+      "middle_name": "",
+      "phone": "+998 23 423 42 34",
+      "gender": "f",
+      "visitTypes": [
+        "room",
+        "lab"
+      ],
+      "medServices": [],
+      "room": {
+        "roomId": 2,
+        "days": 3
+      },
+      "labTests": [
+        53003
+      ],
+      "doctorId": 3,
+      "roomId": 2,
+      "end_date": "2025-05-18T17:10:30.442Z",
+      "id": 57040
+    },
+    {
+      "create_at": "2025-05-15T17:16:45.816Z",
+      "update_at": "2025-05-15T17:16:45.816Z",
+      "last_name": "aslk;dd",
+      "first_name": "asdasda",
+      "middle_name": "asd",
+      "phone": "+998 33 322 34 23",
+      "gender": "m",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        16389
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 3,
+      "id": 32310
+    },
+    {
+      "create_at": "2025-05-15T17:17:25.435Z",
+      "update_at": "2025-05-15T17:17:25.435Z",
+      "last_name": "asd",
+      "first_name": "w",
+      "middle_name": "",
+      "phone": "+998 33 333 32 34",
+      "gender": "m",
+      "visitTypes": [
+        "room"
+      ],
+      "medServices": [],
+      "room": {
+        "roomId": 2,
+        "days": 4
+      },
+      "labTests": [],
+      "doctorId": 1,
+      "roomId": 2,
+      "end_date": "2025-05-19T17:17:25.435Z",
+      "id": 49319
+    },
+    {
+      "create_at": "2025-05-15T17:18:38.991Z",
+      "update_at": "2025-05-15T17:18:38.991Z",
+      "last_name": "www",
+      "first_name": "ww",
+      "middle_name": "",
+      "phone": "+998 33 453 45 34",
+      "gender": "m",
+      "visitTypes": [
+        "lab"
+      ],
+      "medServices": [],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [
+        53003
+      ],
+      "id": 79707
     }
   ],
   "checks": [
     {
       "clientId": 36285,
       "create_at": "2025-05-15T11:05:19.035Z",
-      "update_at": "2025-05-15T11:08:06.968Z",
-      "totalPrice": 135000,
-      "isPaid": true,
+      "update_at": "2025-05-15T16:57:11.432Z",
+      "totalPrice": 215000,
+      "isPaid": false,
       "medServices": [
         45734,
         16389
@@ -416,6 +575,123 @@
         "room"
       ],
       "id": 52824
+    },
+    {
+      "clientId": 82621,
+      "create_at": "2025-05-15T16:43:10.241Z",
+      "update_at": "2025-05-15T16:45:07.437Z",
+      "totalPrice": 3666,
+      "isPaid": false,
+      "medServices": [],
+      "labTests": [],
+      "doctorId": 3,
+      "roomId": 26952,
+      "visitTypes": [
+        "room"
+      ],
+      "id": 41676
+    },
+    {
+      "clientId": 39734,
+      "create_at": "2025-05-15T16:58:59.674Z",
+      "update_at": "2025-05-15T16:58:59.674Z",
+      "totalPrice": 20000,
+      "isPaid": false,
+      "medServices": [],
+      "labTests": [
+        53003
+      ],
+      "doctorId": null,
+      "roomId": null,
+      "visitTypes": [
+        "lab"
+      ],
+      "id": 75853
+    },
+    {
+      "clientId": 98905,
+      "create_at": "2025-05-15T17:04:31.543Z",
+      "update_at": "2025-05-15T17:04:31.543Z",
+      "totalPrice": 140000,
+      "isPaid": false,
+      "medServices": [],
+      "labTests": [
+        53003
+      ],
+      "doctorId": 1,
+      "roomId": 2,
+      "visitTypes": [
+        "lab",
+        "room"
+      ],
+      "id": 41408
+    },
+    {
+      "clientId": 57040,
+      "create_at": "2025-05-15T17:10:30.474Z",
+      "update_at": "2025-05-15T17:10:30.474Z",
+      "totalPrice": 380000,
+      "isPaid": false,
+      "medServices": [],
+      "labTests": [
+        53003
+      ],
+      "doctorId": 3,
+      "roomId": 2,
+      "visitTypes": [
+        "room",
+        "lab"
+      ],
+      "id": 40917
+    },
+    {
+      "clientId": 32310,
+      "create_at": "2025-05-15T17:16:45.862Z",
+      "update_at": "2025-05-15T17:16:45.862Z",
+      "totalPrice": 35000,
+      "isPaid": false,
+      "medServices": [
+        16389
+      ],
+      "labTests": [],
+      "doctorId": 3,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "id": 91168
+    },
+    {
+      "clientId": 49319,
+      "create_at": "2025-05-15T17:17:25.468Z",
+      "update_at": "2025-05-15T17:17:25.468Z",
+      "totalPrice": 480000,
+      "isPaid": false,
+      "medServices": [],
+      "labTests": [],
+      "doctorId": 1,
+      "roomId": 2,
+      "visitTypes": [
+        "room"
+      ],
+      "id": 99549
+    },
+    {
+      "clientId": 79707,
+      "create_at": "2025-05-15T17:18:39.036Z",
+      "update_at": "2025-05-15T17:18:39.036Z",
+      "totalPrice": 20000,
+      "isPaid": false,
+      "medServices": [],
+      "labTests": [
+        53003
+      ],
+      "doctorId": null,
+      "roomId": null,
+      "visitTypes": [
+        "lab"
+      ],
+      "id": 93691
     }
   ]
 }

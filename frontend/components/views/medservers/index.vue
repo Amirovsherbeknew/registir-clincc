@@ -45,7 +45,12 @@ function handleEditOpenDialog (val:medServices) {
     selected.value = val;
 }
 async function getMedservers () {
-  const {data,error} = await useFetchApi.get<medServices[]>('/medServices');
+  const {data,error} = await useFetchApi.get<medServices[]>('/medServices',{
+    params:{    
+        _order:'desc',
+        _sort:'create_at',
+    }
+  });
   if (!error.value && data.value) {
     const idList = data.value.map((resp:medServices) => Number(resp.id))
     newId.value = idList.length > 0 ? Math.max(...idList) + 1:1;

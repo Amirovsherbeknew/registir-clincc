@@ -134,7 +134,7 @@
   
   <script setup>
   import { ref, onMounted } from 'vue'
-  
+  const router = useRouter()
   const createform = ref(null)
   const viewCheck = ref(false)
   const dictionary = ref({
@@ -286,6 +286,7 @@
   async function createCheck () {
     const {data,error} = await useFetchApi.post('/checks',checkData.value)
     if (!error.value) {
+      checkData.value = {...checkData.value,id:data.value?.id}
       viewCheck.value = true;
       useNotifacation.success('Muvaffaqiyatli yaratildi')
     }
@@ -300,6 +301,10 @@
     }
     if (limit === Number(findRoomId.people_per_room)) {
       is_full = true
+    }
+    if (limit > Number(findRoomId.people_per_room)) {
+      useNotifacation.error('Xatolik','Xonada bo\'sh joy qolmadi')
+      return
     }
     const {data,error} = await useFetchApi.patch(`/rooms/${form.value.room.roomId}`,{limit,is_full})
     if (!error.value) {

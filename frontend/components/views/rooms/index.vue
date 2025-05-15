@@ -58,6 +58,8 @@ const filter = ref<TFilterRoom>({
     _page:1,
     _limit:10,
     name:'',
+    _order:'desc',
+    _sort:'create_at',
     buildingId:undefined,
     _expand:"building"
 })

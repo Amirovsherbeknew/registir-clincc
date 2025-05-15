@@ -45,7 +45,12 @@ function handleEditOpenDialog (val:labTests) {
     selected.value = val;
 }
 async function getLabTest () {
-  const {data,error} = await useFetchApi.get<labTests[]>('/labTests');
+  const {data,error} = await useFetchApi.get<labTests[]>('/labTests',{
+    params:{        
+        _order:'desc',
+        _sort:'create_at',
+    }
+  });
   if (!error.value && data.value) {
     const idList = data.value?.map((resp:labTests) => Number(resp.id)) 
     newId.value = idList.length > 0 ? Math.max(...idList) + 1:1;

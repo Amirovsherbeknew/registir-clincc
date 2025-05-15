@@ -8,6 +8,12 @@
         <div class="flex gap-[10px]">
           <div class="flex gap-4">
             <div>
+              <el-select v-model="filter.isPaid" class="min-w-[270px]" placeholder="Holati">
+                  <el-option :value="true" label="To'langan"></el-option>
+                  <el-option :value="false" label="To'lanmagan"></el-option>
+              </el-select>
+            </div>
+            <div>
               <el-select
                 v-model="filter.visitTypes_like"
                 placeholder="Xizmat turini tanlang"
@@ -109,7 +115,7 @@
             v-model="filter._page"
             :pageSize="filter._limit"
             :total="tableData?.pagination?.total || 0"
-            @change="getRegistirClients"
+            @change="handlePagenation"
         />
       </el-card>
   
@@ -141,8 +147,11 @@
 
   const filter = ref({
     _expand:'client',
+    _order:'desc',
+    _sort:'create_at',
     _page:1,
     _limit:10,
+    isPaid:true,
     visitTypes_like:'',
     roomId:undefined,
     doctorId:undefined,
@@ -159,6 +168,11 @@
     getStatics()
   })
 
+  function handlePagenation () {
+    getList()
+    getStatics()
+  }
+
   function handleSearch () {
     filter.value._page = 1
     filter.value._limit = 10
@@ -171,6 +185,7 @@
       _expand:'client',
       _page:1,
       _limit:10,
+      isPaid:true,
       visitTypes_like:'',
       roomId:undefined,
       doctorId:undefined,

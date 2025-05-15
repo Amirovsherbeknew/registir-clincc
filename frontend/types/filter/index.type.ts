@@ -26,6 +26,8 @@ export interface TFilterCheck {
     dateRange:string[]
     _page:number,
     _limit:number,
+    _order?:string,
+    _sort?:string,
     visitTypes_like?:string
 }
 
@@ -33,6 +35,9 @@ export interface TFilterReplacePayment {
     name:string,
     _limit:number,
     _page:number
+    isPaid?:boolean,
+    _order?:string,
+    _sort?:string,
     id?:number,
     phone:string,
     dateRange:string[]

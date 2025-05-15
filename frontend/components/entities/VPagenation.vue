@@ -18,11 +18,7 @@
     total: number
   }>()
   
-  const emit = defineEmits<{
-    (e: 'update:modelValue', value: number): void
-    (e: 'change', value: number): void
-  }>()
-  
+  const emit = defineEmits(['update:modelValue','change'])
   const internalPage = ref(props.modelValue)
   
   watch(() => props.modelValue, (val) => {
@@ -32,7 +28,7 @@
   function onPageChange(page: number) {
     internalPage.value = page
     emit('update:modelValue', page) // v-model uchun
-    emit('change', page)            // optional, qo‘shimcha ishlatish uchun
+    emit('change')            // optional, qo‘shimcha ishlatish uchun
   }
   </script>
   

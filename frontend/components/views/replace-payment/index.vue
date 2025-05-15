@@ -2,8 +2,8 @@
     <Card>
         <div class="flex gap-[10px] mb-[20px] justify-between">
             <VTitle title="Checklar ro'yxati"/>
-            <el-input class="max-w-[250px]" :value="filter.search" @input="handleSearch" placeholder="check raqami bo'yicha qidiruv"/>
         </div>
+        <FiltersReplacePayment v-model="filter" @search="GetCheckList"/>
         <div class="w-full">
             <el-table :data="tableData?.data" style="width: 100%" border>
             <el-table-column prop="id" label="Check raqami" width="150"  align="center"/>
@@ -72,8 +72,11 @@ const filter = ref<TFilterReplacePayment>({
     _limit:10,
     name:'',
     phone:'',
+    isPaid:true,
     dateRange:[],
     id:undefined,
+    _order:'desc',
+    _sort:'create_at',
     _expand:"client"
 })
 
@@ -109,7 +112,7 @@ async function handleSearch () {
     }
 }
 
-async function GetCheckList (query?:TFilterReplacePayment|number) {
+async function GetCheckList (query?:TFilterReplacePayment) {
     const {data,error} = await useFetchApi.get('/checks',{
         params:useClean(query || filter.value)
     })

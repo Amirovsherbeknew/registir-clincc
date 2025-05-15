@@ -7,7 +7,12 @@
             placeholder="Sanani tanlang"
             class="max-w-[270px]"
         />
-        <el-input  v-model="filter.name" placeholder="Check raqam bo'yicha qidiruv" class="max-w-[270px]"/>
+        <el-select v-model="filter.isPaid" class="max-w-[270px]" placeholder="Holati">
+            <el-option :value="true" label="To'langan"></el-option>
+            <el-option :value="false" label="To'lanmagan"></el-option>
+        </el-select>
+        <el-input  v-model="filter.id" placeholder="Check raqam bo'yicha qidiruv" class="max-w-[270px]"/>
+        <el-input  v-model="filter.phone" placeholder="Telefon raqam" class="max-w-[270px]"/>
         <ActionButton type="search" @click="handleSearch"/>
         <ActionButton type="clear" @click="handleClear"/>
     </div>
@@ -24,20 +29,33 @@ const filter = defineModel<TFilterReplacePayment>({
     default:{
         _page:1,
         _limit:10,
-        name:'',
+        id:'',
+        isPaid:true,
         buildingId:undefined,
         _expand:"client"
     }
-})
-
-onMounted(() => {
-    getBuildingList()
 })
 
 function handleSearch () {
     if (filter.value) {
         filter.value._page = 1
         filter.value._limit = 10
+        if (filter.value.dateRange?.length === 2) {
+            const [startDate, endDate] = filter.value.dateRange
+
+            const isoStart = new Date(startDate).toISOString()
+            const isoEnd = new Date(endDate).toISOString()
+            const query_filter = JSON.parse(JSON.stringify({
+                ...filter.value,
+                create_at_gte: isoStart,
+                create_at_lte: isoEnd,
+            }))
+            
+            delete query_filter.dateRange
+
+            emit('search', query_filter)
+            return
+        }
         emit('search')
     }
 }
@@ -55,10 +73,4 @@ function handleClear () {
     emit('search')
 }
 
-async function getBuildingList () {
-    const {data,error} = await useFetchApi.get<TBuildings[]>('/buildings')
-    if (!error.value && data.value) {
-        buildingList.value = data.value
-    }
-}
 </script>

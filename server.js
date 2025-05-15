@@ -7,7 +7,7 @@ const url = require('url');
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // yoki faqat frontend domeni
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   if (['POST', 'PUT'].includes(req.method)) {
     if (!req.body.id) {
@@ -41,6 +41,12 @@ server.get('/checks/total', (req, res) => {
   //   const isPaid = queryParams.isPaid === 'true';
   //   filtered = filtered.filter(check => check.isPaid === isPaid);
   // }
+  // isPaid
+
+  if (queryParams.isPaid !== undefined) {
+    const isPaid = queryParams.isPaid === 'true'; // stringni aniq tekshirib olamiz
+    filtered = filtered.filter(check => check.isPaid === isPaid);
+  }
 
   // Qo‘shimcha filterlar: doctorId, roomId va boshqalar
   if (queryParams.doctorId) {

@@ -60,7 +60,9 @@ const newId = ref<number|null>();
 const selected = ref<doctors>()
 const filters = ref({
     _page:1,
-    _limit:10
+    _limit:10,
+    _order:'desc',
+    _sort:'create_at',
 })
 onMounted(() => {
     getDoctorsList()

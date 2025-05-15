@@ -58,6 +58,8 @@ const roomId = ref(null)
 const filter = ref({
     _page:1,
     _limit:10,
+    _order:'desc',
+    _sort:'create_at',
     dateRange:[],
     gender:'',
     last_name:"",

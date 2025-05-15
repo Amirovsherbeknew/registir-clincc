@@ -66,7 +66,7 @@
         if (props.selected) {
           PatchMedServers()
         }
-        else alert('3'); CreateMedServers()
+        else  CreateMedServers()
       }
     })
   }

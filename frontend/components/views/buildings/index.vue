@@ -43,7 +43,9 @@ const dialogVisibly = ref(false);
 const tableData = ref();
 const filter = ref({
     _page:1,
-    _limit:10
+    _limit:10,
+    _order:'desc',
+    _sort:'create_at',
 })
 
 onMounted(() => {

@@ -135,6 +135,7 @@
   <script setup>
   import { ref, onMounted } from 'vue'
   const route = useRoute();
+  const router = useRouter();
   const checkByClientInfo = ref()
   const createform = ref(null)
   const viewCheck = ref(false)
@@ -160,6 +161,16 @@
     labTests: [],
     doctorId:undefined
   })
+
+  watch(
+    () => viewCheck.value,
+    (val) => {
+      if (!val) {
+        router.push('/registir')
+      }
+    }
+  )
+
   const clientInfo = computed(() => {
     return {
       ...form.value,
@@ -230,10 +241,7 @@
     if (!createform.value) return
     createform.value.validate(valid => {
       if (valid) {
-        if (form.value.visitTypes.includes('room')) {
-          PatchRoom()
-        }
-        else patchClientInfo()
+        patchClientInfo()
       }
     })
   }
@@ -242,7 +250,7 @@
   async function getDictionary() {
     const apiList = [
       { key: 'medServices', endpoint: '/medServices' },
-      { key: 'rooms', endpoint: '/rooms?is_full=false' },
+      { key: 'rooms', endpoint: '/rooms' },
       { key: 'labTests', endpoint: '/labTests' },
       { key: 'doctor', endpoint: '/doctors' }
     ]
