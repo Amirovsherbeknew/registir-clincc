@@ -6,11 +6,10 @@
       <!-- Filter Section -->
       <el-card shadow="hover" class="mb-6">
         <div class="flex gap-[10px]">
-          <div class="flex gap-4">
+          <div class="flex gap-4 flex-wrap">
             <div>
-              <el-select v-model="filter.isPaid" class="min-w-[270px]" placeholder="Holati">
-                  <el-option :value="true" label="To'langan"></el-option>
-                  <el-option :value="false" label="To'lanmagan"></el-option>
+              <el-select v-model="filter.status" class="min-w-[230px]" placeholder="Holati">
+                  <el-option v-for="(item,idx) in useConstant().statusList()" :key="idx" :value="item.value" :label="item.label"></el-option>
               </el-select>
             </div>
             <div>
@@ -18,7 +17,7 @@
                 v-model="filter.visitTypes_like"
                 placeholder="Xizmat turini tanlang"
                 clearable
-                class="min-w-[250px]"
+                class="min-w-[200px]"
               >
                 <el-option
                   v-for="(service,idx) in useConstant().visitType()"
@@ -33,7 +32,7 @@
                 v-model="filter.roomId"
                 placeholder="Xonani tanlang"
                 clearable
-                class="min-w-[250px]"
+                class="min-w-[200px]"
               >
                 <el-option
                   v-for="(service,idx) in dictionary?.rooms"
@@ -48,7 +47,7 @@
                 v-model="filter.doctorId"
                 placeholder="Shifokorni tanlang"
                 clearable
-                class="min-w-[250px]"
+                class="min-w-[200px]"
               >
                 <el-option
                   v-for="(doctor,idx) in dictionary?.doctor"
@@ -65,11 +64,11 @@
               placeholder="Sanani tanlang"
               format="DD-MM-YYYY"
               value-format="YYYY-MM-DD"
-              class="w-full"
+              class="max-w-[240px]"
             />
           </div>
           </div>
-          <div class="flex items-end gap-[10px]">
+          <div class="flex items-end gap-[10px] flex-1">
             <ActionButton type="search" @click="handleSearch"/>
             <ActionButton type="clear" @click="handleClear"/>
           </div>
@@ -93,6 +92,11 @@
               {{ useDateFormat(scope.row.create_at) }}
             </template>
           </el-table-column>
+           <el-table-column label="Holati" >
+            <template #default="scope">
+              <TableStatus :type="scope.row.status"/>
+            </template>
+          </el-table-column>
           <el-table-column label="Xizmat ko'rsatilgan narx">
             <template #default="scope">
               {{ useCurrencyFormat(scope.row?.totalPrice) }}
@@ -100,7 +104,7 @@
           </el-table-column>
           <el-table-column label="Ko'rsatilgan xizmatlar">
             <template #default="scope">
-              <div v-for="(item,idx) in scope.row.visitTypes" :key="`visit_type_${idx}`">{{ useConstant().visitType(item)?.label }}</div>
+              <div v-for="(item,idx) in scope.row.visitTypes" :key="`visit_type_${idx}`" :class="useConstant().visitType(item).value === visitType ? 'font-bold':''">{{ useConstant().visitType(item)?.label }}</div>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="Harakat" width="150" align="center">
@@ -138,6 +142,7 @@
   const dialogVisibly = ref(false)
   const tableData = ref()
   const roomId = ref(null)
+  const visitType = ref()
   const dictionary = ref({
     medServices: [],
     rooms: [],
@@ -151,7 +156,7 @@
     _sort:'create_at',
     _page:1,
     _limit:10,
-    isPaid:true,
+    status:'approved',
     visitTypes_like:'',
     roomId:undefined,
     doctorId:undefined,
@@ -176,8 +181,10 @@
   function handleSearch () {
     filter.value._page = 1
     filter.value._limit = 10
+    visitType.value = filter.value.visitTypes_like
     getList()
     getStatics()
+    getReports()
   }
 
   function handleClear () {
@@ -185,12 +192,13 @@
       _expand:'client',
       _page:1,
       _limit:10,
-      isPaid:undefined,
+      status:undefined,
       visitTypes_like:'',
       roomId:undefined,
       doctorId:undefined,
       medServices:undefined
     }
+    visitType.value = undefined
     selectedDate.value = undefined
     getList()
     getStatics()
@@ -202,7 +210,7 @@
   }
 
   async function getList () {
-    const {data,error} = await useFetchApi.get(`/checks`,{
+    const {data,error} = await useFetchApi.get(`/reports`,{
       params:useClean({
         create_at_gte:useDateToISOString(selectedDate.value?.[0]),
         create_at_lte:useDateToISOString(selectedDate.value?.[1],{ endOfDay: true }),
@@ -247,6 +255,7 @@
       }
     }
   }
+
   </script>
   
   <style scoped>

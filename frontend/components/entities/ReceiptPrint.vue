@@ -77,6 +77,13 @@
       </table>
 
       <hr>
+      <table class="w-full mt-4 mb-2" v-if="data?.part_pay_price">
+        <tr>
+          <td class="font-bold text-xl w-1/3">Qolgan summa:</td>
+          <td class="text-right text-xl">{{ useCurrencyFormat(data?.totalPrice - (data?.part_pay_price?.reduce((sum,item) => sum + Number(item.price),0) || 0))}}</td>
+        </tr>
+      </table>
+      <hr>
       <table class="w-full mt-4">
         <tr>
           <td class="font-bold text-xl w-1/3">Jami:</td>
@@ -86,28 +93,30 @@
     </div>
     <!-- Кнопка оплаты -->
     <div class="w-full">
-      <el-form :model="form" :rules="useRules('part_pay_price')">
+      <el-form v-if="role === 'kassir'" :model="form" :rules="useRules('part_pay_price')" ref="formRef">
         <el-form-item label="To'lov turi:">
           <el-select v-model="paymentType" placeholder="To'lov turi">
             <el-option label="To'liq to'lov" value="all"></el-option>
             <el-option label="Qisman to'lov" value="part"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="Miqdori:" prop="part_pay_price">
-          <el-input v-model="form.part_pay_price" placeholder=""/>
+        <el-form-item label="Miqdori:" prop="part_pay_price"  v-if="paymentType === 'part'">
+          <el-input v-model="form.part_pay_price" placeholder="Miqdori:" v-mask="'###################'"/>
         </el-form-item>
         <el-form-item>
           <template v-if="role === 'kassir'">
-            <p v-if="responsePaid || data?.isPaid || data?.is_paid" class="mt-4 text-green-500 text-2xl font-medium text-center">
-              To'langan
-            </p>
-            <button  type="button"
-              v-else
-              @click="handlePaid(data.id)"
-              class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
-            >
-              To'lash
-            </button>
+            <div class="w-full flex-center">
+              <p v-if="responsePaid || data?.isPaid || data?.is_paid" class="mt-4 text-green-500 text-2xl font-medium text-center">
+                To'langan
+              </p>
+              <button  type="button"
+                v-else
+                @click="handlePaid(data.id)"
+                class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+              >
+                To'lash
+              </button>
+            </div>
           </template>
         </el-form-item>
       </el-form>
@@ -124,6 +133,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import printJS from 'print-js'
 const emit = defineEmits(['handleSearch'])
 const { getRole } = useToken();
@@ -142,23 +152,74 @@ const props = defineProps({
     })
   }
 })
-
+const formRef = ref()
 const role = getRole()
 const responsePaid = ref(false)
-const paymentType = ref(false)
+const paymentType = ref('all')
+const dialogVisible = defineModel()
 
 const form = ref({
   part_pay_price:undefined
 })
 
-async function handlePaid(id) {
-  const 
-  const { data,error } = await useFetchApi.patch(`/checks/${id}`, { isPaid:true })
-  if (!error.value) {
-    emit('handleSearch')
-    responsePaid.value = data.value.isPaid
-    printSection()
+function validateCheck() {
+  const existingPayments = props.data?.part_pay_price ?? [];
+  const newPayment = Number(form.value.part_pay_price) || 0;
+  const totalPaid = existingPayments.reduce((sum, item) => sum + Number(item.price || 0), 0);
+
+  // Prevent overpayment
+  if (newPayment + totalPaid > Number(props.data?.totalPrice ?? 0)) {
+    return false;
   }
+
+  const paymentDate = new Date().toISOString();
+
+  if (paymentType.value === 'all' && !props.data?.part_pay_price) {
+    return { 
+      isPaid: true,
+      status:'approved'
+    };
+  }
+  
+  if (paymentType.value === 'all' && props.data?.part_pay_price) {
+    return { 
+        isPaid: true,
+        status:'approved',
+        part_pay_price:[...existingPayments,{
+          create_at:new Date().toISOString(),
+          price:Number(props.data.totalPrice) - Number(totalPaid)
+        }]
+    }
+  }
+
+  if (paymentType.value === 'part') {
+    const updatedPayments = [...existingPayments, { create_at: paymentDate, price: newPayment }];
+    return { 
+      status:'part_payment',
+      part_pay_price: updatedPayments 
+    };
+  }
+
+  // Optional: return null or undefined if paymentType doesn't match expected values
+  return null;
+}
+
+async function handlePaid(id) {
+  if (!formRef.value) return 
+  formRef.value.validate(async (resp) => {
+    if (resp) {
+      if (!validateCheck()) {
+        useNotifacation.error('Xatolik','Kiritilgan miqdor qolgan miqdordan ko\'proq')
+      }
+      const { data,error } = await useFetchApi.patch(`/checks/${id}`, validateCheck())
+      if (!error.value) {
+        emit('handleSearch')
+        responsePaid.value = data.value.isPaid
+          printSection()
+          dialogVisible.value = false
+      }
+    }
+  }) 
 }
 
 const printSection = () => {

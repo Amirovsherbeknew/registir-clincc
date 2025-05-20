@@ -1,4 +1,4 @@
-import { genderList,visitTypeList } from "~/constants"
+import { genderList,visitTypeList,StatusList } from "~/constants"
 export const useConstant = () => {
     function gender (value?:string) {
         if (value) {
@@ -12,5 +12,8 @@ export const useConstant = () => {
         }
         return visitTypeList
     }
-    return {gender,visitType}
+    function statusList () {
+        return StatusList
+    }
+    return {gender,visitType,statusList}
 }

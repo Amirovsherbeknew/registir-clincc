@@ -26,3 +26,22 @@ export const visitTypeList = [
         label:"Laboratoriya"
     }
 ]
+
+export const StatusList = [
+    {
+        value:'part_payment',
+        label:"Qisman to'langan"
+    },
+    {
+        value:'approved',
+        label:"To'langan"
+    },
+    {
+        value:'pending',
+        label:"To'lov kutilmoqda"
+    },
+    {
+        value:'cancel_payment',
+        label:"To'lov qaytarilgan"
+    }
+]

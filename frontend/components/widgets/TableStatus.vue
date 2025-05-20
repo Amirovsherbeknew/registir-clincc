@@ -80,6 +80,11 @@ const statusTypes = {
     label: "Jarayonda",
     class: "bg-orange-50 text-amber-600"
   },
+  part_payment: {
+    icon: "reload",
+    label: "Qisman to'langan",
+    class: "bg-orange-50 text-amber-600"
+  },
   rejected: {
     icon: "remove-circle",
     label: "Rad etilgan",

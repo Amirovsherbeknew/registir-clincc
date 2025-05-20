@@ -31,21 +31,12 @@ server.use((req, res, next) => {
 server.get('/checks/total', (req, res) => {
   const db = router.db; // lowdb instance
   const checks = db.get('checks').value();
-
   const queryParams = url.parse(req.url, true).query;
 
   let filtered = checks;
 
-  // // Misol uchun isPaid filter
-  // if (queryParams.isPaid !== undefined) {
-  //   const isPaid = queryParams.isPaid === 'true';
-  //   filtered = filtered.filter(check => check.isPaid === isPaid);
-  // }
-  // isPaid
-
-  if (queryParams.isPaid !== undefined) {
-    const isPaid = queryParams.isPaid === 'true'; // stringni aniq tekshirib olamiz
-    filtered = filtered.filter(check => check.isPaid === isPaid);
+  if (queryParams.status) {
+    filtered = filtered.filter(check => check.status === queryParams.status);
   }
 
   // Qo‘shimcha filterlar: doctorId, roomId va boshqalar
@@ -83,11 +74,101 @@ server.get('/checks/total', (req, res) => {
     filtered = filtered.filter(check => new Date(check.create_at) <= toDate);
   }
 
-  const total = filtered.reduce((sum, check) => sum + (check.totalPrice || 0), 0);
-
+  let total = filtered.reduce((sum, check) => sum + (check.totalPrice || 0), 0);
+  if (queryParams['visitTypes_like']) {
+    filtered = filtered.map(check => {
+      return {...check,totalPrice:check[queryParams['visitTypes_like']]}
+    })
+    total = filtered.reduce((sum, check) => sum + (check.totalPrice || 0), 0);
+  }
   res.json({ total });
 });
 
+server.get('/reports', (req, res) => {
+  const db = router.db; // lowdb instance
+  const checks = db.get('checks').value();
+  const clients = db.get('clients').value()
+  const queryParams = url.parse(req.url, true).query;
+
+  let Reportfiltered = checks;
+
+  // // Misol uchun isPaid filter
+  // if (queryParams.isPaid !== undefined) {
+  //   const isPaid = queryParams.isPaid === 'true';
+  //   filtered = filtered.filter(check => check.isPaid === isPaid);
+  // }
+  // isPaid
+
+  if (queryParams.status) {
+    Reportfiltered = Reportfiltered.filter(check => check.status === queryParams.status);
+  }
+
+  // Qo‘shimcha filterlar: doctorId, roomId va boshqalar
+  if (queryParams.doctorId) {
+    Reportfiltered = Reportfiltered.filter(check => String(check.doctorId) === queryParams.doctorId);
+  }
+
+  if (queryParams.roomId) {
+    Reportfiltered = Reportfiltered.filter(check => String(check.roomId) === queryParams.roomId);
+  }
+
+  if (queryParams['visitTypes_like']) {
+    // queryParams['visitTypes_like'] ko‘pincha string bo‘ladi, 
+    // agar array bo‘lishi ehtimoli bo‘lsa, shuni ham hisobga olish mumkin:
+    const visitTypeLikes = Array.isArray(queryParams['visitTypes_like'])
+      ? queryParams['visitTypes_like']
+      : [queryParams['visitTypes_like']];
+
+    Reportfiltered = Reportfiltered.filter(check =>
+      // Har bir _like qiymat uchun visitTypes massivida shu substring mavjudmi:
+      visitTypeLikes.every(likeVal =>
+        check.visitTypes.some(vt => vt.includes(likeVal))
+      )
+    );
+  }
+
+  // Date filtering: create_at_gte va create_at_lte
+  if (queryParams.create_at_gte) {
+    const fromDate = new Date(queryParams.create_at_gte);
+    Reportfiltered = Reportfiltered.filter(check => new Date(check.create_at) >= fromDate);
+  }
+
+  if (queryParams.create_at_lte) {
+    const toDate = new Date(queryParams.create_at_lte);
+    Reportfiltered = Reportfiltered.filter(check => new Date(check.create_at) <= toDate);
+  }
+  if (queryParams['visitTypes_like']) {
+    Reportfiltered = Reportfiltered.map(check => {
+      return {...check,totalPrice:check[queryParams['visitTypes_like']]}
+    })
+    console.log(queryParams['visitTypes_like'])
+  }
+
+  if (queryParams._expand === 'client') {
+    Reportfiltered = Reportfiltered.map(check => {
+      const client = clients.find(c => c.id === check.clientId);
+      return { ...check, client };
+    });
+  }
+  
+  Reportfiltered.sort((a, b) => new Date(b.create_at) - new Date(a.create_at));
+  
+  const page = parseInt(queryParams._page) || 1;
+  const limit = parseInt(queryParams._limit) || Reportfiltered.length;
+  const start = (page - 1) * limit;
+  const end = start + limit;
+
+  const paginatedData = Reportfiltered.slice(start, end);
+
+  res.json({
+    data: paginatedData,
+    pagination: {
+      total: Reportfiltered.length,
+      page,
+      limit
+    }
+  });
+});
 // Custom render for pagination
 router.render = (req, res) => {
   const headers = res.getHeaders();

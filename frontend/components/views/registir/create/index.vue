@@ -176,7 +176,7 @@
     () => viewCheck.value,
     (val) => {
       if (!val) {
-        router.push('/registir/create')
+        router.push('/registir')
       }
     }
   )
@@ -195,24 +195,34 @@
   const checkData = ref(null)
   const generateCheck = async (id) => {
     let total = 0
-  
+    let roomPrice = 0
+    let med = 0
+    let lab = 0
     if (form.value.visitTypes.includes('med')) {
       for (let id of form.value.medServices) {
         const item = dictionary.value.medServices.find(m => m?.id === id)
-        if (item) total += Number(item.price)
+        if (item) {
+          med += Number(item.price)
+          total += Number(item.price)
+        }
       }
     }
   
     if (form.value.visitTypes.includes('room')) {
       const room = dictionary.value.rooms.find(r => r?.id === form.value.room.roomId)
-      if (room) total += Number(room.pricePerDay) * form.value.room.days
-      console.log(total)
+      if (room) {
+        roomPrice += Number(room.pricePerDay) * form.value.room.days
+        total += Number(room.pricePerDay) * form.value.room.days
+      }
     }
   
     if (form.value.visitTypes.includes('lab')) {
       for (let id of form.value.labTests) {
         const test = dictionary.value.labTests.find(t => t?.id === id)
-        if (test) total += Number(test.price)
+        if (test) {
+          lab += Number(test.price)
+          total += Number(test.price)
+        }
       }
     }
   
@@ -226,7 +236,10 @@
       labTests:form.value.labTests || [],
       doctorId:form.value.doctorId || null,
       roomId:form.value?.room?.roomId || null,
-      visitTypes:form.value.visitTypes
+      visitTypes:form.value.visitTypes,
+      med,
+      lab,
+      room:roomPrice
     }
     createCheck()
   }
@@ -284,7 +297,7 @@
     }
   }
   async function createCheck () {
-    const {data,error} = await useFetchApi.post('/checks',checkData.value)
+    const {data,error} = await useFetchApi.post('/checks',{...checkData.value,status:'pending'})
     if (!error.value) {
       checkData.value = {...checkData.value,id:data.value?.id}
       viewCheck.value = true;

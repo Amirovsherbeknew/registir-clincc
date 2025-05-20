@@ -17,6 +17,14 @@
                     {{ useCurrencyFormat(Number(scope.row?.totalPrice)) }}
                 </template>
             </el-table-column>
+            <el-table-column label="Qolgan summasi" width="150" align="center">
+                <template #default="scope">
+                    <div v-if="scope.row?.isPaid">{{ useCurrencyFormat(0) }}</div>
+                    <div v-else>
+                        {{ useCurrencyFormat(scope.row?.totalPrice - (scope.row.part_pay_price ? scope.row?.part_pay_price.reduce((sum:any,item:any) => sum + Number(item.price),0):0) ) }}
+                    </div>
+                </template>
+            </el-table-column>
             <el-table-column label="Yaratilgan vaqti" width="200" align="center">
                 <template #default="scope">
                     {{ useDateFormat(scope.row?.create_at) }}
@@ -24,17 +32,12 @@
             </el-table-column>
             <el-table-column label="Holati" width="250"  align="center">
                 <template #default="scope">
-                    <TableStatus :type="TableStatusType(scope.row)"/>
+                    <TableStatus :type="scope.row.status"/>
                 </template>
             </el-table-column>
             <el-table-column label="Telefon raqam" width="200" align="center">
                 <template #default="scope">
                     {{scope?.row?.client?.phone}}
-                </template>
-            </el-table-column>
-            <el-table-column label="Check egasini raqami" width="200" align="center">
-                <template #default="scope">
-                    <div>{{ scope.row.id }}</div>
                 </template>
             </el-table-column>
             <el-table-column label="Qaytarilgan miqdor" width="220" align="center">
@@ -72,7 +75,7 @@ const filter = ref<TFilterReplacePayment>({
     _limit:10,
     name:'',
     phone:'',
-    isPaid:true,
+    status:undefined,
     dateRange:[],
     id:undefined,
     _order:'desc',
@@ -89,27 +92,8 @@ onMounted(() => {
 })
 
 function handleEditOpenDialog (val:any) {
-    console.log(val)
     check.value = val
     dialogVisibly.value = true
-}
-
-function TableStatusType (check:rooms) {
-    if (check?.replace_payment) {
-        return 'cancel_payment'
-    }
-    else return check?.isPaid ? 'approved':'pending'
-}
-
-async function handleSearch () {
-    const {data,error} = await useFetchApi.get('',{
-        params:{
-            ...filter.value
-        }
-    })
-    if (!error.value) {
-        console.log(data.value)
-    }
 }
 
 async function GetCheckList (query?:TFilterReplacePayment) {
@@ -117,7 +101,6 @@ async function GetCheckList (query?:TFilterReplacePayment) {
         params:useClean(query || filter.value)
     })
     if (!error.value) {
-        console.log(data.value);
         tableData.value = data.value
     }
 }

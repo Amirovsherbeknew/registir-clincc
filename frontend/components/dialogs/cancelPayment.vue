@@ -59,7 +59,7 @@
     if (!medserversForm.value) return
     medserversForm.value.validate((valid) => {
       if (valid) {
-        if (form.value.price && props.check?.totalPrice && Number(props.check.totalPrice) <= Number(form.value.price)) {
+        if (form.value.price && props.check?.totalPrice && Number(props.check.totalPrice) < Number(form.value.price)) {
           useNotifacation.warning('Xatolik','qaytarish summasi to\'langan miqdordan ko\'p bo\'lib ketdi')
           return
         }
@@ -76,7 +76,9 @@
       update_at:new Date().toISOString(),
       ...form.value
     };
-    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,{totalPrice:(Number(props?.check?.totalPrice) - Number(payloadData.price)),replace_payment:payloadData})
+    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,{totalPrice:(Number(props?.check?.totalPrice) - Number(payloadData.price)),  replace_payment:payloadData,
+    status:'cancel_payment'
+    })
     if (!error.value) {
       emit('getData')
       dialogVisible.value = false;
@@ -88,7 +90,8 @@
       update_at:new Date().toISOString(),
       ...form.value
     };
-    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,payloadData)
+    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,{totalPrice:(Number(props?.check?.totalPrice) - Number(payloadData.price)),replace_payment:payloadData,
+    status:'cancel_payment'})
     if (!error.value) {
       emit('getData')
       dialogVisible.value = false;

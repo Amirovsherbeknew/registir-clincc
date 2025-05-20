@@ -30,6 +30,7 @@ export interface TFilterCheck {
     isPaid?:boolean,
     _sort?:string,
     visitTypes_like?:string
+    status?:string
 }
 
 export interface TFilterReplacePayment {
@@ -42,5 +43,6 @@ export interface TFilterReplacePayment {
     id?:number,
     phone:string,
     dateRange:string[]
-    _expand:string
+    _expand:string,
+    status?:string
 }

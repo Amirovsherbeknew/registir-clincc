@@ -7,9 +7,8 @@
             placeholder="Sanani tanlang"
             class="max-w-[270px]"
         />
-        <el-select v-model="filter.isPaid" class="max-w-[270px]" placeholder="Holati">
-            <el-option :value="true" label="To'langan"></el-option>
-            <el-option :value="false" label="To'lanmagan"></el-option>
+        <el-select v-model="filter.status" class="max-w-[270px]" placeholder="Holati">
+            <el-option v-for="(item,idx) in useConstant().statusList()" :key="idx" :value="item.value" :label="item.label"></el-option>
         </el-select>
         <el-input  v-model="filter.id" placeholder="Check raqam bo'yicha qidiruv" class="max-w-[270px]"/>
         <el-input  v-model="filter.phone" placeholder="Telefon raqam" class="max-w-[270px]"/>
@@ -30,6 +29,7 @@ const filter = defineModel<TFilterReplacePayment>({
         _page:1,
         _limit:10,
         id:'',
+        status:undefined,
         isPaid:true,
         buildingId:undefined,
         _expand:"client"

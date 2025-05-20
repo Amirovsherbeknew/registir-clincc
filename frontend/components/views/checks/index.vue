@@ -19,6 +19,14 @@
                         {{ useCurrencyFormat(Number(scope.row?.totalPrice)) }}
                     </template>
                 </el-table-column>
+                <el-table-column label="Qolgan summa" width="200" align="center">
+                    <template #default="scope">
+                        <div v-if="scope.row?.isPaid">{{ useCurrencyFormat(0) }}</div>
+                        <div v-else>
+                            {{ useCurrencyFormat(scope.row?.totalPrice - (scope.row.part_pay_price ? scope.row?.part_pay_price.reduce((sum:any,item:any) => sum + Number(item.price),0):0) ) }}
+                        </div>
+                    </template>
+                </el-table-column>
                 <el-table-column label="Yaratilgan vaqti" width="200" align="center">
                     <template #default="scope">
                         {{ useDateFormat(scope.row?.create_at) }}
@@ -26,7 +34,7 @@
                 </el-table-column>
                 <el-table-column label="Holati" width="200" align="center">
                     <template #default="scope">
-                        <TableStatus :type="TableStatusType(scope.row)"/>
+                        <TableStatus :type="scope.row.status"/>
                     </template>
                 </el-table-column>
                 <el-table-column label="Telefon raqam" width="200" align="center">
@@ -34,16 +42,12 @@
                         {{scope?.row?.client?.phone}}
                     </template>
                 </el-table-column>
-                <el-table-column label="Check egasini raqami" width="200" align="center">
-                    <template #default="scope">
-                        <div>{{ scope.row.client?.id }}</div>
-                    </template>
-                </el-table-column>
                 <el-table-column fixed="right" label="Harakat" width="150" align="center">
                     <template #default="scope">
                         <div class="flex-center gap-[10px]">
                             <ActionButton type="show" :disabled="!scope.row?.visitTypes?.includes('room')" tooltip_title="Xona haqida malumot" @click="handleOpenRoomInfoDialog(scope.row?.client?.roomId)"/>
                             <ActionButton type="file" tooltip_title="Check" @click="handleOpenCheckInfoDialog(scope.row)"/>
+                            <ActionButton :disabled="!scope.row?.part_pay_price" type="payment" tooltip_title="To'lovlar tarixi" @click="handleHistoryPaymentDialog(scope.row)"/>
                         </div>
                     </template>
                 </el-table-column>
@@ -55,7 +59,7 @@
                 @change="GetCheckList"
             />
         </div>
-      
+      <DialogsHistoryPayment v-model="historyDialogVisibly" :info="{...selectedCheck,clientInfo:clientInfo}"/>
       <DialogsViewRoomInfo v-if="dialogVisibly" v-model="dialogVisibly" :roomId="roomId"/>
       <DialogsViewCheck v-model="checkDialogVisibly" :info="{...selectedCheck,clientInfo:clientInfo}" @handleSearch="GetCheckList"/>
   </Card>
@@ -67,7 +71,8 @@ const filter = ref<TFilterCheck>({
     _page:1,
     _limit:10,
     dateRange:[],
-    _isPaid:undefined,
+    isPaid:undefined,
+    status:undefined,
     _order:'desc',
     _sort:'create_at',
     visitTypes_like:undefined
@@ -82,6 +87,7 @@ const dictionary = ref<any>({
 
 const tableData = ref()
 const dialogVisibly = ref(false)
+const historyDialogVisibly = ref(false)
 const checkDialogVisibly = ref(false)
 const roomId = ref<number|null>(null)
 const selectedCheck = ref<any>()
@@ -116,12 +122,9 @@ function handleOpenCheckInfoDialog (val:any) {
     checkDialogVisibly.value = true
 }
 
-
-function TableStatusType (check:rooms) {
-    if (check?.replace_payment) {
-        return 'cancel_payment'
-    }
-    else return check?.isPaid ? 'approved':'pending'
+function handleHistoryPaymentDialog (val:any) {
+    selectedCheck.value = val
+    historyDialogVisibly.value = true
 }
 
 async function GetCheckList (query?:any) {
