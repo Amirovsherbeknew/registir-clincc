@@ -5,6 +5,7 @@
     "author": "Your Name",
     "main": "main.js",
     "scripts": {
+        "start": "node server.js",
         "dev": "electron .",
         "frontend:dev": "npx nuxi dev --cwd frontend",
         "frontend:build": "npx nuxi build --cwd frontend",
