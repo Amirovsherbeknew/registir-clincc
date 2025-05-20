@@ -2,8 +2,7 @@
     <el-dialog
       v-model="dialogVisible"
       width="600"
-      on-destroy-close
-      >
+      on-destroy-close>
       <VTitle class="flex-1 mb-[20px]" title="Pulni qaytarish"/>
       <el-form ref="medserversForm" :model="form" label-position="top" :rules="useRules('replacePayment')">
         
