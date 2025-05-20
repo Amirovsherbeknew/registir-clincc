@@ -156,16 +156,13 @@
     _sort:'create_at',
     _page:1,
     _limit:10,
-    status:'approved',
+    status:undefined,
     visitTypes_like:'',
     roomId:undefined,
     doctorId:undefined,
     medServices:undefined
   })
-  const selectedDate = ref([
-    dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
-    dayjs().format('YYYY-MM-DD')
-  ])
+  const selectedDate = ref([])
   
   onMounted(async () => {
     getList()

@@ -5,10 +5,22 @@ export interface checkType {
     create_at: string,
     update_at: string,
     totalPrice: string,
-    isPaid: boolean
+    isPaid: boolean,
+    status:string,
+    part_pay_price:partPayment[]
 }
 export interface TCheck {
     items?:number,
     data?:checkType[]
     pagination?:TPagination
+}
+
+export interface ReplacePaymentType  {
+    price?:number,
+    reason:string
+}
+
+export interface partPayment {
+    create_at: string,
+    price: number
 }

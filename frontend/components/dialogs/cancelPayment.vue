@@ -38,7 +38,7 @@
   <script lang="ts" setup>
   import {ref} from 'vue'
   import type {medServices} from '~/types/api/medServices.type.ts'
-  import type {checkType} from '~/types/api/check.type.ts'
+  import type {checkType,ReplacePaymentType} from '~/types/api/check.type.ts'
   import type { FormInstance } from 'element-plus'
   const emit = defineEmits(['getData'])
   const props = defineProps<{
@@ -50,9 +50,20 @@
   
   const medserversForm = ref<FormInstance>()
 
-  const form = ref({
+  const form = ref<ReplacePaymentType>({
     reason:'',
-    price:null
+    price:undefined
+  })
+
+  onMounted(() => {
+    if (props.check?.isPaid) {
+      form.value.price = Number(props.check?.totalPrice)
+    }
+    else if (props.check?.status === 'part_payment' && props.check?.part_pay_price) {
+      const partPriceSum = props.check?.part_pay_price?.reduce((sum,item) => sum + Number(item.price),0)
+      console.log(partPriceSum)
+      form.value.price = Number(props.check.totalPrice) - Number(partPriceSum)
+    }
   })
 
   function submitForm () {

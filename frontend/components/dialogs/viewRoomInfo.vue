@@ -1,8 +1,9 @@
 <template>
     <el-dialog v-model="dialogVisible"
       width="750"
-      on-destroy-close v-loading="loading">
-      <h1 class="mb-[10px]">
+      on-destroy-close >
+      <div v-loading="loading" >
+        <h1 class="mb-[10px]">
         <VTitle title="Xona haqida malumotlar"/>
       </h1>
         <div class="grid grid-cols-2 gap-y-[6px]">
@@ -42,6 +43,7 @@
             </template>
         </el-table-column>
        </el-table>
+      </div>
     </el-dialog>
 </template>
 <script lang="ts" setup>
@@ -69,11 +71,10 @@ async function getRoomInfo () {
         roomInfo.value = data.value;
         getClientCountByRoomId()
     }
-    loading.value = false
+    else loading.value = false
 }
 
 async function getClientCountByRoomId () {
-    loading.value = true
     const { data,error } = await useFetchApi.get<any>(`/clients?roomId=${props.roomId}`)
     if (!error.value && data.value) {
         clientsInfo.value = data.value

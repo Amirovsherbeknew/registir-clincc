@@ -53,7 +53,7 @@
             </el-table-column>
             <el-table-column fixed="right" label="Harakat">
                 <template #default="scope">
-                    <ActionButton type="edit" @click="handleEditOpenDialog(scope.row)"/>
+                    <ActionButton type="edit" :disabled="scope.row.status === 'cancel_payment'" @click="handleEditOpenDialog(scope.row)"/>
                 </template>
             </el-table-column>
         </el-table>
@@ -64,7 +64,7 @@
             @change="GetCheckList"
         />
         </div>
-        <DialogsCancelPayment v-model="dialogVisibly" :check="check" @get-data="GetCheckList"/>
+        <DialogsCancelPayment v-if="dialogVisibly" v-model="dialogVisibly" :check="check" @get-data="GetCheckList"/>
     </Card>
 </template>
 <script setup lang='ts'>

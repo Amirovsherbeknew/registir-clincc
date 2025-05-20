@@ -32,7 +32,7 @@
           <template #default="scope">
               <div class="flex-center gap-[10px]">
                 <ActionButton :disabled="!scope.row?.visitTypes?.includes('room')" type="show" tooltip_title="Xona haqida malumot" @click="handleOpenRoomInfoDialog(scope.row?.roomId)"/>
-                <ActionButton type="edit" @click="handleOpenClientInfo(scope.row?.id)"/>
+                <ActionButton v-if="roleCode === 'admin'" type="edit" @click="handleOpenClientInfo(scope.row?.id)"/>
               </div>
           </template>
       </el-table-column>
@@ -49,7 +49,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-
+const { getRole } = useToken();
 const router = useRouter()
 
 const tableData = ref([])
@@ -69,6 +69,10 @@ const filter = ref({
 
 onMounted(() => {
   getRegistirClients()
+})
+
+const roleCode = computed(() => {
+  return getRole()
 })
 
 function handleOpenRoomInfoDialog (val) {
