@@ -6,6 +6,8 @@ export interface TFCheck {
 export interface TFilterRoom {
     name:string,
     _limit:number,
+    _order?:string,
+    _sort?:string,
     _page:number
     buildingId?:number|undefined,
     _expand:string

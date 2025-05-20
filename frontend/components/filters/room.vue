@@ -57,9 +57,9 @@ async function getBuildingList () {
     }
 }
 async function reload () {
-    const {error}:any = await useFetchApi.get('/reload/room')
+    const {data,error}:any = await useFetchApi.get('/reload/room')
     if (!error.value) {
-        useNotifacation.success('Xonalardagi joylar tekshirildi va bir nechtasi olib tashlandi')
+        useNotifacation.success(data.value?.message,'')
     }
 }
 </script>

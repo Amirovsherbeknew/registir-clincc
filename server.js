@@ -34,8 +34,8 @@ server.use((req, res, next) => {
 
 server.get('/reload/room', (req, res) => {
   try {
-    taskManager();
-    res.json({ message: 'Room limits updated successfully via manual reload' });
+    const message = taskManager();
+    res.json({ message: message });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to update room limits' });
@@ -213,6 +213,7 @@ function taskManager() {
 
   const now = new Date();
   let updatedRooms = {};
+  let updateCount = 0;
 
   clients.forEach(client => {
     if (client.end_date && new Date(client.end_date) < now) {
@@ -227,11 +228,13 @@ function taskManager() {
   Object.entries(updatedRooms).forEach(([roomId, newLimit]) => {
     db.get('rooms')
       .find({ id: parseInt(roomId) })
-      .assign({ limit: newLimit})
+      .assign({ limit: newLimit })
       .write();
+    updateCount++;
   });
 
-  console.log(`🔄 [${new Date().toISOString()}] Room limitlar yangilandi.`);
+  console.log(`🔄 [${new Date().toISOString()}] ${updateCount} ta xona limiti yangilandi.`);
+  return `Xonalardagi joylar tekshirildi va ${updateCount} nechta mijozlar olib tashlandi`;
 }
 
 setInterval(() => {
