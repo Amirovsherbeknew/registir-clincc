@@ -87,13 +87,14 @@
     <!-- Кнопка оплаты -->
     <div class="w-full">
       <el-form :model="form" :rules="useRules('part_pay_price')">
-        <el-form-item label="">
+        <el-form-item label="To'lov turi:">
           <el-select v-model="paymentType" placeholder="To'lov turi">
-            <el-option></el-option>
+            <el-option label="To'liq to'lov" value="all"></el-option>
+            <el-option label="Qisman to'lov" value="part"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="Miqdori:" prop="part">
-          <el-input v-model="" placeholder=""/>
+        <el-form-item label="Miqdori:" prop="part_pay_price">
+          <el-input v-model="form.part_pay_price" placeholder=""/>
         </el-form-item>
         <el-form-item>
           <template v-if="role === 'kassir'">
@@ -151,6 +152,7 @@ const form = ref({
 })
 
 async function handlePaid(id) {
+  const 
   const { data,error } = await useFetchApi.patch(`/checks/${id}`, { isPaid:true })
   if (!error.value) {
     emit('handleSearch')
