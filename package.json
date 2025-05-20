@@ -1,31 +1,15 @@
 {
-    "name": "my-electron-app",
+    "name": "my-json-server-app",
     "version": "1.0.0",
-    "description": "This is an Electron app for Registir Medic Clinic",
+    "description": "JSON Server for Registir Medic Clinic",
     "author": "Your Name",
-    "main": "main.js",
+    "main": "server.js",
     "scripts": {
-        "start": "node server.js",
-        "dev": "electron .",
-        "frontend:dev": "npx nuxi dev --cwd frontend",
-        "frontend:build": "npx nuxi build --cwd frontend",
-        "build": "npm run frontend:build && electron-builder"
-    },
-    "build": {
-        "appId": "com.myapp.autolaunch",
-        "win": {
-            "target": "nsis"
-        },
-        "directories": {
-            "buildResources": "assets"
-        }
+      "start": "node server.js"
     },
     "dependencies": {
-        "json-server": "^0.17.4",
-        "wait-on": "^7.2.0"
-    },
-    "devDependencies": {
-        "electron": "^29.0.0",
-        "electron-builder": "^26.0.12"
+      "json-server": "^0.17.4",
+      "wait-on": "^7.2.0"
     }
-}
+  }
+  
