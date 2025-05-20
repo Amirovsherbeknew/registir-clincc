@@ -6,6 +6,7 @@
         <el-input  v-model="filter.name" placeholder="Xona nomi" class="max-w-[270px]"/>
         <ActionButton type="search" @click="handleSearch"/>
         <ActionButton type="clear" @click="handleClear"/>
+        <ActionButton type="reload" @click="reload"/>
     </div>
 </template>
 <script setup lang='ts'>
@@ -53,6 +54,12 @@ async function getBuildingList () {
     const {data,error} = await useFetchApi.get<TBuildings[]>('/buildings')
     if (!error.value && data.value) {
         buildingList.value = data.value
+    }
+}
+async function reload () {
+    const {error}:any = await useFetchApi.get('/reload/room')
+    if (!error.value) {
+        useNotifacation.success('Xonalardagi joylar tekshirildi va bir nechtasi olib tashlandi')
     }
 }
 </script>

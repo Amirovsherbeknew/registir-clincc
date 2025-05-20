@@ -13,7 +13,7 @@
   
   <script setup lang="ts">
   interface TProps {
-    type: "search" | "show" | "delete" | "clear" | "exit" | "file" | "edit"|"payment";
+    type: "search" | "show" | "delete" | "clear" | "exit" | "file" | "edit"|"payment"|"reload";
     disabled?: boolean;
     tooltip_title?: string;
   }
@@ -26,17 +26,19 @@
     exit: "Chiqish",
     file: "Hujjatni ko'rish",
     edit: "O'zgaritirish",
-    payment: "To'lov qilish"
+    payment: "To'lov qilish",
+    reload: "Yangilash"
   };
   </script>
   
   <style scoped>
   .search,
+  .reload,
   .show {
     background: var(--color-sky-50);
     color: var(--color-sky-600);
   }
-  .search:hover,
+  .search:hover,.reload:hover,
   .show:hover {
     background: theme("colors.sky.500");
   }
@@ -75,6 +77,7 @@
   .payment:hover,
   .exit:hover,
   .file:hover,
+  .reload:hover,
   .edit:hover {
     color: #fff;
   }

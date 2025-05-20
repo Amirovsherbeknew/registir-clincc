@@ -129,10 +129,10 @@
       "create_at": "2025-05-07T03:41:34.746Z",
       "update_at": "2025-05-07T03:41:34.746Z",
       "name": "standart",
-      "people_per_room": 10,
+      "people_per_room": 2,
       "pricePerDay": "20000",
       "buildingId": 84900,
-      "limit": 1,
+      "limit": 0,
       "is_full": false
     },
     {
@@ -265,7 +265,7 @@
       "labTests": [],
       "doctorId": 3,
       "roomId": 1,
-      "end_date": "2025-05-25T05:51:31.298Z",
+      "end_date": "2025-05-20T05:51:31.298Z",
       "id": 80996
     },
     {
@@ -297,7 +297,7 @@
       "update_at": "2025-05-20T05:51:31.343Z",
       "totalPrice": 155000,
       "isPaid": true,
-      "status":"approved",
+      "status": "approved",
       "medServices": [
         45734,
         16389
@@ -324,7 +324,7 @@
       "labTests": [
         53003
       ],
-      "status":"part_payment",
+      "status": "part_payment",
       "doctorId": null,
       "roomId": null,
       "visitTypes": [
