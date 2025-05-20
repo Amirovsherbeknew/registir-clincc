@@ -61,7 +61,6 @@
     }
     else if (props.check?.status === 'part_payment' && props.check?.part_pay_price) {
       const partPriceSum = props.check?.part_pay_price?.reduce((sum,item) => sum + Number(item.price),0)
-      console.log(partPriceSum)
       form.value.price = Number(props.check.totalPrice) - Number(partPriceSum)
     }
   })
@@ -87,7 +86,7 @@
       update_at:new Date().toISOString(),
       ...form.value
     };
-    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,{totalPrice:(Number(props?.check?.totalPrice) - Number(payloadData.price)),  replace_payment:payloadData,
+    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,{replace_payment:payloadData,
     status:'cancel_payment'
     })
     if (!error.value) {
@@ -101,7 +100,7 @@
       update_at:new Date().toISOString(),
       ...form.value
     };
-    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,{totalPrice:(Number(props?.check?.totalPrice) - Number(payloadData.price)),replace_payment:payloadData,
+    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,{replace_payment:payloadData,
     status:'cancel_payment'})
     if (!error.value) {
       emit('getData')
