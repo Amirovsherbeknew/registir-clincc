@@ -3,19 +3,20 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 const url = require('url');
+const fs = require('fs');
+
 // Middleware: parse body
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // yoki faqat frontend domeni
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   if (['POST', 'PUT'].includes(req.method)) {
     if (!req.body.id) {
-      console.log('l;ksal;ksdl;asdsa')
       req.body.id = Math.floor(10000 + Math.random() * 90000);
     }
 
-    const keysToConvert = ['clientId', 'doctorId', 'roomId','id'];
+    const keysToConvert = ['clientId', 'doctorId', 'roomId', 'id'];
     keysToConvert.forEach(key => {
       if (req.body[key] && typeof req.body[key] === 'string') {
         const parsed = parseInt(req.body[key]);
@@ -29,7 +30,7 @@ server.use((req, res, next) => {
 });
 
 server.get('/checks/total', (req, res) => {
-  const db = router.db; // lowdb instance
+  const db = router.db;
   const checks = db.get('checks').value();
   const queryParams = url.parse(req.url, true).query;
 
@@ -39,7 +40,6 @@ server.get('/checks/total', (req, res) => {
     filtered = filtered.filter(check => check.status === queryParams.status);
   }
 
-  // Qo‘shimcha filterlar: doctorId, roomId va boshqalar
   if (queryParams.doctorId) {
     filtered = filtered.filter(check => String(check.doctorId) === queryParams.doctorId);
   }
@@ -49,21 +49,17 @@ server.get('/checks/total', (req, res) => {
   }
 
   if (queryParams['visitTypes_like']) {
-    // queryParams['visitTypes_like'] ko‘pincha string bo‘ladi, 
-    // agar array bo‘lishi ehtimoli bo‘lsa, shuni ham hisobga olish mumkin:
     const visitTypeLikes = Array.isArray(queryParams['visitTypes_like'])
       ? queryParams['visitTypes_like']
       : [queryParams['visitTypes_like']];
 
     filtered = filtered.filter(check =>
-      // Har bir _like qiymat uchun visitTypes massivida shu substring mavjudmi:
       visitTypeLikes.every(likeVal =>
         check.visitTypes.some(vt => vt.includes(likeVal))
       )
     );
   }
 
-  // Date filtering: create_at_gte va create_at_lte
   if (queryParams.create_at_gte) {
     const fromDate = new Date(queryParams.create_at_gte);
     filtered = filtered.filter(check => new Date(check.create_at) >= fromDate);
@@ -77,33 +73,25 @@ server.get('/checks/total', (req, res) => {
   let total = filtered.reduce((sum, check) => sum + (check.totalPrice || 0), 0);
   if (queryParams['visitTypes_like']) {
     filtered = filtered.map(check => {
-      return {...check,totalPrice:check[queryParams['visitTypes_like']]}
-    })
+      return { ...check, totalPrice: check[queryParams['visitTypes_like']] };
+    });
     total = filtered.reduce((sum, check) => sum + (check.totalPrice || 0), 0);
   }
   res.json({ total });
 });
 
 server.get('/reports', (req, res) => {
-  const db = router.db; // lowdb instance
+  const db = router.db;
   const checks = db.get('checks').value();
-  const clients = db.get('clients').value()
+  const clients = db.get('clients').value();
   const queryParams = url.parse(req.url, true).query;
 
   let Reportfiltered = checks;
-
-  // // Misol uchun isPaid filter
-  // if (queryParams.isPaid !== undefined) {
-  //   const isPaid = queryParams.isPaid === 'true';
-  //   filtered = filtered.filter(check => check.isPaid === isPaid);
-  // }
-  // isPaid
 
   if (queryParams.status) {
     Reportfiltered = Reportfiltered.filter(check => check.status === queryParams.status);
   }
 
-  // Qo‘shimcha filterlar: doctorId, roomId va boshqalar
   if (queryParams.doctorId) {
     Reportfiltered = Reportfiltered.filter(check => String(check.doctorId) === queryParams.doctorId);
   }
@@ -113,21 +101,17 @@ server.get('/reports', (req, res) => {
   }
 
   if (queryParams['visitTypes_like']) {
-    // queryParams['visitTypes_like'] ko‘pincha string bo‘ladi, 
-    // agar array bo‘lishi ehtimoli bo‘lsa, shuni ham hisobga olish mumkin:
     const visitTypeLikes = Array.isArray(queryParams['visitTypes_like'])
       ? queryParams['visitTypes_like']
       : [queryParams['visitTypes_like']];
 
     Reportfiltered = Reportfiltered.filter(check =>
-      // Har bir _like qiymat uchun visitTypes massivida shu substring mavjudmi:
       visitTypeLikes.every(likeVal =>
         check.visitTypes.some(vt => vt.includes(likeVal))
       )
     );
   }
 
-  // Date filtering: create_at_gte va create_at_lte
   if (queryParams.create_at_gte) {
     const fromDate = new Date(queryParams.create_at_gte);
     Reportfiltered = Reportfiltered.filter(check => new Date(check.create_at) >= fromDate);
@@ -137,11 +121,11 @@ server.get('/reports', (req, res) => {
     const toDate = new Date(queryParams.create_at_lte);
     Reportfiltered = Reportfiltered.filter(check => new Date(check.create_at) <= toDate);
   }
+
   if (queryParams['visitTypes_like']) {
     Reportfiltered = Reportfiltered.map(check => {
-      return {...check,totalPrice:check[queryParams['visitTypes_like']]}
-    })
-    console.log(queryParams['visitTypes_like'])
+      return { ...check, totalPrice: check[queryParams['visitTypes_like']] };
+    });
   }
 
   if (queryParams._expand === 'client') {
@@ -150,9 +134,9 @@ server.get('/reports', (req, res) => {
       return { ...check, client };
     });
   }
-  
+
   Reportfiltered.sort((a, b) => new Date(b.create_at) - new Date(a.create_at));
-  
+
   const page = parseInt(queryParams._page) || 1;
   const limit = parseInt(queryParams._limit) || Reportfiltered.length;
   const start = (page - 1) * limit;
@@ -169,7 +153,7 @@ server.get('/reports', (req, res) => {
     }
   });
 });
-// Custom render for pagination
+
 router.render = (req, res) => {
   const headers = res.getHeaders();
   const totalCount = headers['x-total-count'];
@@ -190,6 +174,39 @@ router.render = (req, res) => {
 
 server.use(middlewares);
 server.use(router);
+
+// ======== 🔁 AUTO ROOM LIMIT CHECK EACH 10 MINS ============
+setInterval(() => {
+  const db = router.db;
+  const clients = db.get('clients').value();
+  const rooms = db.get('rooms').value();
+
+  const now = new Date();
+
+  let updatedRooms = {};
+
+  clients.forEach(client => {
+    if (client.end_date && new Date(client.end_date) < now) {
+      const roomId = client.roomId;
+      const room = rooms.find(r => r.id === roomId);
+      if (room && room.limit > 0) {
+        updatedRooms[roomId] = room.limit - 1;
+      }
+    }
+  });
+
+  // Faqat kerakli roomlarni update qilamiz
+  Object.entries(updatedRooms).forEach(([roomId, newLimit]) => {
+    db.get('rooms')
+      .find({ id: parseInt(roomId) })
+      .assign({ limit: newLimit })
+      .write();
+  });
+
+  console.log(`🔄 [${new Date().toISOString()}] Room limitlar yangilandi.`);
+}, 1000); // 10 daqiqada bir (600000 ms)
+
+// ============================================================
 
 server.listen(3001, () => {
   console.log('🚀 JSON Server running at http://localhost:3001');
