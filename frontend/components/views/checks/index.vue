@@ -67,6 +67,7 @@ const filter = ref<TFilterCheck>({
     _page:1,
     _limit:10,
     dateRange:[],
+    _isPaid:undefined,
     _order:'desc',
     _sort:'create_at',
     visitTypes_like:undefined
@@ -91,9 +92,6 @@ onMounted(() => {
 
 const clientInfo = computed(() => {
     if (selectedCheck.value) {
-        console.log(selectedCheck.value.client.room.roomId)
-        console.log(dictionary.value.rooms)
-        console.log(dictionary.value.rooms.find((resp:any) => Number(resp.id) === Number(selectedCheck.value.client.room.roomId)))
         return {
             ...selectedCheck.value.client,
             medServices:dictionary.value.medServices?.filter((resp:any) => selectedCheck.value.client.medServices.includes(resp.id)),

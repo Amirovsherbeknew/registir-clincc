@@ -86,18 +86,31 @@
     </div>
     <!-- Кнопка оплаты -->
     <div class="w-full">
-      <template v-if="role === 'kassir'">
-        <p v-if="responsePaid || data?.isPaid || data?.is_paid" class="mt-4 text-green-500 text-2xl font-medium text-center">
-          To'langan
-        </p>
-        <button  type="button"
-          v-else
-          @click="handlePaid(data.id)"
-          class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
-        >
-          To'lash
-        </button>
-      </template>
+      <el-form :model="form" :rules="useRules('part_pay_price')">
+        <el-form-item label="">
+          <el-select v-model="paymentType" placeholder="To'lov turi">
+            <el-option></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Miqdori:" prop="part">
+          <el-input v-model="" placeholder=""/>
+        </el-form-item>
+        <el-form-item>
+          <template v-if="role === 'kassir'">
+            <p v-if="responsePaid || data?.isPaid || data?.is_paid" class="mt-4 text-green-500 text-2xl font-medium text-center">
+              To'langan
+            </p>
+            <button  type="button"
+              v-else
+              @click="handlePaid(data.id)"
+              class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+            >
+              To'lash
+            </button>
+          </template>
+        </el-form-item>
+      </el-form>
+      
       <button type="button"
         v-if="role === 'operator'"
         @click="printSection"
@@ -113,8 +126,7 @@
 import printJS from 'print-js'
 const emit = defineEmits(['handleSearch'])
 const { getRole } = useToken();
-const role = getRole()
-const responsePaid = ref(false)
+
 // Props orqali ma'lumot olish
 const props = defineProps({
   data: {
@@ -128,6 +140,14 @@ const props = defineProps({
       date: new Date()
     })
   }
+})
+
+const role = getRole()
+const responsePaid = ref(false)
+const paymentType = ref(false)
+
+const form = ref({
+  part_pay_price:undefined
 })
 
 async function handlePaid(id) {

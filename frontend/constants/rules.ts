@@ -7,7 +7,7 @@ export const rules = {
         last_name:[{required:true,message:''},{validator: useTrim(),trigger: 'blur'}],
         first_name:[{required:true,message:''},{validator: useTrim(),trigger: 'blur'}],
         middle_name:[{required:false,message:''}],
-        phone:[{required:true,message:''},{validator: usePhoneNumberValidate(),trigger: 'blur'}],
+        phone:[{required:false,message:''},{validator: usePhoneNumberValidate(),trigger: 'blur'}],
         gender:[{required:true,message:'Jinsini tanlang'}],
         servers_type:[{required:true,message:''}],
         medServices:[{required:true,message:''}],
@@ -64,5 +64,8 @@ export const rules = {
     replacePayment:{
         reason:[{required:true,message:''}],
         price:[{required:true,message:''}]
+    },
+    part_pay_price:{
+        part_pay_price:[{required:true,message:""}]
     }
 }

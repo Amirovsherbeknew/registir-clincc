@@ -76,7 +76,7 @@
       update_at:new Date().toISOString(),
       ...form.value
     };
-    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,{replace_payment:payloadData})
+    const {error} = await useFetchApi.patch(`/checks/${props.check?.id}`,{totalPrice:(Number(props?.check?.totalPrice) - Number(payloadData.price)),replace_payment:payloadData})
     if (!error.value) {
       emit('getData')
       dialogVisible.value = false;

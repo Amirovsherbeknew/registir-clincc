@@ -3,6 +3,10 @@
         <el-select v-model="filter.visitTypes_like" placeholder="Xizmati turi" class="max-w-[270px]">
             <el-option v-for="item in visitTypeList" :key="`filter_building_${item.value}`" :value="item.value" :label="item.label"></el-option>
         </el-select>
+        <el-select v-model="filter.isPaid" class="max-w-[270px]" placeholder="Holati">
+            <el-option :value="true" label="To'langan"></el-option>
+            <el-option :value="false" label="To'lanmagan"></el-option>
+        </el-select>
         <el-date-picker
             v-model="filter.dateRange"
             type="daterange"
@@ -23,6 +27,7 @@ const filter = defineModel<TFilterCheck>({
     default:{
         _page:1,
         _limit:10,
+        _isPaid:undefined,
         dateRange:[],
         visitTypes_like:undefined
     }

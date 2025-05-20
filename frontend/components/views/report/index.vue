@@ -69,7 +69,7 @@
             />
           </div>
           </div>
-          <div class="flex items-end">
+          <div class="flex items-end gap-[10px]">
             <ActionButton type="search" @click="handleSearch"/>
             <ActionButton type="clear" @click="handleClear"/>
           </div>
@@ -185,7 +185,7 @@
       _expand:'client',
       _page:1,
       _limit:10,
-      isPaid:true,
+      isPaid:undefined,
       visitTypes_like:'',
       roomId:undefined,
       doctorId:undefined,
@@ -204,8 +204,8 @@
   async function getList () {
     const {data,error} = await useFetchApi.get(`/checks`,{
       params:useClean({
-        create_at_gte:selectedDate.value?.[0],
-        create_at_lte:selectedDate.value?.[1],
+        create_at_gte:useDateToISOString(selectedDate.value?.[0]),
+        create_at_lte:useDateToISOString(selectedDate.value?.[1],{ endOfDay: true }),
         ...filter.value
       })
     })
@@ -235,8 +235,8 @@
   async function getStatics () {
     const {data,error} = await useFetchApi.get('/checks/total',{
       params:useClean({
-        create_at_gte:selectedDate.value?.[0],
-        create_at_lte:selectedDate.value?.[1],
+        create_at_gte:useDateToISOString(selectedDate.value?.[0]),
+        create_at_lte:useDateToISOString(selectedDate.value?.[1],{ endOfDay: true }),
         ...filter.value
       })
     })

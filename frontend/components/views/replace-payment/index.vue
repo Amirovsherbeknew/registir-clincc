@@ -61,7 +61,7 @@
             @change="GetCheckList"
         />
         </div>
-        <DialogsCancelPayment v-model="dialogVisibly" :check="check"/>
+        <DialogsCancelPayment v-model="dialogVisibly" :check="check" @get-data="GetCheckList"/>
     </Card>
 </template>
 <script setup lang='ts'>

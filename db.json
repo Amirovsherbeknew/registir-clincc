@@ -506,7 +506,7 @@
       "create_at": "2025-05-15T11:05:19.035Z",
       "update_at": "2025-05-15T16:57:11.432Z",
       "totalPrice": 215000,
-      "isPaid": false,
+      "isPaid": true,
       "medServices": [
         45734,
         16389
@@ -541,7 +541,7 @@
       "clientId": 87271,
       "create_at": "2025-05-15T11:07:42.137Z",
       "update_at": "2025-05-15T11:07:42.137Z",
-      "totalPrice": 75000,
+      "totalPrice": 69000,
       "isPaid": true,
       "medServices": [
         45734,
@@ -556,7 +556,13 @@
         "lab",
         "med"
       ],
-      "id": 42853
+      "id": 42853,
+      "replace_payment": {
+        "create_at": "2025-05-18T19:37:55.025Z",
+        "update_at": "2025-05-18T19:37:55.025Z",
+        "reason": "ssss",
+        "price": "1000"
+      }
     },
     {
       "clientId": 59885,
@@ -581,7 +587,7 @@
       "create_at": "2025-05-15T16:43:10.241Z",
       "update_at": "2025-05-15T16:45:07.437Z",
       "totalPrice": 3666,
-      "isPaid": false,
+      "isPaid": true,
       "medServices": [],
       "labTests": [],
       "doctorId": 3,

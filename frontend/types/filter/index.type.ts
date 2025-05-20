@@ -27,6 +27,7 @@ export interface TFilterCheck {
     _page:number,
     _limit:number,
     _order?:string,
+    isPaid?:boolean,
     _sort?:string,
     visitTypes_like?:string
 }

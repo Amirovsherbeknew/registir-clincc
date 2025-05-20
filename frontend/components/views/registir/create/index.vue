@@ -176,7 +176,7 @@
     () => viewCheck.value,
     (val) => {
       if (!val) {
-        window.location.reload()
+        router.push('/registir/create')
       }
     }
   )

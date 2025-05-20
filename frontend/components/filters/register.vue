@@ -13,6 +13,7 @@
             v-model="filter.dateRange"
             type="daterange"
             format="DD-MM-YYYY"
+            value-format="YYYY-MM-DD"
             placeholder="Sanani tanlang"
             class="w-full"
         />
@@ -61,18 +62,15 @@ function handleSearch () {
 
         if (filter.value.dateRange?.length === 2) {
             const [startDate, endDate] = filter.value.dateRange
-
-            const isoStart = new Date(startDate).toISOString()
-            const isoEnd = new Date(endDate).toISOString()
             const query_filter = JSON.parse(JSON.stringify({
                 ...filter.value,
-                create_at_gte: isoStart,
-                create_at_lte: isoEnd,
+                create_at_gte: useDateToISOString(startDate),
+                create_at_lte: useDateToISOString(endDate,{ endOfDay: true }),
             }))
             
             delete query_filter.dateRange
 
-            emit('search', query_filter)
+            emit('search', useClean(query_filter))
             return
         }
         emit('search')
