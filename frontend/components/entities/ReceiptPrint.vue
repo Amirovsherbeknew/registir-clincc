@@ -1,10 +1,11 @@
 <template>
-  <div class="w-full">
+  <div class="w-full" v-loading="loading">
     <div
       id="print-area"
       ref="printSection"
       class="receipt p-4 bg-white rounded-md w-full mx-auto text-sm font-mono"
     >
+      <h2 class="text-center font-bold text-lg mb-2">SAMIRA SHIFO MARKAZI</h2>
       <h2 class="text-center font-bold text-lg mb-2" v-if="data.isPaid">To'lov Cheki</h2>
       <h2 class="text-center font-bold text-lg mb-2" v-else>To'lov uchun chek</h2>
       <h1 class="text-center text-4xl font-semibold text-blue-600 mb-2">{{ data.id }}</h1>
@@ -90,24 +91,32 @@
           <td class="text-right text-xl">{{ useCurrencyFormat(data?.totalPrice)}}</td>
         </tr>
       </table>
+
+      <hr>
+      <p class="mt-4 text-green-500 text-2xl font-medium text-center">
+        {{ useConstant().statusList()?.find(resp => resp.value === (responseStatus || data.status))?.label }}
+      </p>
+
     </div>
     <!-- Кнопка оплаты -->
     <div class="w-full">
       <el-form v-if="role === 'kassir'" :model="form" :rules="useRules('part_pay_price')" ref="formRef">
-        <el-form-item label="To'lov turi:">
-          <el-select v-model="paymentType" placeholder="To'lov turi">
-            <el-option label="To'liq to'lov" value="all"></el-option>
-            <el-option label="Qisman to'lov" value="part"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Miqdori:" prop="part_pay_price"  v-if="paymentType === 'part'">
-          <el-input v-model="form.part_pay_price" placeholder="Miqdori:" v-mask="'###################'"/>
-        </el-form-item>
+        <template v-if="!data?.isPaid && !responsePaid">
+          <el-form-item label="To'lov turi:">
+            <el-select v-model="paymentType" placeholder="To'lov turi">
+              <el-option label="To'liq to'lov" value="all"></el-option>
+              <el-option label="Qisman to'lov" value="part"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="Miqdori:" prop="part_pay_price"  v-if="paymentType === 'part'">
+            <el-input v-model="form.part_pay_price" placeholder="Miqdori:" v-mask="'###################'"/>
+          </el-form-item>
+        </template>
         <el-form-item>
           <template v-if="role === 'kassir'">
             <div class="w-full flex-center">
-              <p v-if="responsePaid || data?.isPaid || data?.is_paid" class="mt-4 text-green-500 text-2xl font-medium text-center">
-                To'langan
+              <p v-if="responsePaid || [ 'approved','cancel_payment'].includes(responseStatus || data?.status)">
+                
               </p>
               <button  type="button"
                 v-else
@@ -122,7 +131,7 @@
       </el-form>
       
       <button type="button"
-        v-if="role === 'operator'"
+        v-if="role === 'operator' || (data.isPaid && [ 'approved','cancel_payment'].includes(responseStatus || data?.status))"
         @click="printSection"
         class="w-full mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
       >
@@ -156,8 +165,9 @@ const formRef = ref()
 const role = getRole()
 const responsePaid = ref(false)
 const paymentType = ref('all')
+const responseStatus = ref()
 const dialogVisible = defineModel()
-
+const loading = ref(false)
 const form = ref({
   part_pay_price:undefined
 })
@@ -210,15 +220,22 @@ async function handlePaid(id) {
     if (resp) {
       if (!validateCheck()) {
         useNotifacation.error('Xatolik','Kiritilgan miqdor qolgan miqdordan ko\'proq')
+        return
       }
+      loading.value = true
       const { data,error } = await useFetchApi.patch(`/checks/${id}`, validateCheck())
       if (!error.value) {
         emit('handleSearch')
         responsePaid.value = data.value.isPaid
+        responseStatus.value = data.value.status
+        setTimeout(() => {
+          loading.value = false
           printSection()
           dialogVisible.value = false
+        },)
       }
     }
+    loading.value = false
   }) 
 }
 

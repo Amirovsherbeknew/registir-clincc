@@ -69,8 +69,10 @@ onMounted(() => {
 })
 
 function handleOpenRoomInfoDialog (val:number) {
-    roomId.value = val
-    dialogVisibly.value = true
+    if (val) {
+        roomId.value = val
+        dialogVisibly.value = true
+    }
 }
 
 function handleOpenDialog () {

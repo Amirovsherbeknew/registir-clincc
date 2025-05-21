@@ -76,8 +76,10 @@ const roleCode = computed(() => {
 })
 
 function handleOpenRoomInfoDialog (val) {
-    roomId.value = val
-    dialogVisibly.value = true
+    if (val) {
+      roomId.value = val
+      dialogVisibly.value = true
+    }
 }
 
 function handleOpenClientInfo (val) {

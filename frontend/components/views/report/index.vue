@@ -208,8 +208,10 @@
   }
 
   function handleOpenRoomInfoDialog (val) {
-    roomId.value = val
-    dialogVisibly.value = true
+    if (val) {
+      roomId.value = val
+      dialogVisibly.value = true
+    }
   }
 
   async function getList () {
