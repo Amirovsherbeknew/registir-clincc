@@ -2,7 +2,7 @@
   <el-aside width="340px" class="h-full rounded-[20px] shadow-xl main-bg-linear">
     <el-scrollbar class="h-full bg-white">
       <div class="p-6">
-        <img src="~/assets/images/logo.png" class="w-[200px] mx-auto transition-transform duration-300 hover:scale-105"/>
+        <img src="~/assets/images/logo1.png" style="transform: scale(0.85);" class="w-[190px] h-[200px] mx-auto transition-transform duration-300 hover:scale-105"/>
       </div>
       <el-menu class="flex flex-col gap-[5px] !px-4">
           <el-menu-item 
