@@ -1,9 +1,9 @@
 <template>
     <div class="py-[16px] flex gap-[10px]">
-        <el-select v-model="filter.buildingId" placeholder="bino bo'yicha qidiruv" class="max-w-[270px]">
+        <el-select v-model="filter.buildingId" placeholder="bino bo'yicha qidiruv" class="max-w-[270px]" clearable @clear="handleSearch">
             <el-option v-for="item in buildingList" :key="`filter_building_${item.id}`" :value="Number(item.id)" :label="item.name"></el-option>
         </el-select>
-        <el-input  v-model="filter.name" placeholder="Xona nomi" class="max-w-[270px]"/>
+        <el-input  v-model="filter.name" placeholder="Xona nomi" class="max-w-[270px]" clearable @clear="handleSearch"/>
         <ActionButton type="search" @click="handleSearch"/>
         <ActionButton type="clear" @click="handleClear"/>
         <ActionButton type="reload" @click="reload"/>

@@ -6,12 +6,13 @@
             format="DD-MM-YYYY"
             placeholder="Sanani tanlang"
             class="max-w-[270px]"
+            clearable @clear="handleSearch"
         />
-        <el-select v-model="filter.status" class="max-w-[270px]" placeholder="Holati">
+        <el-select v-model="filter.status" class="max-w-[270px]" placeholder="Holati" clearable @clear="handleSearch">
             <el-option v-for="(item,idx) in useConstant().statusList()" :key="idx" :value="item.value" :label="item.label"></el-option>
         </el-select>
-        <el-input  v-model="filter.id" placeholder="Check raqam bo'yicha qidiruv" class="max-w-[270px]"/>
-        <el-input  v-model="filter.phone" placeholder="Telefon raqam" class="max-w-[270px]"/>
+        <el-input  v-model="filter.id" placeholder="Check raqam bo'yicha qidiruv" class="max-w-[270px]" clearable @clear="handleSearch"/>
+        <el-input  v-model="filter.phone" placeholder="Telefon raqam" class="max-w-[270px]" clearable @clear="handleSearch"/>
         <ActionButton type="search" @click="handleSearch"/>
         <ActionButton type="clear" @click="handleClear"/>
     </div>

@@ -1,12 +1,12 @@
 <template>
     <div class="py-[16px] flex gap-[10px] w-full">
-        <el-select v-model="filter.visitTypes_like" placeholder="Xizmati turi" class="max-w-[270px]">
+        <el-select v-model="filter.visitTypes_like" placeholder="Xizmati turi" class="max-w-[270px]" clearable @clear="handleSearch">
             <el-option v-for="item in visitTypeList" :key="`filter_building_${item.value}`" :value="item.value" :label="item.label"></el-option>
         </el-select>
-        <el-select v-model="filter.gender" placeholder="Jinsi" class="max-w-[270px]">
+        <el-select v-model="filter.gender" placeholder="Jinsi" class="max-w-[270px]" clearable @clear="handleSearch">
             <el-option v-for="item in genderList" :key="`gender_${item.value}`" :value="item.value" :label="item.label"></el-option>
         </el-select>
-        <el-select v-model="filter.doctorId" placeholder="Shifokorlar" class="max-w-[270px]">
+        <el-select v-model="filter.doctorId" placeholder="Shifokorlar" class="max-w-[270px]" clearable @clear="handleSearch">
             <el-option v-for="item in doctorList" :key="`doctor_${item.id}`" :value="Number(item.id)" :label="`${item.first_name} ${item.last_name} ${item?.middle_name}`"></el-option>
         </el-select>
         <el-date-picker
@@ -16,6 +16,7 @@
             value-format="YYYY-MM-DD"
             placeholder="Sanani tanlang"
             class="w-full"
+            clearable @clear="handleSearch"
         />
         <el-input  v-model="filter.phone" placeholder="Telefon raqami" class="max-w-[270px]"/>
         <ActionButton type="search" @click="handleSearch"/>

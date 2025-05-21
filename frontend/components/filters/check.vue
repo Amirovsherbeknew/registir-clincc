@@ -1,9 +1,9 @@
 <template>
     <div class="py-[16px] flex gap-[10px] w-full">
-        <el-select v-model="filter.visitTypes_like" placeholder="Xizmati turi" class="max-w-[270px]">
+        <el-select v-model="filter.visitTypes_like" placeholder="Xizmati turi" class="max-w-[270px]" clearable @clear="handleSearch">
             <el-option v-for="item in visitTypeList" :key="`filter_building_${item.value}`" :value="item.value" :label="item.label"></el-option>
         </el-select>
-        <el-select v-model="filter.status" class="max-w-[270px]" placeholder="Holati">
+        <el-select v-model="filter.status" class="max-w-[270px]" placeholder="Holati" clearable @clear="handleSearch">
             <el-option v-for="(item,idx) in useConstant().statusList()" :key="idx" :value="item.value" :label="item.label"></el-option>
         </el-select>
         <el-date-picker
@@ -12,6 +12,7 @@
             format="DD-MM-YYYY"
             placeholder="Sanani tanlang"
             class="max-w-[270px]"
+            clearable @clear="handleSearch"
         />
         <ActionButton type="search" @click="handleSearch"/>
         <ActionButton type="clear" @click="handleClear"/>
