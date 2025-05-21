@@ -8,7 +8,7 @@
         <div class="flex gap-[10px]">
           <div class="flex gap-4 flex-wrap">
             <div>
-              <el-select v-model="filter.status" class="min-w-[230px]" placeholder="Holati">
+              <el-select v-model="filter.status" class="min-w-[230px]" placeholder="Holati" clearable @clear="handleSearch">
                   <el-option v-for="(item,idx) in useConstant().statusList()" :key="idx" :value="item.value" :label="item.label"></el-option>
               </el-select>
             </div>
@@ -17,6 +17,7 @@
                 v-model="filter.visitTypes_like"
                 placeholder="Xizmat turini tanlang"
                 clearable
+                @clear="handleSearch"
                 class="min-w-[200px]"
               >
                 <el-option
@@ -32,6 +33,7 @@
                 v-model="filter.roomId"
                 placeholder="Xonani tanlang"
                 clearable
+                @clear="handleSearch"
                 class="min-w-[200px]"
               >
                 <el-option
@@ -47,6 +49,7 @@
                 v-model="filter.doctorId"
                 placeholder="Shifokorni tanlang"
                 clearable
+                @clear="handleSearch"
                 class="min-w-[200px]"
               >
                 <el-option
@@ -65,6 +68,8 @@
               format="DD-MM-YYYY"
               value-format="YYYY-MM-DD"
               class="max-w-[240px]"
+              clearable
+              @clear="handleSearch"
             />
           </div>
           </div>
@@ -127,6 +132,7 @@
       <el-card shadow="hover" class="mt-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Jami</h2>
         <p class="text-gray-600">Umumiy mijozlar: {{ tableData?.pagination?.total || 0 }}</p>
+        <p class="text-gray-600">Qisman to'langan to‘lov: {{ useCurrencyFormat(staticsData?.partTotalSum)}}</p>
         <p class="text-gray-600">Umumiy to‘lov: {{ useCurrencyFormat(staticsData?.totalPrice)}}</p>
       </el-card>
     </div>
@@ -248,7 +254,8 @@
     if (!error.value) {
       console.log(data)
       staticsData.value = {
-        totalPrice:data.value?.total
+        totalPrice:data.value?.total,
+        partTotalSum:data.value?.partTotalSum
       }
     }
   }

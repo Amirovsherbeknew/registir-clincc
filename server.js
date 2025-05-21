@@ -1,12 +1,8 @@
-const cron = require('node-cron');
-const { Low, JSONFile } = require('lowdb');
 const jsonServer = require('json-server');
 const server = jsonServer.create();
-const path = require('path');
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 const url = require('url');
-
 // Middleware: parse body
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
@@ -31,17 +27,6 @@ server.use((req, res, next) => {
   }
   next();
 });
-
-server.get('/reload/room', (req, res) => {
-  try {
-    const message = taskManager();
-    res.json({ message: message });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to update room limits' });
-  }
-});
-
 
 server.get('/checks/total', (req, res) => {
   const db = router.db; // lowdb instance
@@ -88,15 +73,23 @@ server.get('/checks/total', (req, res) => {
     const toDate = new Date(queryParams.create_at_lte);
     filtered = filtered.filter(check => new Date(check.create_at) <= toDate);
   }
-
-  let total = filtered.reduce((sum, check) => sum + (check.totalPrice || 0), 0);
+  let partTotalSum = 0
+  let total = filtered.reduce((sum, check) => {
+    if (check.status === 'part_payment') {
+      const partTotal = check.part_pay_price?.reduce((partSum, item) => partSum + Number(item.price), 0) || 0;
+      partTotalSum = partTotal
+      return sum + partTotal;
+    } else {
+      return sum + (check.totalPrice || 0);
+    }
+  }, 0);
   if (queryParams['visitTypes_like']) {
     filtered = filtered.map(check => {
       return {...check,totalPrice:check[queryParams['visitTypes_like']]}
     })
     total = filtered.reduce((sum, check) => sum + (check.totalPrice || 0), 0);
   }
-  res.json({ total });
+  res.json({ total,partTotalSum });
 });
 
 server.get('/reports', (req, res) => {
@@ -205,42 +198,6 @@ router.render = (req, res) => {
 
 server.use(middlewares);
 server.use(router);
-
-function taskManager() {
-  const db = router.db;
-  const clients = db.get('clients').value();
-  const rooms = db.get('rooms').value();
-
-  const now = new Date();
-  let updatedRooms = {};
-  let updateCount = 0;
-
-  clients.forEach(client => {
-    if (client.end_date && new Date(client.end_date) < now) {
-      const roomId = client.roomId;
-      const room = rooms.find(r => r.id === roomId);
-      if (room && room.limit > 0) {
-        updatedRooms[roomId] = room.limit - 1;
-      }
-    }
-  });
-
-  Object.entries(updatedRooms).forEach(([roomId, newLimit]) => {
-    db.get('rooms')
-      .find({ id: parseInt(roomId) })
-      .assign({ limit: newLimit })
-      .write();
-    updateCount++;
-  });
-
-  console.log(`🔄 [${new Date().toISOString()}] ${updateCount} ta xona limiti yangilandi.`);
-  return `Xonalardagi joylar tekshirildi va ${updateCount} nechta mijozlar olib tashlandi`;
-}
-
-setInterval(() => {
-  taskManager();
-}, 10800000); // 3 soat = 3 * 60 * 60 * 1000 ms
-
 
 server.listen(3001, () => {
   console.log('🚀 JSON Server running at http://localhost:3001');
