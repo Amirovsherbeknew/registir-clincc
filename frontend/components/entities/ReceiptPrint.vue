@@ -5,6 +5,7 @@
       ref="printSection"
       class="receipt p-4 bg-white rounded-md w-full mx-auto text-sm font-mono"
     >
+    <img src="~/assets/images/logo1.png" style="transform: scale(0.85);" class="w-[155px] h-[150px] mx-auto transition-transform duration-300 hover:scale-105"/>
       <h2 class="text-center font-bold text-lg mb-2">SAMIRA SHIFO MARKAZI</h2>
       <h2 class="text-center font-bold text-lg mb-2" v-if="data.isPaid">To'lov Cheki</h2>
       <h2 class="text-center font-bold text-lg mb-2" v-else>To'lov uchun chek</h2>
