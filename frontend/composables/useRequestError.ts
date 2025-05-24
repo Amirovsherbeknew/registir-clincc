@@ -9,28 +9,26 @@ interface ErrorMessage {
 
 interface ResponseError {
   status?: number;
-  _data?: { show: boolean; key: string; messages: string[]; icon_type: "warning" | "error" | "info" }[];
+  _data?: { show: boolean; key: string; message: string;error:string, icon_type: "warning" | "error" | "info" };
   message?: string;
 }
 export const useRequestError = () => {
   const { $i18n } = useNuxtApp();
   const { global_error_notification } = useConfig();
   const errorMessages = new Map([
+    [401, "wasAnError"],
     [400, "wasAnError"],
     [404, "dataNotFound"],
   ]);
 
   function catchingError(response: ResponseError | null | undefined) {
-    if (!response || !response.status) return;
-    if (!global_error_notification) return;
+    console.log(response)
+    if (!response || !response.status) {console.log(1); return};
+    if (!global_error_notification) {console.log(2); return};
     const errorMessageKey = errorMessages.get(response.status);
-    if (!errorMessageKey) return;
+    if (!errorMessageKey) {console.log(3); return};
 
-    const errorMessagesList = response?._data?.filter?.((resp: ErrorMessage) => resp.show) || [];
-    if (!errorMessagesList.length) return;
-
-    const { key, messages, icon_type = "warning" } = errorMessagesList[0];
-    const messageText = key ? `${key}: ${messages}` : messages?.join(", ");
+    const messageText = response._data?.message;
 
     ElMessageBox.alert(messageText, {
       cancelButtonText: "Yopish",
@@ -38,7 +36,7 @@ export const useRequestError = () => {
       customClass: "el-custom-message",
       showCancelButton: true,
       showConfirmButton: false,
-      type: icon_type,
+      type: 'error',
       center: true,
     });
   }

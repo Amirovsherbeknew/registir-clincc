@@ -11,7 +11,6 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   if (['POST', 'PUT'].includes(req.method)) {
     if (!req.body.id) {
-      console.log('l;ksal;ksdl;asdsa')
       req.body.id = Math.floor(10000 + Math.random() * 90000);
     }
 
@@ -26,6 +25,35 @@ server.use((req, res, next) => {
     });
   }
   next();
+});
+
+server.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const users = router.db.get('users').value();
+
+  const user = users.find(u => u.username === username && u.password === password);
+
+  if (user) {
+    res.status(200).json({
+      message: 'Login successful',
+      user: {
+        id: user.id,
+        role:user?.role
+      }
+    });
+  } else {
+    res.status(401).json({ message: 'Foydalanuvchi topilmadi' });
+  }
+});
+
+server.get('/reload/room', (req, res) => {
+  try {
+    taskManager();
+    res.json({ message: 'Room limits updated successfully via manual reload' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to update room limits' });
+  }
 });
 
 server.get('/checks/total', (req, res) => {
@@ -177,6 +205,79 @@ server.get('/reports', (req, res) => {
     }
   });
 });
+
+server.delete('/checks/:id', (req, res) => {
+  const db = router.db;
+
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'ID is required' });
+  }
+
+  const check = db.get('checks').getById(id).value();
+
+  if (!check) {
+    return res.status(404).json({ error: 'Check not found' });
+  }
+
+  db.get('checks').remove({ id:Number(id) }).write();
+
+  res.status(200).json({ message: 'Check deleted successfully' });
+});
+
+server.delete('/clients/:id', (req, res) => {
+  const db = router.db;
+
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'ID is required' });
+  }
+
+  const check = db.get('clients').getById(id).value();
+
+  if (!check) {
+    return res.status(404).json({ error: 'Client not found' });
+  }
+
+  db.get('clients').remove({ id:Number(id) }).write();
+
+  res.status(200).json({ message: 'Client deleted successfully' });
+});
+
+
+function taskManager() {
+  const db = router.db;
+  const clients = db.get('clients').value();
+  const rooms = db.get('rooms').value();
+
+  const now = new Date();
+  let updatedRooms = {};
+  let updateCount = 0;
+
+  clients.forEach(client => {
+    if (client.end_date && new Date(client.end_date) < now) {
+      const roomId = client.roomId;
+      const room = rooms.find(r => r.id === roomId);
+      if (room && room.limit > 0) {
+        updatedRooms[roomId] = room.limit - 1;
+      }
+    }
+  });
+
+  Object.entries(updatedRooms).forEach(([roomId, newLimit]) => {
+    db.get('rooms')
+      .find({ id: parseInt(roomId) })
+      .assign({ limit: newLimit })
+      .write();
+    updateCount++;
+  });
+
+  console.log(`🔄 [${new Date().toISOString()}] ${updateCount} ta xona limiti yangilandi.`);
+  return `Xonalardagi joylar tekshirildi va ${updateCount} nechta mijozlar olib tashlandi`;
+}
+
 // Custom render for pagination
 router.render = (req, res) => {
   const headers = res.getHeaders();

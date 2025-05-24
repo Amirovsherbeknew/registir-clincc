@@ -325,8 +325,16 @@
     }
   }
 
+  async function getReloadRoomList () {
+    const {data,error} = await useFetchApi.get('/reload/room')
+    if (!error.value ) {
+      // useNotifacation.success(data.value?.message)
+      getDictionary()
+    }
+  }
+
   onMounted(() => {
-    getDictionary()
+    getReloadRoomList()
   })
   </script>
   

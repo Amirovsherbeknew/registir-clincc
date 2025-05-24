@@ -21,7 +21,7 @@
                 <template #default="scope">
                     <div class="flex gap-[10px]">
                         <ActionButton type="edit" @click="handleEditOpenDialog(scope.row)"/>
-                        <!-- <ActionButton type="delete" @click="handleDelete(scope.row.id)"/> -->
+                        <ActionButton type="delete" @click="handleDelete(scope.row.id)"/>
                     </div>
                 </template>
             </el-table-column>
@@ -57,9 +57,12 @@ function handleEditOpenDialog (val:TBuildings) {
     dialogVisibly.value = true;
 }
 
-// async function handleDelete (id:number) {
-//     const {data,error} = await useFetchApi.delete(`/buildings/${id}`)
-// }
+async function handleDelete (id:number) {
+    const {data,error} = await useFetchApi.delete(`/buildings/${id}`)
+    if (!error.value) {
+
+    }
+}
 
 async function getBuildings () {
     const {data,error} = await useFetchApi.get<TBuildingsApi>('/buildings',

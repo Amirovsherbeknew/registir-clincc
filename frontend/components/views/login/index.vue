@@ -85,20 +85,15 @@
     if (!loginFormRef.value) return;
     loginFormRef.value.validate((valid:boolean) => {
       if (valid) {
-        console.log('akdasdlklk')
         handleLogin()
       }
     })
   }
   async function handleLogin () {
-    const {data,error} = await useFetchApi.get<usersType[]>('/users');
+    const {data,error}:any = await useFetchApi.post('/login',form.value);
     if (!error.value && data.value) {
-      const findUser = data.value.find((resp:usersType) => resp.username ===  form.value.username && resp.username ===  form.value.username)
-      if (findUser) {
-        setRole(findUser.role)
-        router.push('/')
-      }
-      else useNotifacation.error('Noto\'g\'ri foydalanuvchi malumotlari' )
+      setRole(data.value?.user?.role)
+      router.push('/')
     }
   }
   </script>

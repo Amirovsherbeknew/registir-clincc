@@ -42,12 +42,13 @@
                         {{scope?.row?.client?.phone}}
                     </template>
                 </el-table-column>
-                <el-table-column fixed="right" label="Harakat" width="150" align="center">
+                <el-table-column fixed="right" label="Harakat" width="220" align="center">
                     <template #default="scope">
                         <div class="flex-center gap-[10px]">
                             <ActionButton type="show" :disabled="!scope.row?.visitTypes?.includes('room')" tooltip_title="Xona haqida malumot" @click="handleOpenRoomInfoDialog(scope.row?.client?.roomId)"/>
                             <ActionButton type="file" tooltip_title="Check" @click="handleOpenCheckInfoDialog(scope.row)"/>
                             <ActionButton :disabled="!scope.row?.part_pay_price" type="payment" tooltip_title="To'lovlar tarixi" @click="handleHistoryPaymentDialog(scope.row)"/>
+                            <ActionButton v-if="getRole() === 'super_admin'" type="delete" @click="handleDeleteCheck(scope.row?.id,scope.row?.client?.id)"/>
                         </div>
                     </template>
                 </el-table-column>
@@ -67,6 +68,7 @@
 <script setup lang='ts'>
 import type {rooms} from '~/types/api/rooms.type.ts'
 import type { TFilterCheck } from '~/types/filter/index.type'
+const {getRole} = useToken()
 const filter = ref<TFilterCheck>({
     _page:1,
     _limit:10,
@@ -156,4 +158,20 @@ async function getDictionary() {
         }
     })
 }
+
+async function handleDeleteCheck (id:number,userId:number) {
+    const {data,error} = await useFetchApi.delete(`/checks/${id}`)
+    if (!error.value) {
+        handleDeleteClient(userId)
+    }
+}
+
+async function handleDeleteClient (id:number) {
+    const {data,error} = await useFetchApi.delete(`/clients/${id}`)
+    if (!error.value) {
+        useNotifacation.info('Check o\'chirildi')
+        GetCheckList()
+    }
+}
+
 </script>

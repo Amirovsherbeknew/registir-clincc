@@ -79,10 +79,10 @@
       </table>
 
       <hr>
-      <table class="w-full mt-4 mb-2" v-if="data?.part_pay_price">
+      <table class="w-full mt-4 mb-2" v-if="role === 'kassir' && responseStatus !== 'approved' && (data?.part_pay_price || (!data.isPaid || !responsePaid))">
         <tr>
           <td class="font-bold text-xl w-1/3">Qolgan summa:</td>
-          <td class="text-right text-xl">{{ useCurrencyFormat(data?.totalPrice - (data?.part_pay_price?.reduce((sum,item) => sum + Number(item.price),0) || 0))}}</td>
+          <td class="text-right text-xl">{{ partPaymentsPrice || useCurrencyFormat(data?.totalPrice - (data?.part_pay_price?.reduce((sum,item) => sum + Number(item.price),0) || 0))}}</td>
         </tr>
       </table>
       <hr>
@@ -167,6 +167,7 @@ const role = getRole()
 const responsePaid = ref(false)
 const paymentType = ref('all')
 const responseStatus = ref()
+const partPaymentsPrice = ref()
 const dialogVisible = defineModel()
 const loading = ref(false)
 const form = ref({
@@ -202,7 +203,14 @@ function validateCheck() {
         }]
     }
   }
-
+  if (paymentType.value === 'part' && Number(props.data.totalPrice) - newPayment === Number(totalPaid)) {
+    const updatedPayments = [...existingPayments, { create_at: paymentDate, price: newPayment }];
+    return { 
+      isPaid: true,
+      status:'approved',
+      part_pay_price: updatedPayments 
+    };
+  }
   if (paymentType.value === 'part') {
     const updatedPayments = [...existingPayments, { create_at: paymentDate, price: newPayment }];
     return { 
@@ -229,6 +237,9 @@ async function handlePaid(id) {
         emit('handleSearch')
         responsePaid.value = data.value.isPaid
         responseStatus.value = data.value.status
+        if (data.value.status === 'part_payment') {
+          partPaymentsPrice.value = Number(props.data.totalPrice - data.value?.part_pay_price?.reduce((sum, item) => sum + Number(item.price || 0), 0))
+        }
         setTimeout(() => {
           loading.value = false
           printSection()
