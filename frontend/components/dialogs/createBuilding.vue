@@ -3,7 +3,7 @@
       v-model="dialogVisible"
       width="600"
       on-destroy-close
-      >{{ selected }}
+      >
       <VTitle class="flex-1 mb-[20px]" title="Laboratoriya sinovini o'zgartirish" v-if="selected"/>
       <VTitle class="flex-1 mb-[20px]" title="Laboratoriya sinovini yaratish" v-else/>
       <el-form ref="medserversForm" :model="form" label-position="top" :rules="useRules('buildingForm')">
