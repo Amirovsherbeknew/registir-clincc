@@ -90,6 +90,7 @@ async function handleDelete (id:number) {
     const {error} = await useFetchApi.delete(`/doctors/${id}`);
     if (!error.value) {
         getDoctorsList()
+        useNotifacation.info('O\'chirildi')
     } 
 }
 </script>

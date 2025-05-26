@@ -52,7 +52,7 @@ server.get('/reload/room', (req, res) => {
     res.json({ message: 'Room limits updated successfully via manual reload' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to update room limits' });
+    res.status(500).json({ message: 'Failed to update room limits' });
   }
 });
 
@@ -212,13 +212,13 @@ server.delete('/checks/:id', (req, res) => {
   const { id } = req.params;
 
   if (!id) {
-    return res.status(400).json({ error: 'ID is required' });
+    return res.status(400).json({ message: 'ID is required' });
   }
 
   const check = db.get('checks').getById(id).value();
 
   if (!check) {
-    return res.status(404).json({ error: 'Check not found' });
+    return res.status(400).json({ message: 'Check not found' });
   }
 
   db.get('checks').remove({ id:Number(id) }).write();
@@ -232,13 +232,13 @@ server.delete('/clients/:id', (req, res) => {
   const { id } = req.params;
 
   if (!id) {
-    return res.status(400).json({ error: 'ID is required' });
+    return res.status(400).json({ message: 'ID is required' });
   }
 
   const check = db.get('clients').getById(id).value();
 
   if (!check) {
-    return res.status(404).json({ error: 'Client not found' });
+    return res.status(404).json({ message: 'Client not found' });
   }
 
   db.get('clients').remove({ id:Number(id) }).write();
@@ -252,19 +252,133 @@ server.delete('/medServices/:id', (req, res) => {
   const { id } = req.params;
 
   if (!id) {
-    return res.status(400).json({ error: 'ID is required' });
+    return res.status(400).json({ message: 'ID is required' });
   }
 
-  const check = db.get('medServices').getById(id).value();
+  const medServices = db.get('medServices').getById(id).value();
 
-  if (!check) {
-    return res.status(404).json({ error: 'Client not found' });
+  if (!medServices) {
+    return res.status(404).json({ message: 'Medko\'rik topilmadi' });
   }
 
   db.get('medServices').remove({ id:Number(id) }).write();
 
   res.status(200).json({ message: 'Client deleted successfully' });
 });
+
+server.delete('/labTests/:id', (req, res) => {
+  const db = router.db;
+
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ message: 'ID is required' });
+  }
+
+  const medServices = db.get('labTests').getById(id).value();
+
+  if (!medServices) {
+    return res.status(400).json({ message: 'Laboratoriya testi topilmadi' });
+  }
+
+  db.get('labTests').remove({ id:Number(id) }).write();
+
+  res.status(200).json({ message: 'Client deleted successfully' });
+});
+
+server.delete('/doctors/:id', (req, res) => {
+  const db = router.db;
+
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ message: 'ID is required' });
+  }
+
+  const doctors = db.get('doctors').getById(id).value();
+
+  if (!doctors) {
+    return res.status(400).json({ message: 'Shifokor topilmadi' });
+  }
+
+  db.get('doctors').remove({ id:Number(id) }).write();
+
+  res.status(200).json({ message: 'Client deleted successfully' });
+});
+
+
+server.delete('/buildings/:id', (req, res) => {
+  const db = router.db;
+
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ message: 'ID is required' });
+  }
+
+  const buildings = db.get('buildings').getById(id).value();
+
+  if (!buildings) {
+    return res.status(400).json({ message: 'Bino topilmadi' });
+  }
+
+  db.get('buildings').remove({ id:Number(id) }).write();
+
+  res.status(200).json({ message: 'Client deleted successfully' });
+});
+
+server.delete('/rooms/:id', (req, res) => {
+  const db = router.db;
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'ID is required' });
+  }
+
+  const roomId = Number(id);
+  const room = db.get('rooms').getById(roomId).value();
+
+  if (!room) {
+    return res.status(404).json({ message: 'Yotoqxona topilmadi' });
+  }
+
+  // Clientlarni tekshirish va tozalash
+  const linkedClients = db.get('clients')
+    .filter(client => client.roomId === roomId || client.room?.roomId === roomId)
+    .value();
+
+  linkedClients.forEach(client => {
+    const updatedVisitTypes = client.visitTypes?.filter(type => type !== 'room') || [];
+
+    db.get('clients')
+      .find({ id: client.id })
+      .assign({
+        roomId: null,
+        room: null,
+        visitTypes: updatedVisitTypes,
+      })
+      .write();
+  });
+
+  // Checklarni tekshirish va tozalash
+  const linkedChecks = db.get('checks')
+    .filter(check => check.roomId === roomId)
+    .value();
+
+  linkedChecks.forEach(check => {
+    db.get('checks')
+      .find({ id: check.id })
+      .assign({ roomId: null })
+      .write();
+  });
+
+  // Roomni o‘chirish
+  db.get('rooms').remove({ id: roomId }).write();
+
+  res.status(200).json({ message: 'Room deleted successfully' });
+});
+
+
 
 
 function taskManager() {

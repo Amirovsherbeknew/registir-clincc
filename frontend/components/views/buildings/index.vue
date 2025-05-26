@@ -60,7 +60,8 @@ function handleEditOpenDialog (val:TBuildings) {
 async function handleDelete (id:number) {
     const {data,error} = await useFetchApi.delete(`/buildings/${id}`)
     if (!error.value) {
-
+        getBuildings()
+        useNotifacation.info('O\'chirildi')
     }
 }
 

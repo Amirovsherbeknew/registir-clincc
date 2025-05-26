@@ -61,6 +61,7 @@ async function handleDelete (id:number) {
     const {error} = await useFetchApi.delete(`/medServices/${id}`);
     if (!error.value) {
         getMedservers()
+        useNotifacation.info('O\'chirildi')
     } 
 }
 </script>

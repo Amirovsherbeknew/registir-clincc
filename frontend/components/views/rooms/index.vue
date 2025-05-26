@@ -97,6 +97,7 @@ async function handleDelete (id:number) {
     const {error} = await useFetchApi.delete(`/rooms/${id}`);
     if (!error.value) {
         getRoomList()
+        useNotifacation.info('O\'chirildi')
     } 
 }
 </script>

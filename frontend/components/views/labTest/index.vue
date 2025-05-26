@@ -61,6 +61,7 @@ async function handleDelete (id:number) {
     const {error} = await useFetchApi.delete(`/labTests/${id}`);
     if (!error.value) {
         getLabTest()
+        useNotifacation.info('O\'chirildi')
     } 
 }
 </script>
