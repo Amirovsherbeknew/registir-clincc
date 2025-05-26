@@ -1,24 +1,9 @@
 {
   "users": [
-    {
-      "id": "1",
-      "username": "operator",
-      "password": "qweasdzxc",
-      "role": "operator"
-    },
-    {
-      "id": "1",
-      "username": "kassir",
-      "password": "qweasdzxc",
-      "role": "kassir"
-    },
-    {
-      "id": "1",
-      "username": "admin",
-      "password": "qweasdzxc",
-      "role": "super_admin"
-    }
-  ],
+  { "id": 1, "username": "operator", "password": "097531", "role": "operator" },
+  { "id": 2, "username": "kassir", "password": "qwert12345", "role": "kassir" },
+  { "id": 3, "username": "admin", "password": "samiraofficial", "role": "super_admin" }
+],
   "medServices": [
     {
       "create_at": "2025-05-06T09:43:52.223Z",
