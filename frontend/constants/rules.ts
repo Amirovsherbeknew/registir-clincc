@@ -5,7 +5,7 @@ export const rules = {
     },
     createForm:{
         last_name:[{required:true,message:''},{validator: useTrim(),trigger: 'blur'}],
-        first_name:[{required:false,message:''},{validator: useTrim(),trigger: 'blur'}],
+        first_name:[{required:false,message:''}],
         middle_name:[{required:false,message:''}],
         phone:[{required:false,message:''}],
         gender:[{required:false,message:'Jinsini tanlang'}],
