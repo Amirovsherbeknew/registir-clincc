@@ -6,56 +6,56 @@
       class="receipt p-4 bg-white rounded-md w-full mx-auto text-sm font-mono"
     >
     <img src="~/assets/images/logo1.png" style="transform: scale(0.85);" class="w-[155px] h-[150px] mx-auto transition-transform duration-300 hover:scale-105"/>
-      <h2 class="text-center font-bold text-lg mb-2">SAMIRA SHIFO MARKAZI</h2>
-      <h2 class="text-center font-bold text-lg mb-2" v-if="data.isPaid">To'lov Cheki</h2>
-      <h2 class="text-center font-bold text-lg mb-2" v-else>To'lov uchun chek</h2>
-      <h1 class="text-center text-4xl font-semibold text-blue-600 mb-2">{{ data.id }}</h1>
+      <h2 class="text-center font-bold text-[#000] text-lg mb-2">SAMIRA SHIFO MARKAZI</h2>
+      <h2 class="text-center font-bold text-[#000] text-lg mb-2" v-if="data.isPaid">To'lov Cheki</h2>
+      <h2 class="text-center font-bold text-[#000] text-lg mb-2" v-else>To'lov uchun chek</h2>
+      <h1 class="text-center text-4xl font-bold text-[#000] mb-2">{{ data.id }}</h1>
       
       <!-- Используем таблицу для гарантированного разделения -->
       <table class="w-full mb-2">
         <tr>
-          <td class="font-bold w-1/3">Ism:</td>
-          <td class="text-right">{{ data?.clientInfo?.first_name }}</td>
+          <td class="font-bold text-[#000] w-1/3">Ism:</td>
+          <td class="text-right text-[#000]">{{ data?.clientInfo?.first_name }}</td>
         </tr>
         <tr>
-          <td class="font-bold">Familiya:</td>
-          <td class="text-right">{{ data?.clientInfo?.last_name }}</td>
+          <td class="font-bold text-[#000]">Familiya:</td>
+          <td class="text-right text-[#000]">{{ data?.clientInfo?.last_name }}</td>
         </tr>
         <tr>
-          <td class="font-bold">Jinsi:</td>
-          <td class="text-right">{{ useConstant().gender(data?.clientInfo?.gender)?.label }}</td>
+          <td class="font-bold text-[#000]">Jinsi:</td>
+          <td class="text-right text-[#000]">{{ useConstant().gender(data?.clientInfo?.gender)?.label }}</td>
         </tr>
         <tr>
-          <td class="font-bold">Telefon:</td>
-          <td class="text-right">{{ data?.clientInfo?.phone }}</td>
+          <td class="font-bold text-[#000]">Telefon:</td>
+          <td class="text-right text-[#000]">{{ data?.clientInfo?.phone }}</td>
         </tr>
         <tr v-if="data.isPaid">
-          <td class="font-bold">To'lov summasi:</td>
-          <td class="text-right">{{ data.amount }} so'm</td>
+          <td class="font-bold text-[#000]">To'lov summasi:</td>
+          <td class="text-right text-[#000]">{{ data.amount }} so'm</td>
         </tr>
         <tr>
-          <td class="font-bold">Sana:</td>
-          <td class="text-right">{{ useDateFormat(data.create_at || props.data.date) }}</td>
+          <td class="font-bold text-[#000]">Sana:</td>
+          <td class="text-right font-bold text-[#000]">{{ useDateFormat(data.create_at || props.data.date) }}</td>
         </tr>
       </table>
       
       <hr>
-      <p class="font-bold my-2">Xizmatlar:</p>
+      <p class="font-bold my-2 text-[#000]">Xizmatlar:</p>
       <hr>
       
       <!-- Медицинские услуги -->
       <table class="w-full" v-if="data?.clientInfo?.visitTypes.includes('med')">
         <tr v-for="item in data?.clientInfo.medServices" class="my-1">
-          <td class="font-bold w-2/3">{{item.name}}:</td>
-          <td class="text-right">{{ useCurrencyFormat(item.price) }}</td>
+          <td class="font-bold w-2/3 text-[#000]">{{item.name}}:</td>
+          <td class="text-right text-[#000]">{{ useCurrencyFormat(item.price) }}</td>
         </tr>
       </table>
       
       <!-- Услуги проживания -->
       <table class="w-full" v-if="data?.clientInfo?.visitTypes.includes('room')">
         <tr class="my-1">
-          <td class="font-bold w-1/2">Yotoqxona:</td>
-          <td class="text-right">
+          <td class="font-bold w-1/2 text-[#000]">Yotoqxona:</td>
+          <td class="text-right text-[#000]">
             {{ Number(data?.clientInfo?.room?.priceDay) }} x 
             {{ data?.clientInfo?.room?.days }} = 
             {{ useCurrencyFormat(Number(data?.clientInfo?.room?.price)) }}
@@ -66,35 +66,35 @@
       <!-- Лабораторные тесты -->
       <table class="w-full" v-if="data?.clientInfo?.visitTypes.includes('lab')">
         <tr v-for="item in data?.clientInfo.labTests" class="my-1">
-          <td class="font-bold w-2/3">{{item.name}}:</td>
-          <td class="text-right">{{ useCurrencyFormat(item.price) }}</td>
+          <td class="font-bold w-2/3 text-[#000]">{{item.name}}:</td>
+          <td class="text-right text-[#000]">{{ useCurrencyFormat(item.price) }}</td>
         </tr>
       </table>
       
       <table class="w-full" v-if="data?.clientInfo?.doctorInfo">
         <tr class="my-1">
-          <td class="font-bold w-2/3">Shifokor:</td>
-          <td class="text-right">{{ data?.clientInfo?.doctorInfo?.first_name }} {{ data?.clientInfo?.doctorInfo?.last_name }} {{ data?.clientInfo?.doctorInfo?.middle_name }}</td>
+          <td class="font-bold w-2/3 text-[#000]">Shifokor:</td>
+          <td class="text-right text-[#000]">{{ data?.clientInfo?.doctorInfo?.first_name }} {{ data?.clientInfo?.doctorInfo?.last_name }} {{ data?.clientInfo?.doctorInfo?.middle_name }}</td>
         </tr>
       </table>
 
       <hr>
       <table class="w-full mt-4 mb-2" v-if="role === 'kassir' && responseStatus !== 'approved' && (data?.part_pay_price || (!data.isPaid || !responsePaid))">
         <tr>
-          <td class="font-bold text-xl w-1/3">Qolgan summa:</td>
-          <td class="text-right text-xl">{{ partPaymentsPrice || useCurrencyFormat(data?.totalPrice - (data?.part_pay_price?.reduce((sum,item) => sum + Number(item.price),0) || 0))}}</td>
+          <td class="font-bold text-xl text-[#000] w-1/3">Qolgan summa:</td>
+          <td class="text-right text-xl text-[#000]">{{ partPaymentsPrice || useCurrencyFormat(data?.totalPrice - (data?.part_pay_price?.reduce((sum,item) => sum + Number(item.price),0) || 0))}}</td>
         </tr>
       </table>
       <hr>
       <table class="w-full mt-4">
         <tr>
-          <td class="font-bold text-xl w-1/3">Jami:</td>
-          <td class="text-right text-xl">{{ useCurrencyFormat(data?.totalPrice)}}</td>
+          <td class="font-bold text-xl w-1/3 text-[#000]">Jami:</td>
+          <td class="text-right text-xl text-[#000]">{{ useCurrencyFormat(data?.totalPrice)}}</td>
         </tr>
       </table>
 
       <hr>
-      <p class="mt-4 text-green-500 text-2xl font-medium text-center">
+      <p class="mt-4 text-[#000] text-2xl font-medium text-center">
         {{ useConstant().statusList()?.find(resp => resp.value === (responseStatus || data.status))?.label }}
       </p>
 
