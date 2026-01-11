@@ -94,7 +94,7 @@
       </table>
 
       <hr>
-      <p class="mt-4 text-[#000] text-2xl font-bold text-center">
+      <p class="mt-4 text-[#000] text-2xl font-bold text-center border-[2px] rounded-[10px]">
         {{ useConstant().statusList()?.find(resp => resp.value === (responseStatus || data.status))?.label }}
       </p>
 
