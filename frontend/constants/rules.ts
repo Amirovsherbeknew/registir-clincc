@@ -5,10 +5,10 @@ export const rules = {
     },
     createForm:{
         last_name:[{required:true,message:''},{validator: useTrim(),trigger: 'blur'}],
-        first_name:[{required:true,message:''},{validator: useTrim(),trigger: 'blur'}],
+        first_name:[{required:false,message:''},{validator: useTrim(),trigger: 'blur'}],
         middle_name:[{required:false,message:''}],
         phone:[{required:false,message:''}],
-        gender:[{required:true,message:'Jinsini tanlang'}],
+        gender:[{required:false,message:'Jinsini tanlang'}],
         servers_type:[{required:true,message:''}],
         medServices:[{required:true,message:''}],
         visitTypes:[{required:true,message:'Murojat turini tanlang'}],
