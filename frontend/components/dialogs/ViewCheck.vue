@@ -1,6 +1,6 @@
 <template>
     <el-dialog v-model="dialogVisible"
-      width="420"
+      width="388"
       on-destroy-close>
         <ReceiptPrint v-if="dialogVisible" v-model="dialogVisible" :data="info" @handleSearch="emit('handleSearch')"/>
     </el-dialog>
