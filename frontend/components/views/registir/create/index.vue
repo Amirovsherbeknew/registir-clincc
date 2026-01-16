@@ -297,9 +297,11 @@
     }
   }
   async function createCheck () {
-    const {data,error} = await useFetchApi.post('/checks',{...checkData.value,status:'pending'})
+    const {data,error} = await useFetchApi.post('/check-create',{...checkData.value,status:'pending'})
     if (!error.value) {
-      checkData.value = {...checkData.value,id:data.value?.id}
+      checkData.value = {...checkData.value,id:data.value?.id,
+        queue:data?.value?.user?.queue
+      }
       viewCheck.value = true;
       useNotifacation.success('Muvaffaqiyatli yaratildi')
     }

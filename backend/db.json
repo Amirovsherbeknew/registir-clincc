@@ -1,266 +1,2153 @@
 {
   "users": [
-  { "id": 1, "username": "operator", "password": "097531", "role": "operator" },
-  { "id": 2, "username": "kassir", "password": "qwert12345", "role": "kassir" },
-  { "id": 3, "username": "admin", "password": "samiraofficial", "role": "super_admin" }
-],
-  "medServices": [
     {
-      "create_at": "2025-05-06T09:43:52.223Z",
-      "update_at": "2025-05-06T09:44:05.173Z",
-      "name": "asdsa",
-      "price": "20000",
-      "id": 45734
+      "id": 1,
+      "foydalanuvchi nomi": "operator",
+      "parol": "097531",
+      "rol": "operator"
     },
     {
-      "create_at": "2025-05-06T09:43:57.319Z",
-      "update_at": "2025-05-06T09:44:13.061Z",
-      "name": "asdasd",
-      "price": "35000",
-      "id": 16389
+      "id": 2,
+      "foydalanuvchi nomi": "kassir",
+      "parol": "qwert12345",
+      "role": "kassir"
+    },
+    {
+      "id": 3,
+      "foydalanuvchi nomi": "admin",
+      "password": "samiraofficial",
+      "rol": "super_admin"
+    }
+  ],
+  "medServices": [
+    {
+      "create_at": "2025-05-26T16:51:19.459Z",
+      "update_at": "2026-01-11T14:33:44.144Z",
+      "name": "Nevrologiya",
+      "price": "70000",
+      "id": 41589
+    },
+    {
+      "create_at": "2025-05-26T16:51:31.891Z",
+      "update_at": "2026-01-11T14:33:56.192Z",
+      "name": "Kardiologiya",
+      "price": "70000",
+      "id": 96382
+    },
+    {
+      "create_at": "2025-05-26T16:51:44.765Z",
+      "update_at": "2026-01-11T14:33:58.976Z",
+      "name": "Urologiya",
+      "price": "70000",
+      "id": 39783
+    },
+    {
+      "create_at": "2025-05-26T16:52:00.503Z",
+      "update_at": "2026-01-11T14:34:02.312Z",
+      "name": "Genikologiya ",
+      "price": "70000",
+      "id": 63957
+    },
+    {
+      "create_at": "2025-05-26T16:54:51.513Z",
+      "update_at": "2026-01-11T14:34:05.888Z",
+      "name": "Gastroenterolog",
+      "price": "70000",
+      "id": 69628
+    },
+    {
+      "create_at": "2025-05-26T16:55:17.511Z",
+      "update_at": "2026-01-11T14:34:08.704Z",
+      "name": "Proktologiya",
+      "price": "70000",
+      "id": 57151
+    },
+    {
+      "create_at": "2025-05-26T16:55:26.445Z",
+      "update_at": "2026-01-11T14:35:09.649Z",
+      "name": "Endokrinologiya",
+      "price": "70000",
+      "id": 70245
+    },
+    {
+      "create_at": "2025-05-26T16:55:46.951Z",
+      "update_at": "2026-01-11T14:34:16.888Z",
+      "name": "Terapiya",
+      "price": "70000",
+      "id": 44060
+    },
+    {
+      "create_at": "2025-05-26T16:55:58.559Z",
+      "update_at": "2026-01-11T14:33:29.576Z",
+      "name": "Nefrologiya",
+      "price": "70000",
+      "id": 30829
+    },
+    {
+      "create_at": "2025-05-26T16:56:32.667Z",
+      "update_at": "2026-01-11T14:22:59.257Z",
+      "name": "Bolalar Nevrologiyasi",
+      "price": "70000",
+      "id": 46778
+    },
+    {
+      "create_at": "2025-05-27T07:16:57.857Z",
+      "update_at": "2026-01-11T14:22:30.953Z",
+      "name": " Видеоэндоскопия (зонд)",
+      "price": "150000",
+      "id": 90397
+    },
+    {
+      "create_at": "2025-05-27T07:17:10.008Z",
+      "update_at": "2026-01-11T14:28:04.504Z",
+      "name": "Видеоколоноскопия ",
+      "price": "250000",
+      "id": 51407
+    },
+    {
+      "create_at": "2025-05-27T07:17:30.312Z",
+      "update_at": "2026-01-11T14:33:38.776Z",
+      "name": "Proktologiya",
+      "price": "80000",
+      "id": 38130
+    },
+    {
+      "create_at": "2025-05-27T07:17:39.960Z",
+      "update_at": "2025-05-27T07:17:39.960Z",
+      "name": " ЭхоКГ (УЗИ сердца) ",
+      "price": "120000",
+      "id": 61455
+    },
+    {
+      "create_at": "2025-05-27T07:18:21.128Z",
+      "update_at": "2025-05-27T07:18:21.128Z",
+      "name": "ТМС (транскраниальная магнитная стимуляция)",
+      "price": "120000",
+      "id": 61134
+    },
+    {
+      "create_at": "2026-01-11T14:23:47.490Z",
+      "update_at": "2026-01-11T14:51:39.097Z",
+      "name": "ЭКГ (электрокардиограмма",
+      "price": "30000",
+      "id": 18737
+    },
+    {
+      "create_at": "2026-01-11T14:26:30.857Z",
+      "update_at": "2026-01-11T14:26:30.857Z",
+      "name": "Lor-1",
+      "price": "70000",
+      "id": 71567
+    },
+    {
+      "create_at": "2026-01-11T14:26:41.080Z",
+      "update_at": "2026-01-11T14:26:41.080Z",
+      "name": "Lor-2",
+      "price": "100000",
+      "id": 72912
+    },
+    {
+      "create_at": "2026-01-11T14:26:51.609Z",
+      "update_at": "2026-01-11T14:26:51.609Z",
+      "name": "Lor-3",
+      "price": "150000",
+      "id": 14825
+    },
+    {
+      "create_at": "2026-01-11T14:27:13.144Z",
+      "update_at": "2026-01-11T14:51:03.904Z",
+      "name": " Рентгенография ",
+      "price": "80000",
+      "id": 56620
+    },
+    {
+      "create_at": "2026-01-11T14:31:39.081Z",
+      "update_at": "2026-01-11T14:31:39.081Z",
+      "name": "ЭЭГ (электроэнцефалография)",
+      "price": "80000",
+      "id": 88231
+    },
+    {
+      "create_at": "2026-01-11T14:36:10.833Z",
+      "update_at": "2026-01-11T14:36:10.833Z",
+      "name": "UZD To`liq",
+      "price": "150000",
+      "id": 19138
+    },
+    {
+      "create_at": "2026-01-11T14:36:53.536Z",
+      "update_at": "2026-01-11T14:36:53.536Z",
+      "name": "UZD-Jigar (O`t qopi , oob, taloq)",
+      "price": "80000",
+      "id": 21257
+    },
+    {
+      "create_at": "2026-01-11T14:37:14.770Z",
+      "update_at": "2026-01-11T14:37:14.770Z",
+      "name": "UZD- BUyrak+Prostata",
+      "price": "80000",
+      "id": 58036
+    },
+    {
+      "create_at": "2026-01-11T14:37:51.352Z",
+      "update_at": "2026-01-11T14:37:51.352Z",
+      "name": "UZD-70000",
+      "price": "70000",
+      "id": 67593
+    },
+    {
+      "create_at": "2026-01-11T14:38:12.648Z",
+      "update_at": "2026-01-11T14:38:12.648Z",
+      "name": "UZD-Ko`krak bezi",
+      "price": "80000",
+      "id": 22516
+    },
+    {
+      "create_at": "2026-01-11T14:38:25.840Z",
+      "update_at": "2026-01-11T14:38:25.840Z",
+      "name": "UZD-Yorg`oq",
+      "price": "80000",
+      "id": 74864
+    },
+    {
+      "create_at": "2026-01-11T14:38:52.632Z",
+      "update_at": "2026-01-11T14:38:52.632Z",
+      "name": "UZD-Buyrak ",
+      "price": "65000",
+      "id": 63414
+    },
+    {
+      "create_at": "2026-01-11T14:39:16.328Z",
+      "update_at": "2026-01-11T14:39:16.328Z",
+      "name": "UZD-bachadon +Tuxumdon",
+      "price": "70000",
+      "id": 43816
+    },
+    {
+      "create_at": "2026-01-11T14:39:31.792Z",
+      "update_at": "2026-01-11T14:39:31.792Z",
+      "name": "Qalqonsimon bez ",
+      "price": "60000",
+      "id": 55807
+    },
+    {
+      "create_at": "2026-01-11T14:39:58.169Z",
+      "update_at": "2026-01-11T14:39:58.169Z",
+      "name": "UZD-Yuza a`zolari",
+      "price": "60000",
+      "id": 30117
+    },
+    {
+      "create_at": "2026-01-11T14:40:16.184Z",
+      "update_at": "2026-01-11T14:40:16.184Z",
+      "name": "UZD-Folekulametriya",
+      "price": "50000",
+      "id": 65081
     }
   ],
   "buildings": [
     {
-      "create_at": "2025-05-06T10:52:51.728Z",
-      "update_at": "2025-05-06T15:27:12.794Z",
-      "name": "B bino",
-      "per_room": 10,
-      "id": 84900,
-      "is_active": true
+      "create_at": "2025-05-26T14:10:36.972Z",
+      "update_at": "2025-05-26T14:10:36.972Z",
+      "name": "1",
+      "per_room": 28,
+      "id": 81264
     },
     {
-      "create_at": "2025-05-06T10:54:42.720Z",
-      "update_at": "2025-05-06T10:54:42.720Z",
-      "name": "sss",
-      "per_room": 4,
-      "id": 28807,
-      "is_active": false
+      "create_at": "2025-05-26T14:11:08.131Z",
+      "update_at": "2025-05-26T14:11:08.131Z",
+      "name": "2",
+      "per_room": 27,
+      "id": 62500
     },
     {
-      "create_at": "2025-05-06T15:39:07.784Z",
-      "update_at": "2025-05-06T15:39:07.784Z",
-      "name": "asd",
-      "per_room": 4,
-      "id": 16393
-    },
-    {
-      "create_at": "2025-05-06T15:39:11.994Z",
-      "update_at": "2025-05-06T15:39:11.994Z",
-      "name": "asdsadasd",
-      "per_room": 5,
-      "id": 19286
-    },
-    {
-      "create_at": "2025-05-06T15:39:17.266Z",
-      "update_at": "2025-05-06T15:39:17.266Z",
-      "name": "asdsadsad",
-      "per_room": 4,
-      "id": 58562
-    },
-    {
-      "create_at": "2025-05-06T15:39:21.097Z",
-      "update_at": "2025-05-06T15:39:21.097Z",
-      "name": "adasdsadsad",
-      "per_room": 2,
-      "id": 78698
-    },
-    {
-      "create_at": "2025-05-06T15:39:41.962Z",
-      "update_at": "2025-05-06T15:39:41.962Z",
-      "name": "aasdasdas",
-      "per_room": 6,
-      "id": 33765
-    },
-    {
-      "create_at": "2025-05-06T15:39:50.217Z",
-      "update_at": "2025-05-06T15:39:50.217Z",
-      "name": "asdasdsadsadsadasd",
-      "per_room": 7,
-      "id": 16474
-    },
-    {
-      "create_at": "2025-05-06T15:39:55.545Z",
-      "update_at": "2025-05-06T15:39:55.545Z",
-      "name": "ewqeqwe2232",
-      "per_room": 4,
-      "id": 17035
-    },
-    {
-      "create_at": "2025-05-06T15:40:01.233Z",
-      "update_at": "2025-05-06T15:40:01.233Z",
-      "name": "sdfdsfdsfdsfds34343",
-      "per_room": 7,
-      "id": 94554
-    },
-    {
-      "create_at": "2025-05-06T15:40:22.873Z",
-      "update_at": "2025-05-06T15:40:22.873Z",
-      "name": "adsadsa",
-      "per_room": 7,
-      "id": 74371
-    },
-    {
-      "create_at": "2025-05-13T11:46:49.502Z",
-      "update_at": "2025-05-13T11:46:49.502Z",
-      "name": "12asd",
-      "per_room": 1,
-      "id": 60393
+      "create_at": "2025-05-26T14:16:49.969Z",
+      "update_at": "2025-05-27T14:46:39.071Z",
+      "name": "3",
+      "per_room": 56,
+      "id": 21102
     }
   ],
   "rooms": [
     {
-      "id": 1,
-      "create_at": "2025-05-07T03:41:34.746Z",
-      "update_at": "2025-05-07T03:41:34.746Z",
-      "name": "standart",
-      "people_per_room": 2,
-      "pricePerDay": "20000",
-      "buildingId": 84900,
-      "limit": 0,
-      "is_full": false
+      "create_at": "2025-05-26T14:52:28.431Z",
+      "update_at": "2025-05-26T16:10:07.998Z",
+      "is_full": false,
+      "name": "200",
+      "people_per_room": 3,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 18883
     },
     {
-      "id": 2,
-      "create_at": "2025-05-13T04:29:22.567Z",
-      "update_at": "2025-05-13T04:29:22.567Z",
-      "name": "sss",
-      "people_per_room": 5,
-      "pricePerDay": "120000",
-      "buildingId": 84900,
+      "create_at": "2025-05-26T16:08:37.860Z",
+      "update_at": "2025-05-26T16:08:37.860Z",
       "is_full": false,
+      "name": "202",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 49616
+    },
+    {
+      "create_at": "2025-05-26T16:08:51.426Z",
+      "update_at": "2025-05-26T16:08:51.426Z",
+      "is_full": false,
+      "name": "203",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 38318
+    },
+    {
+      "create_at": "2025-05-26T16:09:02.043Z",
+      "update_at": "2025-05-26T16:09:02.043Z",
+      "is_full": false,
+      "name": "204",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 77132
+    },
+    {
+      "create_at": "2025-05-26T16:09:26.232Z",
+      "update_at": "2025-05-26T16:09:26.232Z",
+      "is_full": false,
+      "name": "205",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 99219
+    },
+    {
+      "create_at": "2025-05-26T16:10:28.683Z",
+      "update_at": "2025-05-26T16:10:28.683Z",
+      "is_full": false,
+      "name": "206",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 76483
+    },
+    {
+      "create_at": "2025-05-26T16:10:38.351Z",
+      "update_at": "2025-05-26T16:10:38.351Z",
+      "is_full": false,
+      "name": "207",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 22759
+    },
+    {
+      "create_at": "2025-05-26T16:10:50.924Z",
+      "update_at": "2025-05-26T16:10:50.924Z",
+      "is_full": false,
+      "name": "208",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 14420
+    },
+    {
+      "create_at": "2025-05-26T16:11:00.161Z",
+      "update_at": "2025-05-26T16:11:00.161Z",
+      "is_full": false,
+      "name": "209",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 54374
+    },
+    {
+      "create_at": "2025-05-26T16:11:09.480Z",
+      "update_at": "2025-05-26T16:11:09.480Z",
+      "is_full": false,
+      "name": "210",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 92055
+    },
+    {
+      "create_at": "2025-05-26T16:11:19.437Z",
+      "update_at": "2025-05-26T16:11:19.437Z",
+      "is_full": false,
+      "name": "211",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 93998,
       "limit": 0
     },
     {
-      "id": 3,
-      "create_at": "2025-05-13T04:30:36.901Z",
-      "update_at": "2025-05-13T04:30:36.901Z",
-      "name": "asd",
-      "people_per_room": 5,
-      "pricePerDay": "1222",
-      "buildingId": 84900,
-      "is_full": false
+      "create_at": "2025-05-26T16:11:30.912Z",
+      "update_at": "2025-05-26T16:11:30.912Z",
+      "is_full": false,
+      "name": "212",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 13136
     },
     {
-      "id": 4,
-      "create_at": "2025-05-13T04:31:02.790Z",
-      "update_at": "2025-05-13T04:31:02.790Z",
-      "name": "asdas",
-      "people_per_room": 5,
-      "pricePerDay": "1232",
-      "buildingId": 84900,
-      "is_full": false
+      "create_at": "2025-05-26T16:11:37.710Z",
+      "update_at": "2025-05-26T16:11:37.710Z",
+      "is_full": false,
+      "name": "213",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 14933
     },
     {
-      "id": 5,
-      "create_at": "2025-05-13T04:31:36.723Z",
-      "update_at": "2025-05-13T04:31:36.723Z",
-      "name": "asda",
-      "people_per_room": 5,
-      "pricePerDay": "123",
-      "buildingId": 84900,
-      "is_full": false
+      "create_at": "2025-05-26T16:11:46.368Z",
+      "update_at": "2025-05-26T16:11:46.368Z",
+      "is_full": false,
+      "name": "214",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 54083
     },
     {
-      "id": 6,
-      "create_at": "2025-05-13T04:35:20.711Z",
-      "update_at": "2025-05-13T04:35:20.711Z",
-      "name": "asd",
-      "people_per_room": 4,
-      "pricePerDay": "212",
-      "buildingId": 28807,
-      "is_full": false
+      "create_at": "2025-05-26T16:11:56.322Z",
+      "update_at": "2025-05-26T16:11:56.322Z",
+      "is_full": false,
+      "name": "215",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 26596
     },
     {
-      "create_at": "2025-05-13T11:47:04.932Z",
-      "update_at": "2025-05-13T11:47:04.932Z",
-      "name": "asdasd",
+      "create_at": "2025-05-26T16:12:04.773Z",
+      "update_at": "2025-05-26T16:12:04.773Z",
+      "is_full": false,
+      "name": "216",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 13916
+    },
+    {
+      "create_at": "2025-05-26T16:13:35.295Z",
+      "update_at": "2025-05-26T16:13:35.295Z",
+      "is_full": false,
+      "name": "221",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 46204
+    },
+    {
+      "create_at": "2025-05-26T16:14:05.492Z",
+      "update_at": "2025-05-26T16:14:21.186Z",
+      "is_full": false,
+      "name": "222",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 72960
+    },
+    {
+      "create_at": "2025-05-26T16:14:14.968Z",
+      "update_at": "2025-05-26T16:14:14.968Z",
+      "is_full": false,
+      "name": "223",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 88900
+    },
+    {
+      "create_at": "2025-05-26T16:14:39.887Z",
+      "update_at": "2025-05-26T16:14:39.887Z",
+      "is_full": false,
+      "name": "224",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 24422
+    },
+    {
+      "create_at": "2025-05-26T16:14:47.476Z",
+      "update_at": "2025-05-26T16:14:47.476Z",
+      "is_full": false,
+      "name": "225",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 37133
+    },
+    {
+      "create_at": "2025-05-26T16:14:54.809Z",
+      "update_at": "2025-05-26T16:14:54.809Z",
+      "is_full": false,
+      "name": "226",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 96182
+    },
+    {
+      "create_at": "2025-05-26T16:15:02.304Z",
+      "update_at": "2025-05-26T16:15:02.304Z",
+      "is_full": false,
+      "name": "227",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 76217
+    },
+    {
+      "create_at": "2025-05-26T16:15:08.973Z",
+      "update_at": "2025-05-26T16:15:08.973Z",
+      "is_full": false,
+      "name": "228",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 23556
+    },
+    {
+      "create_at": "2025-05-26T16:15:14.793Z",
+      "update_at": "2025-05-26T16:15:14.793Z",
+      "is_full": false,
+      "name": "229",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 95943
+    },
+    {
+      "create_at": "2025-05-26T16:15:21.393Z",
+      "update_at": "2025-05-26T16:15:21.393Z",
+      "is_full": false,
+      "name": "230",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 50377
+    },
+    {
+      "create_at": "2025-05-26T16:16:06.775Z",
+      "update_at": "2025-05-26T16:16:06.775Z",
+      "is_full": false,
+      "name": "300",
       "people_per_room": 3,
-      "pricePerDay": "1222",
-      "buildingId": 60393,
-      "id": 26952,
-      "is_full": false
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 41706
+    },
+    {
+      "create_at": "2025-05-26T16:16:15.612Z",
+      "update_at": "2025-05-26T16:16:15.612Z",
+      "is_full": false,
+      "name": "301",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 27126
+    },
+    {
+      "create_at": "2025-05-26T16:16:28.383Z",
+      "update_at": "2025-05-26T16:16:28.383Z",
+      "is_full": false,
+      "name": "302",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 81264,
+      "id": 39727
+    },
+    {
+      "create_at": "2025-05-26T16:16:42.747Z",
+      "update_at": "2025-05-26T16:16:42.747Z",
+      "is_full": false,
+      "name": "303",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 81264,
+      "id": 79730
+    },
+    {
+      "create_at": "2025-05-26T16:16:51.714Z",
+      "update_at": "2025-05-26T16:16:51.714Z",
+      "is_full": false,
+      "name": "304",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 81264,
+      "id": 13700
+    },
+    {
+      "create_at": "2025-05-26T16:17:00.874Z",
+      "update_at": "2025-05-26T16:17:00.874Z",
+      "is_full": false,
+      "name": "305",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 81264,
+      "id": 27731
+    },
+    {
+      "create_at": "2025-05-26T16:17:28.833Z",
+      "update_at": "2025-05-26T16:17:28.833Z",
+      "is_full": false,
+      "name": "306",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 71930
+    },
+    {
+      "create_at": "2025-05-26T16:17:43.188Z",
+      "update_at": "2025-05-26T16:17:43.188Z",
+      "is_full": false,
+      "name": "307",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 81264,
+      "id": 35176
+    },
+    {
+      "create_at": "2025-05-26T16:17:55.538Z",
+      "update_at": "2025-05-26T16:17:55.538Z",
+      "is_full": false,
+      "name": "312",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 81264,
+      "id": 46178
+    },
+    {
+      "create_at": "2025-05-26T16:18:02.459Z",
+      "update_at": "2025-05-26T16:18:02.459Z",
+      "is_full": false,
+      "name": "313",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 81264,
+      "id": 40433
+    },
+    {
+      "create_at": "2025-05-26T16:38:15.875Z",
+      "update_at": "2025-05-26T16:43:34.700Z",
+      "is_full": false,
+      "name": "3 etaj 1 xona ",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 62500,
+      "id": 44001
+    },
+    {
+      "create_at": "2025-05-26T16:38:34.038Z",
+      "update_at": "2025-05-26T16:43:50.011Z",
+      "is_full": false,
+      "name": "3 etaj 2 xona",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 62500,
+      "id": 68781
+    },
+    {
+      "create_at": "2025-05-26T16:38:47.691Z",
+      "update_at": "2025-05-26T16:44:05.807Z",
+      "is_full": false,
+      "name": "3 etaj 3 xona ",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 62500,
+      "id": 61709
+    },
+    {
+      "create_at": "2025-05-26T16:39:11.122Z",
+      "update_at": "2025-05-26T16:44:14.355Z",
+      "is_full": false,
+      "name": "3 etaj 4 xona ",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 90465
+    },
+    {
+      "create_at": "2025-05-26T16:39:31.974Z",
+      "update_at": "2025-05-26T16:44:20.691Z",
+      "is_full": false,
+      "name": "3 etaj 5 xona ",
+      "people_per_room": 1,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 74471
+    },
+    {
+      "create_at": "2025-05-26T16:39:48.996Z",
+      "update_at": "2025-05-26T16:44:27.343Z",
+      "is_full": false,
+      "name": "3 etaj 6 xona ",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 94398
+    },
+    {
+      "create_at": "2025-05-26T16:39:56.898Z",
+      "update_at": "2025-05-26T16:44:33.777Z",
+      "is_full": false,
+      "name": "3 etaj 7 xona ",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 13079
+    },
+    {
+      "create_at": "2025-05-26T16:41:27.947Z",
+      "update_at": "2025-05-26T16:44:41.357Z",
+      "is_full": false,
+      "name": "1 etaj 1 xona",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 95857
+    },
+    {
+      "create_at": "2025-05-26T16:45:19.444Z",
+      "update_at": "2025-05-26T16:45:19.444Z",
+      "is_full": false,
+      "name": "1 etaj 2 xona",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 58025
+    },
+    {
+      "create_at": "2025-05-26T16:45:29.159Z",
+      "update_at": "2025-05-26T16:45:29.159Z",
+      "is_full": false,
+      "name": "1 etaj 3 xona",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 93773
+    },
+    {
+      "create_at": "2025-05-26T16:45:39.059Z",
+      "update_at": "2025-05-26T16:45:39.059Z",
+      "is_full": false,
+      "name": "1 etaj 4 xona",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 11398
+    },
+    {
+      "create_at": "2025-05-26T16:45:56.599Z",
+      "update_at": "2025-05-26T16:45:56.599Z",
+      "is_full": false,
+      "name": "1 etaj 5 xona",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 92502
+    },
+    {
+      "create_at": "2025-05-26T16:46:08.966Z",
+      "update_at": "2025-05-26T16:46:08.966Z",
+      "is_full": false,
+      "name": "1 etaj 6 xona",
+      "people_per_room": 2,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 78442
+    },
+    {
+      "create_at": "2025-05-26T16:46:19.500Z",
+      "update_at": "2025-05-26T16:46:19.500Z",
+      "is_full": false,
+      "name": "1 etaj 7 xona",
+      "people_per_room": 3,
+      "pricePerDay": "180000",
+      "buildingId": 62500,
+      "id": 67275
+    },
+    {
+      "create_at": "2025-05-26T16:46:53.082Z",
+      "update_at": "2025-05-26T16:46:53.082Z",
+      "is_full": false,
+      "name": "101",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 74062
+    },
+    {
+      "create_at": "2025-05-26T16:47:25.817Z",
+      "update_at": "2025-05-26T16:47:25.817Z",
+      "is_full": false,
+      "name": "102",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 26763
+    },
+    {
+      "create_at": "2025-05-26T16:47:33.657Z",
+      "update_at": "2025-05-26T16:47:33.657Z",
+      "is_full": false,
+      "name": "103",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 98601
+    },
+    {
+      "create_at": "2025-05-26T16:47:41.973Z",
+      "update_at": "2025-05-26T16:47:41.973Z",
+      "is_full": false,
+      "name": "104",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 40405
+    },
+    {
+      "create_at": "2025-05-26T16:47:48.587Z",
+      "update_at": "2025-05-26T16:47:48.587Z",
+      "is_full": false,
+      "name": "105",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 94570
+    },
+    {
+      "create_at": "2025-05-26T16:47:55.547Z",
+      "update_at": "2025-05-26T16:47:55.548Z",
+      "is_full": false,
+      "name": "106",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 62371
+    },
+    {
+      "create_at": "2025-05-26T16:48:02.534Z",
+      "update_at": "2025-05-26T16:48:02.534Z",
+      "is_full": false,
+      "name": "107",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 37247
+    },
+    {
+      "create_at": "2025-05-26T16:48:14.237Z",
+      "update_at": "2025-05-26T16:48:14.237Z",
+      "is_full": false,
+      "name": "108",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 46690
+    },
+    {
+      "create_at": "2025-05-26T16:48:21.430Z",
+      "update_at": "2025-05-26T16:48:21.430Z",
+      "is_full": false,
+      "name": "109",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 26849
+    },
+    {
+      "create_at": "2025-05-26T16:48:29.126Z",
+      "update_at": "2025-05-26T16:48:29.126Z",
+      "is_full": false,
+      "name": "110",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 78561
+    },
+    {
+      "create_at": "2025-05-27T14:38:32.874Z",
+      "update_at": "2025-05-27T14:38:32.874Z",
+      "is_full": false,
+      "name": "201",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 68864
+    },
+    {
+      "create_at": "2025-05-27T14:38:51.823Z",
+      "update_at": "2025-05-27T14:38:51.823Z",
+      "is_full": false,
+      "name": "202",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 93687
+    },
+    {
+      "create_at": "2025-05-27T14:39:00.056Z",
+      "update_at": "2025-05-27T14:39:00.056Z",
+      "is_full": false,
+      "name": "203",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 83548
+    },
+    {
+      "create_at": "2025-05-27T14:39:14.180Z",
+      "update_at": "2025-05-27T14:39:14.180Z",
+      "is_full": false,
+      "name": "204",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 65464
+    },
+    {
+      "create_at": "2025-05-27T14:39:21.847Z",
+      "update_at": "2025-05-27T14:39:21.847Z",
+      "is_full": false,
+      "name": "205",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 42045
+    },
+    {
+      "create_at": "2025-05-27T14:39:29.190Z",
+      "update_at": "2025-05-27T14:39:29.190Z",
+      "is_full": false,
+      "name": "206",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 94156
+    },
+    {
+      "create_at": "2025-05-27T14:39:37.835Z",
+      "update_at": "2025-05-27T14:39:37.835Z",
+      "is_full": false,
+      "name": "207",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 77353
+    },
+    {
+      "create_at": "2025-05-27T14:39:47.274Z",
+      "update_at": "2025-05-27T14:39:47.274Z",
+      "is_full": false,
+      "name": "208",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 86483
+    },
+    {
+      "create_at": "2025-05-27T14:39:59.232Z",
+      "update_at": "2025-05-27T14:40:07.592Z",
+      "is_full": false,
+      "name": "209",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 32495
+    },
+    {
+      "create_at": "2025-05-27T14:40:19.383Z",
+      "update_at": "2025-05-27T14:40:19.383Z",
+      "is_full": false,
+      "name": "210",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 26471
+    },
+    {
+      "create_at": "2025-05-27T14:40:36.834Z",
+      "update_at": "2025-05-27T14:40:36.834Z",
+      "is_full": false,
+      "name": "211",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 57512
+    },
+    {
+      "create_at": "2025-05-27T14:40:44.084Z",
+      "update_at": "2025-05-27T14:40:44.084Z",
+      "is_full": false,
+      "name": "212",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 71900
+    },
+    {
+      "create_at": "2025-05-27T14:40:51.768Z",
+      "update_at": "2025-05-27T14:40:51.768Z",
+      "is_full": false,
+      "name": "213",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 90392
+    },
+    {
+      "create_at": "2025-05-27T14:40:59.169Z",
+      "update_at": "2025-05-27T14:40:59.169Z",
+      "is_full": false,
+      "name": "214",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 45481
+    },
+    {
+      "create_at": "2025-05-27T14:41:07.204Z",
+      "update_at": "2025-05-27T14:41:07.204Z",
+      "is_full": false,
+      "name": "215",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 51525
+    },
+    {
+      "create_at": "2025-05-27T14:41:13.754Z",
+      "update_at": "2025-05-27T14:41:13.754Z",
+      "is_full": false,
+      "name": "216",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 89735
+    },
+    {
+      "create_at": "2025-05-27T14:41:19.378Z",
+      "update_at": "2025-05-27T14:41:19.378Z",
+      "is_full": false,
+      "name": "217",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 46010
+    },
+    {
+      "create_at": "2025-05-27T14:41:35.760Z",
+      "update_at": "2025-05-27T14:41:35.760Z",
+      "is_full": false,
+      "name": "301",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 81993
+    },
+    {
+      "create_at": "2025-05-27T14:41:49.652Z",
+      "update_at": "2025-05-27T14:41:49.652Z",
+      "is_full": false,
+      "name": "302",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 71809
+    },
+    {
+      "create_at": "2025-05-27T14:41:59.577Z",
+      "update_at": "2025-05-27T14:41:59.577Z",
+      "is_full": false,
+      "name": "303",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 45355
+    },
+    {
+      "create_at": "2025-05-27T14:42:06.409Z",
+      "update_at": "2025-05-27T14:42:06.409Z",
+      "is_full": false,
+      "name": "304",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 27641
+    },
+    {
+      "create_at": "2025-05-27T14:42:18.214Z",
+      "update_at": "2025-05-27T14:42:18.214Z",
+      "is_full": false,
+      "name": "305",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 64296
+    },
+    {
+      "create_at": "2025-05-27T14:42:30.846Z",
+      "update_at": "2025-05-27T14:42:30.846Z",
+      "is_full": false,
+      "name": "306",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 79555
+    },
+    {
+      "create_at": "2025-05-27T14:42:37.394Z",
+      "update_at": "2025-05-27T14:42:37.394Z",
+      "is_full": false,
+      "name": "307",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 57790
+    },
+    {
+      "create_at": "2025-05-27T14:42:46.176Z",
+      "update_at": "2025-05-27T14:42:46.176Z",
+      "is_full": false,
+      "name": "308",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 38407
+    },
+    {
+      "create_at": "2025-05-27T14:42:54.792Z",
+      "update_at": "2025-05-27T14:42:54.792Z",
+      "is_full": false,
+      "name": "309",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 45418
+    },
+    {
+      "create_at": "2025-05-27T14:43:00.162Z",
+      "update_at": "2025-05-27T14:43:00.162Z",
+      "is_full": false,
+      "name": "310",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 52686
+    },
+    {
+      "create_at": "2025-05-27T14:43:06.822Z",
+      "update_at": "2025-05-27T14:43:06.822Z",
+      "is_full": false,
+      "name": "311",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 44108
+    },
+    {
+      "create_at": "2025-05-27T14:43:12.302Z",
+      "update_at": "2025-05-27T14:43:12.302Z",
+      "is_full": false,
+      "name": "312",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 72902
+    },
+    {
+      "create_at": "2025-05-27T14:43:17.173Z",
+      "update_at": "2025-05-27T14:43:17.173Z",
+      "is_full": false,
+      "name": "313",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 68705
+    },
+    {
+      "create_at": "2025-05-27T14:46:49.774Z",
+      "update_at": "2025-05-27T14:46:49.774Z",
+      "is_full": false,
+      "name": "314",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 11256
+    },
+    {
+      "create_at": "2025-05-27T14:46:58.252Z",
+      "update_at": "2025-05-27T14:46:58.252Z",
+      "is_full": false,
+      "name": "315",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 26956
+    },
+    {
+      "create_at": "2025-05-27T14:47:10.084Z",
+      "update_at": "2025-05-27T14:47:10.084Z",
+      "is_full": false,
+      "name": "316",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 43366
+    },
+    {
+      "create_at": "2025-05-27T14:47:38.275Z",
+      "update_at": "2025-05-27T14:47:38.275Z",
+      "is_full": false,
+      "name": "401",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 91070
+    },
+    {
+      "create_at": "2025-05-27T14:47:44.699Z",
+      "update_at": "2025-05-27T14:47:44.699Z",
+      "is_full": false,
+      "name": "402",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 59949
+    },
+    {
+      "create_at": "2025-05-27T14:47:57.613Z",
+      "update_at": "2025-05-27T14:47:57.613Z",
+      "is_full": false,
+      "name": "403",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 56528
+    },
+    {
+      "create_at": "2025-05-27T14:48:03.622Z",
+      "update_at": "2025-05-27T14:48:03.622Z",
+      "is_full": false,
+      "name": "404",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 78698
+    },
+    {
+      "create_at": "2025-05-27T14:48:12.985Z",
+      "update_at": "2025-05-27T14:48:12.985Z",
+      "is_full": false,
+      "name": "405",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 23970
+    },
+    {
+      "create_at": "2025-05-27T14:48:23.628Z",
+      "update_at": "2025-05-27T14:48:23.628Z",
+      "is_full": false,
+      "name": "406",
+      "people_per_room": 1,
+      "pricePerDay": "250000",
+      "buildingId": 21102,
+      "id": 41799
+    },
+    {
+      "create_at": "2025-05-27T14:48:39.500Z",
+      "update_at": "2025-05-27T14:48:39.500Z",
+      "is_full": false,
+      "name": "407",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 93653
+    },
+    {
+      "create_at": "2025-05-27T14:48:47.923Z",
+      "update_at": "2025-05-27T14:48:47.923Z",
+      "is_full": false,
+      "name": "408",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 99421
+    },
+    {
+      "create_at": "2025-05-27T14:48:57.248Z",
+      "update_at": "2025-05-27T14:48:57.248Z",
+      "is_full": false,
+      "name": "409",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 13699
+    },
+    {
+      "create_at": "2025-05-27T14:49:03.211Z",
+      "update_at": "2025-05-27T14:49:03.211Z",
+      "is_full": false,
+      "name": "410",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 43843
+    },
+    {
+      "create_at": "2025-05-27T14:49:10.606Z",
+      "update_at": "2025-05-27T14:49:10.606Z",
+      "is_full": false,
+      "name": "411",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 65286
+    },
+    {
+      "create_at": "2025-05-27T14:49:16.464Z",
+      "update_at": "2025-05-27T14:49:16.464Z",
+      "is_full": false,
+      "name": "412",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 40253
+    },
+    {
+      "create_at": "2025-05-27T14:49:22.264Z",
+      "update_at": "2025-05-27T14:49:22.264Z",
+      "is_full": false,
+      "name": "413",
+      "people_per_room": 2,
+      "pricePerDay": "200000",
+      "buildingId": 21102,
+      "id": 85889
     }
   ],
   "labTests": [
     {
-      "create_at": "2025-05-07T04:17:29.909Z",
-      "update_at": "2025-05-07T04:17:29.909Z",
-      "name": "asda",
+      "create_at": "2025-05-27T04:56:00.087Z",
+      "update_at": "2026-01-11T14:55:22.312Z",
+      "name": "Ревмопробы ",
+      "price": "90000",
+      "id": 90753
+    },
+    {
+      "create_at": "2025-05-27T04:56:16.159Z",
+      "update_at": "2026-01-11T17:37:34.665Z",
+      "name": "Билирубин, АЛТ, АСТ ",
+      "price": "80000",
+      "id": 67399
+    },
+    {
+      "create_at": "2025-05-27T04:56:33.783Z",
+      "update_at": "2025-05-27T04:56:33.783Z",
+      "name": "АЛТ, АСТ",
+      "price": "60000",
+      "id": 25981
+    },
+    {
+      "create_at": "2025-05-27T04:56:50.319Z",
+      "update_at": "2025-05-27T04:56:50.319Z",
+      "name": "Диастаза",
+      "price": "35000",
+      "id": 48219
+    },
+    {
+      "create_at": "2025-05-27T04:56:59.719Z",
+      "update_at": "2025-05-27T04:56:59.719Z",
+      "name": "Глюкоза в крови (Сахар)",
+      "price": "25000",
+      "id": 25268
+    },
+    {
+      "create_at": "2025-05-27T04:57:43.167Z",
+      "update_at": "2025-05-27T04:58:26.903Z",
+      "name": " Время свертываемости крови (КИВ",
       "price": "20000",
-      "id": 53003
+      "id": 11804
+    },
+    {
+      "create_at": "2025-05-27T04:58:14.975Z",
+      "update_at": "2025-05-27T04:58:14.975Z",
+      "name": " Билирубин",
+      "price": "30000",
+      "id": 68360
+    },
+    {
+      "create_at": "2025-05-27T04:58:46.631Z",
+      "update_at": "2025-05-27T04:58:46.631Z",
+      "name": "Мочевина",
+      "price": "25000",
+      "id": 68185
+    },
+    {
+      "create_at": "2025-05-27T04:58:58.119Z",
+      "update_at": "2025-05-27T04:58:58.119Z",
+      "name": "Креатинин",
+      "price": "25000",
+      "id": 49166
+    },
+    {
+      "create_at": "2025-05-27T04:59:21.383Z",
+      "update_at": "2026-01-11T17:38:30.732Z",
+      "name": " Гепатит B (ИФА)",
+      "price": "50000",
+      "id": 98598
+    },
+    {
+      "create_at": "2025-05-27T04:59:32.560Z",
+      "update_at": "2026-01-11T17:38:37.077Z",
+      "name": "Гепатит C (ИФА)",
+      "price": "50000",
+      "id": 43648
+    },
+    {
+      "create_at": "2025-05-27T04:59:45.567Z",
+      "update_at": "2026-01-11T15:06:54.168Z",
+      "name": " Гепатит D (ИФА) ",
+      "price": "55000",
+      "id": 76565
+    },
+    {
+      "create_at": "2025-05-27T05:00:01.503Z",
+      "update_at": "2025-05-27T05:02:43.127Z",
+      "name": "Гепатит B, C, D Количество (ПЦР) за каждый",
+      "price": "290000",
+      "id": 17856
+    },
+    {
+      "create_at": "2025-05-27T05:00:21.208Z",
+      "update_at": "2025-05-27T05:03:34.727Z",
+      "name": "Количественный B C D Качество ПЦР (за каждый)",
+      "price": "170000",
+      "id": 87414
+    },
+    {
+      "create_at": "2025-05-27T05:04:27.960Z",
+      "update_at": "2025-05-27T05:04:27.960Z",
+      "name": "Бакпосев",
+      "price": "145000",
+      "id": 19278
+    },
+    {
+      "create_at": "2025-05-27T05:04:38.967Z",
+      "update_at": "2026-01-11T17:38:56.013Z",
+      "name": "Коагулограмма",
+      "price": "100000",
+      "id": 90101
+    },
+    {
+      "create_at": "2025-05-27T05:05:12.759Z",
+      "update_at": "2025-05-27T05:05:12.759Z",
+      "name": "Общий белок в крови",
+      "price": "25000",
+      "id": 18950
+    },
+    {
+      "create_at": "2025-05-27T05:05:26.944Z",
+      "update_at": "2026-01-11T17:39:06.970Z",
+      "name": "Общий анализ кала",
+      "price": "50000",
+      "id": 79261
+    },
+    {
+      "create_at": "2025-05-27T07:06:36.776Z",
+      "update_at": "2026-01-11T17:39:29.091Z",
+      "name": " Бруцеллёз M,G",
+      "price": "120000",
+      "id": 67867
+    },
+    {
+      "create_at": "2025-05-27T07:06:51.176Z",
+      "update_at": "2026-01-11T17:39:50.474Z",
+      "name": "Гепатит A: M,G",
+      "price": "110000",
+      "id": 18464
+    },
+    {
+      "create_at": "2025-05-27T07:07:08.792Z",
+      "update_at": "2026-01-11T17:40:12.456Z",
+      "name": "СПИД (ВИЧ)",
+      "price": "95000",
+      "id": 35289
+    },
+    {
+      "create_at": "2025-05-27T07:07:21.088Z",
+      "update_at": "2026-01-11T17:40:23.974Z",
+      "name": "Общий анализ мочи",
+      "price": "30000",
+      "id": 81034
+    },
+    {
+      "create_at": "2025-05-27T07:07:41.824Z",
+      "update_at": "2025-05-27T07:07:41.824Z",
+      "name": "Холестерин ",
+      "price": "25000",
+      "id": 55531
+    },
+    {
+      "create_at": "2025-05-27T07:07:57.728Z",
+      "update_at": "2026-01-11T17:40:56.240Z",
+      "name": "RW",
+      "price": "50000",
+      "id": 26014
+    },
+    {
+      "create_at": "2025-05-27T07:08:15.680Z",
+      "update_at": "2026-01-11T17:40:42.065Z",
+      "name": " Тимол",
+      "price": "35000",
+      "id": 73226
+    },
+    {
+      "create_at": "2025-05-27T07:08:25.680Z",
+      "update_at": "2025-05-27T07:08:25.680Z",
+      "name": "Кальций",
+      "price": "35000",
+      "id": 32514
+    },
+    {
+      "create_at": "2025-05-27T07:08:37.344Z",
+      "update_at": "2025-05-27T07:08:37.344Z",
+      "name": "Дисбактериоз",
+      "price": "145000",
+      "id": 81818
+    },
+    {
+      "create_at": "2025-05-27T07:08:50.928Z",
+      "update_at": "2025-05-27T07:12:03.664Z",
+      "name": " Кандида (M,G) ",
+      "price": "100000",
+      "id": 95680
+    },
+    {
+      "create_at": "2025-05-27T07:13:05.888Z",
+      "update_at": "2026-01-11T15:15:09.721Z",
+      "name": "Ахлат анализ (Кала)",
+      "price": "50000",
+      "id": 44247
+    },
+    {
+      "create_at": "2025-05-27T07:14:29.401Z",
+      "update_at": "2026-01-11T15:03:51.224Z",
+      "name": "Аскарида Г",
+      "price": "50000",
+      "id": 53903
+    },
+    {
+      "create_at": "2025-05-27T07:14:59.337Z",
+      "update_at": "2026-01-11T15:05:05.984Z",
+      "name": "Лямбиля м г",
+      "price": "110000",
+      "id": 16040
+    },
+    {
+      "create_at": "2025-05-27T07:15:11.401Z",
+      "update_at": "2026-01-11T15:06:14.904Z",
+      "name": "Амйлаза",
+      "price": "35000",
+      "id": 85301
+    },
+    {
+      "create_at": "2025-05-27T07:16:11.176Z",
+      "update_at": "2026-01-11T15:15:49.840Z",
+      "name": "Кровь  сок простаты  сперма",
+      "price": "170000",
+      "id": 57582
+    },
+    {
+      "create_at": "2026-01-11T14:56:54.705Z",
+      "update_at": "2026-01-11T17:37:04.931Z",
+      "name": "Торж",
+      "price": "45000",
+      "id": 35246
+    },
+    {
+      "create_at": "2026-01-11T15:02:50.425Z",
+      "update_at": "2026-01-11T15:02:50.425Z",
+      "name": "Электрофорез ",
+      "price": "50000",
+      "id": 82339
+    },
+    {
+      "create_at": "2026-01-11T15:05:14.984Z",
+      "update_at": "2026-01-11T17:42:50.280Z",
+      "name": "Мочевая кислота",
+      "price": "30000",
+      "id": 98033
+    },
+    {
+      "create_at": "2026-01-11T15:06:35.248Z",
+      "update_at": "2026-01-11T17:44:03.749Z",
+      "name": "Щелочная фосфатаза",
+      "price": "30000",
+      "id": 79955
+    },
+    {
+      "create_at": "2026-01-11T15:12:12.769Z",
+      "update_at": "2026-01-11T17:45:39.572Z",
+      "name": "Альбумин",
+      "price": "30000",
+      "id": 95877
+    },
+    {
+      "create_at": "2026-01-12T04:27:29.597Z",
+      "update_at": "2026-01-12T04:30:14.941Z",
+      "name": "Общий анализ кровы",
+      "price": "40000",
+      "id": 46981
     }
   ],
   "doctors": [
     {
       "id": 1,
-      "last_name": "Navbatov",
-      "first_name": "Navbatbek",
-      "middle_name": "Navbat o'g'li",
-      "position": "siydik ustasi",
+      "last_name": "Farmonov",
+      "first_name": "Ikrom",
+      "middle_name": "1",
+      "position": "Nevropatolog",
       "category": [
         "med",
         "room"
-      ]
+      ],
+      "update_at": "2026-01-11T13:53:39.548Z"
     },
     {
       "id": 2,
-      "last_name": "asd",
-      "first_name": "adas",
-      "middle_name": "dadasd",
-      "position": "asdsa",
+      "last_name": "Kengboyev",
+      "first_name": "Akbar",
+      "middle_name": "2",
+      "position": "Lor",
+      "category": [
+        "med",
+        "room"
+      ],
+      "update_at": "2026-01-11T13:53:46.435Z"
+    },
+    {
+      "id": 3,
+      "last_name": "Murtazayev ",
+      "first_name": "Yorqin",
+      "middle_name": "3",
+      "position": "Kardiolog",
+      "category": [
+        "med",
+        "room"
+      ],
+      "update_at": "2026-01-11T13:57:32.140Z"
+    },
+    {
+      "id": 4,
+      "last_name": "Rahmonov",
+      "first_name": "Tulqin",
+      "middle_name": "4",
+      "position": "Nevropatolog",
+      "category": [
+        "med",
+        "room"
+      ],
+      "update_at": "2026-01-11T13:53:57.764Z"
+    },
+    {
+      "id": 5,
+      "last_name": "Xalilov",
+      "first_name": "Dilshod",
+      "middle_name": "5",
+      "position": "Kardiolog",
+      "category": [
+        "med",
+        "room"
+      ],
+      "update_at": "2026-01-11T13:54:13.371Z"
+    },
+    {
+      "id": 6,
+      "last_name": "Ruziyev ",
+      "first_name": "Shoxrux",
+      "middle_name": "6",
+      "position": "Gastroenterolog",
+      "category": [
+        "med",
+        "room"
+      ],
+      "update_at": "2026-01-11T13:54:19.299Z"
+    },
+    {
+      "id": 7,
+      "last_name": "Xayrullayev",
+      "first_name": "Baxtiyor",
+      "middle_name": "7",
+      "position": "Terapiya",
+      "category": [
+        "med",
+        "room"
+      ],
+      "update_at": "2026-01-11T13:54:24.132Z"
+    },
+    {
+      "id": 8,
+      "last_name": "Ismoilov",
+      "first_name": "Shoxrux",
+      "middle_name": "8",
+      "position": "Urolog",
+      "category": [
+        "med",
+        "room"
+      ],
+      "update_at": "2026-01-11T13:54:28.676Z"
+    },
+    {
+      "id": 9,
+      "last_name": "Nodirov",
+      "first_name": "Muxtor",
+      "middle_name": "9",
+      "position": "UZD",
+      "category": [
+        "med"
+      ],
+      "update_at": "2026-01-11T13:55:02.171Z"
+    },
+    {
+      "id": 10,
+      "last_name": "Jumayeva",
+      "first_name": "Nigora",
+      "middle_name": "10",
+      "position": "Proktolog",
+      "category": [
+        "med",
+        "room"
+      ],
+      "update_at": "2026-01-11T13:55:08.667Z"
+    },
+    {
+      "id": 11,
+      "last_name": "Nazarov",
+      "first_name": "Nazar",
+      "middle_name": "11",
+      "position": "Bolalar Nevropatolog",
+      "category": [
+        "med",
+        "room"
+      ],
+      "update_at": "2026-01-11T13:55:42.212Z"
+    },
+    {
+      "id": 12,
+      "last_name": "Boltayev ",
+      "first_name": "G`olib ",
+      "middle_name": "12",
+      "position": "Endokrinolog",
       "category": [
         "med",
         "room"
       ]
     },
     {
-      "id": 3,
-      "last_name": "Urologov",
-      "first_name": "Urolog",
-      "middle_name": "Urolog o'g'li",
-      "position": "Super Urolog",
+      "id": 13,
+      "last_name": "Begimova",
+      "first_name": " Nargiza",
+      "middle_name": "13",
+      "position": "Genekolog",
       "category": [
         "med",
         "room"
+      ]
+    },
+    {
+      "id": 14,
+      "last_name": ".Xolmurodov ",
+      "first_name": "Serob",
+      "middle_name": "14",
+      "position": "Nefrolog",
+      "category": [
+        "med",
+        "room"
+      ]
+    },
+    {
+      "id": 15,
+      "last_name": "Turdiyeva",
+      "first_name": "Hidoyat",
+      "middle_name": "15",
+      "position": "EKG",
+      "category": [
+        "med"
+      ]
+    },
+    {
+      "id": 16,
+      "last_name": "Saidov",
+      "first_name": "Xusan",
+      "middle_name": "16",
+      "position": "Rentgen",
+      "category": [
+        "med"
+      ]
+    },
+    {
+      "id": 17,
+      "last_name": "Abdullayev",
+      "first_name": "Abdulla",
+      "middle_name": "17",
+      "position": "MRT",
+      "category": [
+        "med"
       ]
     }
   ],
   "clients": [
     {
-      "create_at": "2025-05-20T05:51:31.298Z",
-      "update_at": "2025-05-20T05:51:31.298Z",
-      "last_name": "sss",
-      "first_name": "ss",
+      "create_at": "2026-01-12T03:16:38.986Z",
+      "update_at": "2026-01-12T03:16:38.986Z",
+      "last_name": "Sanobar",
+      "first_name": "",
       "middle_name": "",
       "phone": "",
-      "gender": "m",
+      "gender": "",
       "visitTypes": [
-        "med",
-        "room"
+        "med"
       ],
       "medServices": [
-        45734,
-        16389
+        41589
       ],
       "room": {
-        "roomId": 1,
-        "days": 5
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 1,
+      "id": 56122
+    },
+    {
+      "create_at": "2026-01-12T03:18:30.250Z",
+      "update_at": "2026-01-12T03:18:30.250Z",
+      "last_name": "Azamat",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        63414
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 9,
+      "id": 54985
+    },
+    {
+      "create_at": "2026-01-12T03:27:52.722Z",
+      "update_at": "2026-01-12T03:27:52.722Z",
+      "last_name": "Mehroj",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        63414
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 9,
+      "id": 69363
+    },
+    {
+      "create_at": "2026-01-12T04:21:37.436Z",
+      "update_at": "2026-01-12T04:21:37.436Z",
+      "last_name": "тухлиев",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        39783
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 8,
+      "id": 54174
+    },
+    {
+      "create_at": "2026-01-13T08:38:05.822Z",
+      "update_at": "2026-01-13T08:38:05.822Z",
+      "last_name": "SAMIRA",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        96382
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
       },
       "labTests": [],
       "doctorId": 3,
-      "roomId": 1,
-      "end_date": "2025-05-20T05:51:31.298Z",
-      "id": 80996
+      "id": 89880
     },
     {
-      "create_at": "2025-05-20T05:53:05.100Z",
-      "update_at": "2025-05-20T05:53:05.100Z",
-      "last_name": "ss",
-      "first_name": "s",
+      "create_at": "2026-01-13T08:39:46.658Z",
+      "update_at": "2026-01-13T08:39:46.658Z",
+      "last_name": "жураева",
+      "first_name": "",
       "middle_name": "",
       "phone": "",
-      "gender": "m",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        57151
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 10,
+      "id": 28833
+    },
+    {
+      "create_at": "2026-01-13T08:40:31.252Z",
+      "update_at": "2026-01-13T08:40:31.252Z",
+      "last_name": "1",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "lab"
+      ],
+      "medServices": [
+        71567
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [
+        25981,
+        67399,
+        90753
+      ],
+      "doctorId": 2,
+      "id": 49143
+    },
+    {
+      "create_at": "2026-01-13T08:41:38.728Z",
+      "update_at": "2026-01-13T08:41:38.728Z",
+      "last_name": "тураева",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        30117
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 7,
+      "id": 19105
+    },
+    {
+      "create_at": "2026-01-13T08:43:50.722Z",
+      "update_at": "2026-01-13T08:43:50.722Z",
+      "last_name": "FATXULLAYEVA",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        69628
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 6,
+      "id": 22180
+    },
+    {
+      "create_at": "2026-01-13T08:44:04.784Z",
+      "update_at": "2026-01-13T08:44:04.784Z",
+      "last_name": "жабборова",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        70245
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 6,
+      "id": 30561
+    },
+    {
+      "create_at": "2026-01-13T08:52:15.836Z",
+      "update_at": "2026-01-13T08:52:15.836Z",
+      "last_name": "NODIRA",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        69628
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 6,
+      "id": 28241
+    },
+    {
+      "create_at": "2026-01-13T08:52:12.485Z",
+      "update_at": "2026-01-13T08:52:12.485Z",
+      "last_name": "NODIRA",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        69628
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 6,
+      "id": 40064
+    },
+    {
+      "create_at": "2026-01-13T08:52:17.259Z",
+      "update_at": "2026-01-13T08:52:17.259Z",
+      "last_name": "NODIRA",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        69628
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 6,
+      "id": 71472
+    },
+    {
+      "create_at": "2026-01-13T08:52:17.436Z",
+      "update_at": "2026-01-13T08:52:17.436Z",
+      "last_name": "NODIRA",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "med"
+      ],
+      "medServices": [
+        69628
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [],
+      "doctorId": 6,
+      "id": 28253
+    },
+    {
+      "create_at": "2026-01-13T08:54:44.401Z",
+      "update_at": "2026-01-13T08:54:44.402Z",
+      "last_name": "hh",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
+      "visitTypes": [
+        "lab"
+      ],
+      "medServices": [
+        57151
+      ],
+      "room": {
+        "roomId": null,
+        "days": 1
+      },
+      "labTests": [
+        48219,
+        67399
+      ],
+      "doctorId": 4,
+      "id": 70685
+    },
+    {
+      "create_at": "2026-01-13T09:26:29.714Z",
+      "update_at": "2026-01-13T09:26:29.714Z",
+      "last_name": "Abdullayeva",
+      "first_name": "",
+      "middle_name": "",
+      "phone": "",
+      "gender": "",
       "visitTypes": [
         "lab"
       ],
@@ -270,121 +2157,403 @@
         "days": 1
       },
       "labTests": [
-        53003
+        67399,
+        48219,
+        68185,
+        49166
       ],
-      "id": 60198
+      "id": 67781
     },
     {
-      "create_at": "2025-05-24T15:07:12.977Z",
-      "update_at": "2025-05-24T15:07:12.977Z",
-      "last_name": "22ssas",
-      "first_name": "asdasd",
-      "middle_name": "",
+      "create_at": "2026-01-13T09:33:01.762Z",
+      "update_at": "2026-01-13T09:33:01.762Z",
+      "last_name": "ШАЙМАНОВА НАСИБА ОЧИЛОВНА-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------- - - - - - - - - -- - - - - - - - - --  -- - - - - - - - - - - - -- - - - - - - - - - -- - - - - - - - - -- - - - - - - - - --  -- - - - - - - - --  - --  -- - - - - - - - - - -- - - - - - - - -- - - - - - - - - - - -- - - - - - - - -- - - - - - - - - - - - - --  -- - - - - - - - - -- - - - - - - - - - --  -- - - - - - - - -- - - - - - - - - - -- - - - - - - - - - --  -- - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - - - -- - - - - - - - -- - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - --  -- - - - - - - - - - - - -- - - - - - - - - - -- - - - - - - - - -- - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - -- -  -- - - - - - - --  -- - - - - - - --  - --  -- - - - - - - - - -- - - - - - - - - - -- - - - - - - - - -- - - - - - - - - - --  -- - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - -- - - - - - - - - -- - - - - - - - - - - --  - -- - - - - --  - - - -- - - - - - - - - - - -- - - ---- ----------------- - - - - -- -  -- - - - - - - - - - -- - - - - - - - - -- - - - - - - - - - --  -- - - - - - - - - -- - - - - - - - - - -- - - - - - - - - -- -  -- - - - - - - --  -- - - - - - - - - - - - -- - - - - - - - - -- - - - - - - - - - --  -- - - - - - - - -- - - - - - - - - - -- - - - - - - - - - - - - - -- - - - - - - - -- - - - - - - - - - ----------------- - - - - --  -- - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - -- - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - --  -- -  -- - - - - - - - -- - - - - - - - - - - --  -- - - - - - - -- - - - - - - - - -- -  -- - - - - - - - - - - - -- - - - - - - - - -- - - - - - - - - - --  -- - - - - - - - -- - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - -- - - - - - - - - -- - - - - - - - - - --  -- - - - - - - - -- - - - - - - - - - --  - -- - - - - - - - - - - -- - --- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------,",
+      "first_name": "",
+      "middle_name": "-НАСИБА",
       "phone": "",
-      "gender": "m",
+      "gender": "",
       "visitTypes": [
-        "lab"
+        "med"
       ],
-      "medServices": [],
+      "medServices": [
+        39783
+      ],
       "room": {
         "roomId": null,
         "days": 1
       },
-      "labTests": [
-        53003
-      ],
-      "id": 56823
+      "labTests": [],
+      "doctorId": 8,
+      "id": 70951
     }
   ],
   "checks": [
     {
-      "clientId": 80996,
-      "create_at": "2025-05-20T05:51:31.343Z",
-      "update_at": "2025-05-20T05:51:31.343Z",
-      "totalPrice": 155000,
+      "clientId": 56122,
+      "create_at": "2026-01-12T03:16:39.111Z",
+      "update_at": "2026-01-12T03:16:39.111Z",
+      "totalPrice": 70000,
       "isPaid": true,
-      "status": "approved",
       "medServices": [
-        45734,
-        16389
+        41589
+      ],
+      "labTests": [],
+      "doctorId": 1,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 70000,
+      "lab": 0,
+      "room": 0,
+      "status": "approved",
+      "id": 20166
+    },
+    {
+      "clientId": 54985,
+      "create_at": "2026-01-12T03:18:30.352Z",
+      "update_at": "2026-01-12T03:18:30.352Z",
+      "totalPrice": 65000,
+      "isPaid": true,
+      "medServices": [
+        63414
+      ],
+      "labTests": [],
+      "doctorId": 9,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 65000,
+      "lab": 0,
+      "room": 0,
+      "status": "approved",
+      "id": 47915
+    },
+    {
+      "clientId": 69363,
+      "create_at": "2026-01-12T03:27:52.810Z",
+      "update_at": "2026-01-12T03:27:52.810Z",
+      "totalPrice": 65000,
+      "isPaid": true,
+      "medServices": [
+        63414
+      ],
+      "labTests": [],
+      "doctorId": 9,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 65000,
+      "lab": 0,
+      "room": 0,
+      "status": "approved",
+      "id": 24918
+    },
+    {
+      "clientId": 54174,
+      "create_at": "2026-01-12T04:21:37.547Z",
+      "update_at": "2026-01-12T04:21:37.547Z",
+      "totalPrice": 70000,
+      "isPaid": true,
+      "medServices": [
+        39783
+      ],
+      "labTests": [],
+      "doctorId": 8,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 70000,
+      "lab": 0,
+      "room": 0,
+      "status": "approved",
+      "id": 80204
+    },
+    {
+      "clientId": 89880,
+      "create_at": "2026-01-13T08:38:06.097Z",
+      "update_at": "2026-01-13T08:38:06.098Z",
+      "totalPrice": 70000,
+      "isPaid": true,
+      "medServices": [
+        96382
       ],
       "labTests": [],
       "doctorId": 3,
-      "roomId": 1,
+      "roomId": null,
       "visitTypes": [
-        "med",
-        "room"
+        "med"
       ],
-      "med": 55000,
+      "med": 70000,
       "lab": 0,
-      "room": 100000,
-      "id": 29286
+      "room": 0,
+      "status": "approved",
+      "id": 20801
     },
     {
-      "clientId": 60198,
-      "create_at": "2025-05-20T05:53:05.130Z",
-      "update_at": "2025-05-20T05:53:05.130Z",
-      "totalPrice": 20000,
+      "clientId": 28833,
+      "create_at": "2026-01-13T08:39:46.812Z",
+      "update_at": "2026-01-13T08:39:46.812Z",
+      "totalPrice": 70000,
+      "isPaid": true,
+      "medServices": [
+        57151
+      ],
+      "labTests": [],
+      "doctorId": 10,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 70000,
+      "lab": 0,
+      "room": 0,
+      "status": "approved",
+      "id": 34215
+    },
+    {
+      "clientId": 49143,
+      "create_at": "2026-01-13T08:40:31.360Z",
+      "update_at": "2026-01-13T08:40:31.360Z",
+      "totalPrice": 230000,
+      "isPaid": true,
+      "medServices": [
+        71567
+      ],
+      "labTests": [
+        25981,
+        67399,
+        90753
+      ],
+      "doctorId": 2,
+      "roomId": null,
+      "visitTypes": [
+        "lab"
+      ],
+      "med": 0,
+      "lab": 230000,
+      "room": 0,
+      "status": "approved",
+      "id": 96923
+    },
+    {
+      "clientId": 19105,
+      "create_at": "2026-01-13T08:41:38.974Z",
+      "update_at": "2026-01-13T08:41:38.974Z",
+      "totalPrice": 60000,
+      "isPaid": false,
+      "medServices": [
+        30117
+      ],
+      "labTests": [],
+      "doctorId": 7,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 60000,
+      "lab": 0,
+      "room": 0,
+      "status": "pending",
+      "id": 70132
+    },
+    {
+      "clientId": 22180,
+      "create_at": "2026-01-13T08:43:50.825Z",
+      "update_at": "2026-01-13T08:43:50.825Z",
+      "totalPrice": 70000,
+      "isPaid": false,
+      "medServices": [
+        69628
+      ],
+      "labTests": [],
+      "doctorId": 6,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 70000,
+      "lab": 0,
+      "room": 0,
+      "status": "pending",
+      "id": 23308
+    },
+    {
+      "clientId": 30561,
+      "create_at": "2026-01-13T08:44:04.953Z",
+      "update_at": "2026-01-13T08:44:04.953Z",
+      "totalPrice": 70000,
+      "isPaid": false,
+      "medServices": [
+        70245
+      ],
+      "labTests": [],
+      "doctorId": 6,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 70000,
+      "lab": 0,
+      "room": 0,
+      "status": "pending",
+      "id": 85384
+    },
+    {
+      "clientId": 28253,
+      "create_at": "2026-01-13T08:52:17.474Z",
+      "update_at": "2026-01-13T08:52:17.474Z",
+      "totalPrice": 70000,
+      "isPaid": false,
+      "medServices": [
+        69628
+      ],
+      "labTests": [],
+      "doctorId": 6,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 70000,
+      "lab": 0,
+      "room": 0,
+      "status": "pending",
+      "id": 34791
+    },
+    {
+      "clientId": 28253,
+      "create_at": "2026-01-13T08:52:17.482Z",
+      "update_at": "2026-01-13T08:52:17.482Z",
+      "totalPrice": 70000,
+      "isPaid": false,
+      "medServices": [
+        69628
+      ],
+      "labTests": [],
+      "doctorId": 6,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 70000,
+      "lab": 0,
+      "room": 0,
+      "status": "pending",
+      "id": 57229
+    },
+    {
+      "clientId": 28253,
+      "create_at": "2026-01-13T08:52:17.477Z",
+      "update_at": "2026-01-13T08:52:17.477Z",
+      "totalPrice": 70000,
+      "isPaid": false,
+      "medServices": [
+        69628
+      ],
+      "labTests": [],
+      "doctorId": 6,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 70000,
+      "lab": 0,
+      "room": 0,
+      "status": "pending",
+      "id": 98812
+    },
+    {
+      "clientId": 28253,
+      "create_at": "2026-01-13T08:52:17.479Z",
+      "update_at": "2026-01-13T08:52:17.479Z",
+      "totalPrice": 70000,
+      "isPaid": false,
+      "medServices": [
+        69628
+      ],
+      "labTests": [],
+      "doctorId": 6,
+      "roomId": null,
+      "visitTypes": [
+        "med"
+      ],
+      "med": 70000,
+      "lab": 0,
+      "room": 0,
+      "status": "pending",
+      "id": 65878
+    },
+    {
+      "clientId": 70685,
+      "create_at": "2026-01-13T08:54:44.533Z",
+      "update_at": "2026-01-13T08:54:44.533Z",
+      "totalPrice": 115000,
+      "isPaid": false,
+      "medServices": [
+        57151
+      ],
+      "labTests": [
+        48219,
+        67399
+      ],
+      "doctorId": 4,
+      "roomId": null,
+      "visitTypes": [
+        "lab"
+      ],
+      "med": 0,
+      "lab": 115000,
+      "room": 0,
+      "status": "pending",
+      "id": 84281
+    },
+    {
+      "clientId": 67781,
+      "create_at": "2026-01-13T09:26:33.676Z",
+      "update_at": "2026-01-13T09:26:33.676Z",
+      "totalPrice": 165000,
       "isPaid": false,
       "medServices": [],
       "labTests": [
-        53003
+        67399,
+        48219,
+        68185,
+        49166
       ],
-      "status": "part_payment",
       "doctorId": null,
       "roomId": null,
       "visitTypes": [
         "lab"
       ],
       "med": 0,
-      "lab": 20000,
+      "lab": 165000,
       "room": 0,
-      "id": 92824,
-      "part_pay_price": [
-        {
-          "create_at": "2025-05-20T09:58:53.075Z",
-          "price": 1000
-        }
-      ]
+      "status": "pending",
+      "id": 20431
     },
     {
-      "clientId": 56823,
-      "create_at": "2025-05-24T15:07:13.050Z",
-      "update_at": "2025-05-24T15:07:13.050Z",
-      "totalPrice": 20000,
-      "isPaid": true,
-      "medServices": [],
-      "labTests": [
-        53003
+      "clientId": 70951,
+      "create_at": "2026-01-13T09:33:02.012Z",
+      "update_at": "2026-01-13T09:33:02.012Z",
+      "totalPrice": 70000,
+      "isPaid": false,
+      "medServices": [
+        39783
       ],
-      "doctorId": null,
+      "labTests": [],
+      "doctorId": 8,
       "roomId": null,
       "visitTypes": [
-        "lab"
+        "med"
       ],
-      "med": 0,
-      "lab": 20000,
+      "med": 70000,
+      "lab": 0,
       "room": 0,
-      "status": "approved",
-      "id": 28213,
-      "part_pay_price": [
-        {
-          "create_at": "2025-05-24T15:07:45.937Z",
-          "price": 10000
-        },
-        {
-          "create_at": "2025-05-24T15:08:46.514Z",
-          "price": 1000
-        },
-        {
-          "create_at": "2025-05-24T15:12:02.632Z",
-          "price": 9000
-        },
-        {
-          "create_at": "2025-05-24T15:16:45.160Z",
-          "price": 0
-        }
-      ]
+      "status": "pending",
+      "id": 28177
     }
   ]
 }
