@@ -9,7 +9,10 @@
       <h2 class="text-center font-bold text-[#000] text-lg mb-2">SAMIRA SHIFO MARKAZI</h2>
       <h2 class="text-center font-bold text-[#000] text-lg mb-2" v-if="data.isPaid">To'lov Cheki</h2>
       <h2 class="text-center font-bold text-[#000] text-lg mb-2" v-else>To'lov uchun chek</h2>
-      <h2 v-if="data?.queue" class="text-center font-bold text-[#000] text-[32px] mb-2">{{data?.queue}}</h2>
+      <div class="flex gap-1 items-center justify-center">
+        <p class="font-bold text-[#000]">Navbat:</p>
+        <h2 v-if="data?.queue" class="text-center font-bold text-[#000] text-[32px] mb-2">{{data?.queue}}</h2>
+      </div>
       <h1 class="text-center text-4xl font-bold text-[#000] mb-2">{{ data.id }}</h1>
       
       <!-- Используем таблицу для гарантированного разделения -->
