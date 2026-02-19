@@ -75,5 +75,12 @@ export const navigationList = [
         path:'/client-info-change',
         icon:'IconsListUserView',
         permisionList:['super_admin','operator']
+    },
+    {
+        title:"Laboratoriyaga kelgan mijozlar",
+        show:true,
+        path:'/laboratory-clients',
+        icon:'IconsListUserView',
+        permisionList:['super_admin','laborant','doctor']
     }
 ]

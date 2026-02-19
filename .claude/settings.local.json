@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:kobi.json.uz)",
+      "Bash(npm install:*)",
+      "Bash(node -e:*)",
+      "Bash(node --check:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}

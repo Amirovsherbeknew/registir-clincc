@@ -1,10 +1,31 @@
 const jsonServer = require('json-server');
 const server = jsonServer.create();
+const fs = require('fs')
+const path = require('path')
+const { PDFDocument, rgb } = require('pdf-lib')
+const fontkit = require('@pdf-lib/fontkit')
+const multer = require('multer')
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 const url = require('url');
+
+// Multer: client fayllarini saqlash
+const clientFilesDir = path.join(__dirname, 'files', 'clients')
+if (!fs.existsSync(clientFilesDir)) fs.mkdirSync(clientFilesDir, { recursive: true })
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, clientFilesDir),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname)
+    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e6)}${ext}`
+    cb(null, uniqueName)
+  }
+})
+const upload = multer({ storage })
+
 // Middleware: parse body
 server.use(jsonServer.bodyParser);
+
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // yoki faqat frontend domeni
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, OPTIONS");
@@ -26,6 +47,84 @@ server.use((req, res, next) => {
   }
   next();
 });
+
+server.post('/documents/pdf', (req, res) => {
+  try {
+    let findClient = null
+    const first_name = req.body?.first_name
+    const phone_number = req?.body?.phone_number
+    const clients = router.db.get('clients').value();
+
+    if (first_name) {
+      findClient = clients.find(u => u.first_name === first_name);
+    }
+
+    if (phone_number) {
+      findClient = clients.find(u => u.phone === phone_number);
+    }
+
+    if (!findClient) {
+      return res.status(400).json({ message: 'Bu foydalanuvchi topilmadi' })
+    }
+
+    if (!findClient.clientFile) {
+      return res.status(400).json({ message: 'Bu clientga biriktirilgan fayl topilmadi' })
+    }
+
+    const filePath = path.join(__dirname, 'files', 'clients', findClient.clientFile)
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ message: 'Fayl serverda topilmadi' })
+    }
+
+    res.sendFile(filePath)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ message: 'Faylni yuborishda xato' })
+  }
+})
+
+// Client faylini yuklab olish
+server.get('/clients/file/:filename', (req, res) => {
+  const filePath = path.join(__dirname, 'files', 'clients', req.params.filename)
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ message: 'Fayl topilmadi' })
+  }
+  res.download(filePath)
+})
+
+// Fayl yuklash va clientga "clientFile" kaliti bilan saqlash
+server.post('/upload/clientFile', upload.single('file'), (req, res) => {
+  try {
+    const clientId = Number(req.body?.clientId)
+    if (!clientId) {
+      return res.status(400).json({ message: 'clientId majburiy' })
+    }
+    if (!req.file) {
+      return res.status(400).json({ message: 'Fayl tanlanmagan' })
+    }
+
+    const db = router.db
+    const client = db.get('clients').find({ id: clientId }).value()
+    if (!client) {
+      fs.unlinkSync(req.file.path)
+      return res.status(404).json({ message: 'Client topilmadi' })
+    }
+
+    db.get('clients')
+      .find({ id: clientId })
+      .assign({ clientFile: req.file.filename })
+      .write()
+
+    res.status(200).json({
+      message: 'Fayl muvaffaqiyatli yuklandi',
+      clientFile: req.file.filename
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ message: 'Fayl yuklashda xato' })
+  }
+})
 
 server.post('/login', (req, res) => {
   const { username, password } = req.body;
@@ -67,7 +166,7 @@ server.get('/checks/total', (req, res) => {
     filtered = filtered.filter(check => check.status === queryParams.status);
   }
 
-  // Qo‘shimcha filterlar: doctorId, roomId va boshqalar
+  // Qo'shimcha filterlar: doctorId, roomId va boshqalar
   if (queryParams.doctorId) {
     filtered = filtered.filter(check => String(check.doctorId) === queryParams.doctorId);
   }
@@ -77,8 +176,8 @@ server.get('/checks/total', (req, res) => {
   }
 
   if (queryParams['visitTypes_like']) {
-    // queryParams['visitTypes_like'] ko‘pincha string bo‘ladi, 
-    // agar array bo‘lishi ehtimoli bo‘lsa, shuni ham hisobga olish mumkin:
+    // queryParams['visitTypes_like'] ko'pincha string bo'ladi, 
+    // agar array bo'lishi ehtimoli bo'lsa, shuni ham hisobga olish mumkin:
     const visitTypeLikes = Array.isArray(queryParams['visitTypes_like'])
       ? queryParams['visitTypes_like']
       : [queryParams['visitTypes_like']];
@@ -139,7 +238,7 @@ server.get('/reports', (req, res) => {
     Reportfiltered = Reportfiltered.filter(check => check.status === queryParams.status);
   }
 
-  // Qo‘shimcha filterlar: doctorId, roomId va boshqalar
+  // Qo'shimcha filterlar: doctorId, roomId va boshqalar
   if (queryParams.doctorId) {
     Reportfiltered = Reportfiltered.filter(check => String(check.doctorId) === queryParams.doctorId);
   }
@@ -149,8 +248,8 @@ server.get('/reports', (req, res) => {
   }
 
   if (queryParams['visitTypes_like']) {
-    // queryParams['visitTypes_like'] ko‘pincha string bo‘ladi, 
-    // agar array bo‘lishi ehtimoli bo‘lsa, shuni ham hisobga olish mumkin:
+    // queryParams['visitTypes_like'] ko'pincha string bo'ladi, 
+    // agar array bo'lishi ehtimoli bo'lsa, shuni ham hisobga olish mumkin:
     const visitTypeLikes = Array.isArray(queryParams['visitTypes_like'])
       ? queryParams['visitTypes_like']
       : [queryParams['visitTypes_like']];
@@ -372,7 +471,7 @@ server.delete('/rooms/:id', (req, res) => {
       .write();
   });
 
-  // Roomni o‘chirish
+  // Roomni o'chirish
   db.get('rooms').remove({ id: roomId }).write();
 
   res.status(200).json({ message: 'Room deleted successfully' });
@@ -410,6 +509,48 @@ function taskManager() {
 
   console.log(`🔄 [${new Date().toISOString()}] ${updateCount} ta xona limiti yangilandi.`);
   return `Xonalardagi joylar tekshirildi va ${updateCount} nechta mijozlar olib tashlandi`;
+}
+
+function drawTable(page, startX, startY, colWidths, rowHeight, rows, font) {
+  const tableWidth = colWidths.reduce((a, b) => a + b, 0)
+
+  // 🔹 Gorizontal chiziqlar
+  for (let i = 0; i <= rows.length; i++) {
+    page.drawLine({
+      start: { x: startX, y: startY - i * rowHeight },
+      end: { x: startX + tableWidth, y: startY - i * rowHeight },
+    })
+  }
+
+  // 🔹 Vertikal chiziqlar
+  let x = startX
+  colWidths.forEach(width => {
+    page.drawLine({
+      start: { x, y: startY },
+      end: { x, y: startY - rows.length * rowHeight },
+    })
+    x += width
+  })
+
+  // oxirgi vertikal chiziq
+  page.drawLine({
+    start: { x: startX + tableWidth, y: startY },
+    end: { x: startX + tableWidth, y: startY - rows.length * rowHeight },
+  })
+
+  // 🔹 Textlar
+  rows.forEach((row, rowIndex) => {
+    let textX = startX + 5
+    row.forEach((cell, colIndex) => {
+      page.drawText(String(cell), {
+        x: textX,
+        y: startY - rowHeight * (rowIndex + 0.7),
+        size: 12,
+        font: font,
+      })
+      textX += colWidths[colIndex]
+    })
+  })
 }
 
 // Custom render for pagination
